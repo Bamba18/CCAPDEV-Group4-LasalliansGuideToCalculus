@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lasallian's Guide to Calculus - Log in</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Local Bootstrap 4.6.2 CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+
+  <!-- Local Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- 1. Top Pill Navigation Bar -->
+  <header class="page-header py-3 py-md-4">
+    <div class="page-header-inner">
+      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
+        <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label">HOME</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+      </nav>
+
+      <button
+        type="button"
+        class="nav-item-btn theme-toggle-btn"
+        id="themeToggle"
+        data-theme-toggle
+      >
+        <svg class="nav-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="nav-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+        <span class="nav-label theme-toggle-label">DARK MODE</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- 2. Main Login Area -->
+  <main class="py-4 my-auto">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-10 col-lg-9 mx-auto">
+
+          <div class="text-center mb-4 px-2">
+            <h1 class="welcome-heading mb-2">WELCOME BACK</h1>
+            <p class="sub-text mb-0">
+              Log in to join classes, or <a href="#" class="link-dlsu-accent">explore the topics</a> without an account.
+            </p>
+          </div>
+
+          <div class="role-toggle-container d-flex mx-auto">
+            <button type="button" class="btn role-btn active w-50" id="btnStudent">STUDENT</button>
+            <button type="button" class="btn role-btn w-50" id="btnTeacher">TEACHER</button>
+          </div>
+
+          <div class="card login-card shadow-sm border-0">
+            <div class="card-body p-4">
+              <form id="loginForm" autocomplete="off" novalidate>
+                <div class="form-group mb-3">
+                  <label for="emailInput" class="form-label text-uppercase">EMAIL</label>
+                  <input 
+                    type="email" 
+                    class="form-control pill-input" 
+                    id="emailInput" 
+                    placeholder="juan_delacruz@dlsu.edu.ph" 
+                    required>
+                </div>
+
+                <div class="form-group mb-4">
+                  <label for="passwordInput" class="form-label text-uppercase">PASSWORD</label>
+                  <input 
+                    type="password" 
+                    class="form-control pill-input" 
+                    id="passwordInput" 
+                    placeholder="Your password" 
+                    required>
+                </div>
+
+                <div class="d-flex align-items-center justify-content-between pt-1">
+                  <button type="submit" class="btn btn-login font-weight-bold">Login</button>
+                  <span class="no-account-text">
+                    No account yet? <a href="#" class="signup-link">Sign up</a>
+                  </span>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Scripts: jQuery first, then Bootstrap Bundle -->
+  <script src="js/jquery-3.7.1.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+
+  <!-- jQuery Interactive Logic -->
+  <script>
+    const ThemeController = (() => {
+      const STORAGE_KEY = "theme";
+      const $themeToggle = $("[data-theme-toggle]");
+      const $themeLabel = $(".theme-toggle-label");
+
+      function applyTheme(isDarkMode) {
+        $("body").toggleClass("dark-mode", isDarkMode);
+        $themeLabel.text(isDarkMode ? "LIGHT MODE" : "DARK MODE");
+      }
+
+      function init() {
+        const savedTheme = localStorage.getItem(STORAGE_KEY) === "dark";
+        applyTheme(savedTheme);
+
+        $themeToggle.on("click", function () {
+          const nextTheme = !$("body").hasClass("dark-mode");
+          applyTheme(nextTheme);
+          localStorage.setItem(STORAGE_KEY, nextTheme ? "dark" : "light");
+        });
+      }
+
+      return { init, applyTheme };
+    })();
+
+    const LoginController = (() => {
+      let currentRole = "student";
+
+      function init() {
+        $("#btnStudent").on("click", function () {
+          currentRole = "student";
+          $(this).addClass("active");
+          $("#btnTeacher").removeClass("active");
+          $("#emailInput").attr("placeholder", "juan_delacruz@dlsu.edu.ph");
+        });
+
+        $("#btnTeacher").on("click", function () {
+          currentRole = "teacher";
+          $(this).addClass("active");
+          $("#btnStudent").removeClass("active");
+          $("#emailInput").attr("placeholder", "faculty_name@dlsu.edu.ph");
+        });
+
+        $("#loginForm").on("submit", function (e) {
+          e.preventDefault();
+          const email = $("#emailInput").val().trim();
+          const password = $("#passwordInput").val();
+
+          if (!email || !password) {
+            alert("Please fill in both email and password.");
+            return;
+          }
+
+          alert("Logged in as " + currentRole.toUpperCase() + ": " + email);
+        });
+      }
+
+      return { init };
+    })();
+
+    $(document).ready(function () {
+      ThemeController.init();
+      LoginController.init();
+    });
+  </script>
+</body>
+</html>
