@@ -1,62 +1,59 @@
 /* =========================================
-   THEME TOGGLE BUTTON STYLES
+   MODULAR FLOATING THEME BUTTON (FAB)
    ========================================= */
-.theme-toggle-btn {
+.theme-fab {
   position: fixed;
-  top: 20px;
-  right: 18px;
-  background-color: var(--dlsu-nav-green);
-  border-radius: 50px;
-  padding: 8px 16px 7px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
-  min-width: 20px;
-  height: 62px;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  bottom: 60px;
+  right: 4px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--dlsu-nav-green, #0a5b37);
   color: #ffffff;
   border: none;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  transition: opacity 0.15s ease-in-out;
+  z-index: 1050;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
-.theme-toggle-btn:hover {
-  opacity: 1;
+.theme-fab:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
 }
 
-.theme-toggle-btn:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.8);
-  outline-offset: 4px;
-  border-radius: 50px;
+.theme-fab:active {
+  transform: translateY(0) scale(0.95);
 }
 
-/* Icon Display Switching */
-svg.theme-icon-sun {
+.theme-fab:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.9);
+  outline-offset: 3px;
+}
+
+.theme-fab .theme-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Icon Switching */
+.theme-fab .theme-icon-sun {
   display: none !important;
 }
 
-svg.theme-icon-moon {
+.theme-fab .theme-icon-moon {
   display: block !important;
 }
 
-body.dark-mode svg.theme-icon-sun {
+body.dark-mode .theme-fab .theme-icon-sun {
   display: block !important;
 }
 
-body.dark-mode svg.theme-icon-moon {
+body.dark-mode .theme-fab .theme-icon-moon {
   display: none !important;
-}
-
-/* Mobile Placement for Toggle Button */
-@media (max-width: 575.98px) {
-  .theme-toggle-btn {
-    right: 10px;
-    top: 16px;
-    min-width: 118px;
-    padding: 8px 10px 7px;
-  }
 }
 
 /* =========================================
