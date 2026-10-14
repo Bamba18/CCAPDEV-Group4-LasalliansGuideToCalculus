@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. The LaTeX Framework Styling -->
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+  <!-- 2. The Upgraded KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script ddefer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  <!-- 3. Safe Custom Converter Script (Skips Desmos elements) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("math").forEach(m => {
+        if (m.closest('#calculator')) return; // Leave Desmos math tags alone!
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 4. Core Desmos API File (Updated to correct script URL) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <h1 class="title">The Lasallian's Guide to Calculus</h1>
+  </header>
+
+  <h2 id="homepage">Homepage</h2>
+  <p>Welcome to <em>The Lasallian's Guide to Calculus</em> (or TLGC for
+    short)! We aim to provide an accompanying guide for calculus classes for
+    students of a variety of courses; including but not limited to
+    mathematics, statistics, computer science, engineering, physics,
+    chemistry, etc.</p>
+  <p>Many popular resources already exist, such as <a href="https://tutorial.math.lamar.edu/">Paul’s Online Notes</a>
+    and
+    various classic textbooks by Leithold, Stewart, Simmons, and more. (In
+    fact, Simmons’ book <span class="citation" data-cites="simmons"></span>
+    is used as a reference for our website). However, we aim to provide two
+    things that the other sources either do not have or do not cover in as
+    much breadth:</p>
+  <ol>
+    <li>
+      <p>interactive visualizations;</p>
+    </li>
+    <li>
+      <p>applications to numerical approximation.</p>
+    </li>
+  </ol>
+  <p>The interactive graphs are created via <a href="https://www.desmos.com/my-api">Desmos applets</a>, and
+    math text is rendered via <a href="https://latex.vercel.app/">LaTeX.css</a>. We chose to include a
+    handful of topics in numerical approximation to show some immediate
+    payoff for the concepts learned, and because such topics also appear in
+    future courses for mathematics, computer science, and engineering
+    majors. Numerical analysis is the cornerstone of many applications of
+    mathematics, and we believe that applications are a great source of
+    motivation <em>and</em> illustration for abstract mathematical concepts.
+    It’s easier to understand concepts when you see them in live action —
+    after all, calculus is the study of continuous change!</p>
+  <p>It is the <em>understanding</em> of concepts which we hope to enhance
+    through this website. Techniques such as the chain rule and integration
+    by parts are already covered indepth in the resources listed above, and
+    we choose not to repeat them here. We would have included proofs of why
+    these techniques work, but decided against it because (1) they are
+    already on Wikipedia, and (2) we reasonably assume that such proofs
+    would only be accessible to understanding for math majors, even if a
+    rigorous grounding would benefit understanding for everyone.</p>
+  <p>We hope that our unique approach achieves our aim of presenting
+    topics in calculus to a wide audience of students in a more digestible
+    and motivated manner, as compared to how it has been traditionally
+    taught.</p>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
