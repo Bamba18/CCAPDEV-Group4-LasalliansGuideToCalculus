@@ -93,13 +93,13 @@ header {
    2. WELCOME HEADINGS
    ========================================= */
 .welcome-heading {
-  font-family: 'Montserrat', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   font-weight: 900;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.04em;
   color: var(--heading-text);
-  font-size: clamp(2.4rem, 4vw, 4rem);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
   line-height: 1.08;
-  margin-top: 1rem;
+  margin-top: 0;
   margin-bottom: 0.5rem;
 }
 
@@ -156,7 +156,7 @@ header {
 }
 
 /* =========================================
-   4. LOGIN CARD & FORM
+   4. CARDS & FORMS (LOGIN & SIGNUP)
    ========================================= */
 .login-card {
   background-color: var(--dlsu-card-green);
@@ -164,6 +164,14 @@ header {
   border-top-right-radius: 0;
   border-bottom-left-radius: 18px;
   border-bottom-right-radius: 18px;
+  width: min(100%, 540px);
+  margin: 0 auto;
+  padding: 0;
+}
+
+.signup-card {
+  background-color: var(--dlsu-card-green);
+  border-radius: 18px;
   width: min(100%, 540px);
   margin: 0 auto;
   padding: 0;
@@ -201,6 +209,28 @@ header {
   border-color: transparent;
 }
 
+/* Dynamic Detection Badge (Signup Page) */
+.detection-wrapper {
+  gap: 8px 12px;
+  margin-top: 4px;
+}
+
+.badge-detection {
+  background-color: var(--dlsu-toggle-dark);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.72rem;
+  padding: 6px 14px;
+  border-radius: 50px;
+}
+
+.detection-hint {
+  color: #ffffff;
+  font-size: 0.72rem;
+  opacity: 0.9;
+}
+
+/* Action Buttons & Links */
 .btn-login {
   background-color: var(--dlsu-btn-dark);
   color: #ffffff;
@@ -246,6 +276,9 @@ header {
   letter-spacing: 0.2px;
 }
 
+/* =========================================
+   6. RESPONSIVE MOBILE VIEW
+   ========================================= */
 @media (max-width: 575.98px) {
   .page-header-inner {
     min-height: 86px;
@@ -260,7 +293,8 @@ header {
   }
 
   .role-toggle-container,
-  .login-card {
+  .login-card,
+  .signup-card {
     width: 100%;
   }
 
