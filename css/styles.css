@@ -23,7 +23,7 @@ body {
 }
 
 /* =========================================
-   1. TOP NAVIGATION PILL & THEME BUTTON
+   1. TOP NAVIGATION PILL
    ========================================= */
 header {
   padding-top: 0.75rem;
@@ -70,25 +70,6 @@ header {
   opacity: 1;
 }
 
-.theme-toggle-btn {
-  position: fixed;
-  top: 20px;
-  right: 18px;
-  background-color: var(--dlsu-nav-green);
-  border-radius: 50px;
-  padding: 8px 16px 7px;
-  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
-  min-width: 132px;
-  height: 62px;
-  z-index: 50;
-}
-
-.theme-toggle-btn:focus-visible {
-  outline: 2px solid rgba(255, 255, 255, 0.8);
-  outline-offset: 4px;
-  border-radius: 50px;
-}
-
 .nav-icon {
   width: 22px;
   height: 22px;
@@ -118,7 +99,7 @@ header {
   color: var(--heading-text);
   font-size: clamp(2.4rem, 4vw, 4rem);
   line-height: 1.08;
-  margin-top: 0.75rem;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
 
@@ -276,13 +257,6 @@ header {
     padding: 10px 16px;
     gap: 10px;
     margin: 0 auto;
-  }
-
-  .theme-toggle-btn {
-    right: 10px;
-    top: 16px;
-    min-width: 118px;
-    padding: 8px 10px 7px;
   }
 
   .role-toggle-container,
