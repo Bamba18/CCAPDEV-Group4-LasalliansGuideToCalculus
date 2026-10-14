@@ -1,0 +1,41 @@
+/* Dark Mode Styles */
+
+body.dark-mode {
+  --dlsu-nav-green: #102d1e;
+  --dlsu-card-green: #153b2a;
+  --dlsu-toggle-dark: #0d2619;
+  --dlsu-btn-dark: #0a2418;
+  --dlsu-accent-green: #96d8ae;
+  --page-background: #18241d;
+  --page-text: #edf4ef;
+  --heading-text: #f2f6f3;
+  --input-background: #24372f;
+  --input-text: #edf4ef;
+}
+
+body.dark-mode .sub-text {
+  color: #c9d6ce;
+}
+
+body.dark-mode .pill-input::placeholder {
+  color: #bfd4c7;
+}
+
+/* Toggle Icon Visibility */
+.theme-icon-sun,
+.dark-mode .theme-icon-moon {
+  display: none !important;
+}
+
+.dark-mode .theme-icon-sun {
+  display: block !important;
+}
+
+
+body.dark-mode .theme-icon-moon {
+  display: none !important;
+}
+
+body.dark-mode .theme-icon-sun {
+  display: block !important;
+}

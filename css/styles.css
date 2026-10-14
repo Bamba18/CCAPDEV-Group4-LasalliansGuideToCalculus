@@ -22,29 +22,8 @@ body {
   margin: 0;
 }
 
-body.dark-mode {
-  --dlsu-nav-green: #102d1e;
-  --dlsu-card-green: #153b2a;
-  --dlsu-toggle-dark: #0d2619;
-  --dlsu-btn-dark: #0a2418;
-  --dlsu-accent-green: #96d8ae;
-  --page-background: #18241d;
-  --page-text: #edf4ef;
-  --heading-text: #f2f6f3;
-  --input-background: #24372f;
-  --input-text: #edf4ef;
-}
-
-body.dark-mode .sub-text {
-  color: #c9d6ce;
-}
-
-body.dark-mode .pill-input::placeholder {
-  color: #bfd4c7;
-}
-
 /* =========================================
-   1. TOP NAVIGATION PILL
+   1. TOP NAVIGATION PILL & THEME BUTTON
    ========================================= */
 header {
   padding-top: 0.75rem;
@@ -121,15 +100,6 @@ header {
   letter-spacing: 0.9px;
   font-weight: 700;
   line-height: 1;
-}
-
-.theme-icon-sun,
-.dark-mode .theme-icon-moon {
-  display: none;
-}
-
-.dark-mode .theme-icon-sun {
-  display: block;
 }
 
 .nav-divider {
