@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manage Topics - The Lasallian's Guide to Calculus</title>
+
+  <!-- Local Offline CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- Admin Top Navigation Bar -->
+  <header class="page-header py-3">
+    <div class="container d-flex justify-content-center px-2">
+      <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
+
+        <!-- HOMEPAGE -->
+        <a href="Admin.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label text-nowrap">HOMEPAGE</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="Users.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span class="nav-label">USERS</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="nav-label">PROFILE</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span class="nav-label">LOGOUT</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="flex-grow-1 py-4">
+    <div class="container text-center mb-4">
+      <h1 class="welcome-heading mb-1">MANAGE TOPICS</h1>
+      <p class="sub-text mb-0">Create, edit and delete the topic pages students see</p>
+    </div>
+
+    <div class="container" style="max-width: 1140px;">
+      <div class="row">
+
+        <!-- Left: All Topics Table -->
+        <div class="col-12 col-lg-7 mb-4 mb-lg-0">
+          <div class="card classmates-card">
+            <div class="classmates-card-header d-flex justify-content-between align-items-center">
+              <h2 class="card-section-heading mb-0">ALL TOPICS (6)</h2>
+              <button type="button" class="btn btn-pill-action mx-0 mb-0 py-1 px-3" style="font-size: 0.78rem;">Add
+                topic</button>
+            </div>
+            <div class="table-responsive">
+              <table class="table classmates-table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 5%;">#</th>
+                    <th scope="col" style="width: 50%;">TITLE</th>
+                    <th scope="col" style="width: 25%;">CATEGORY</th>
+                    <th scope="col" style="width: 20%;" class="text-right"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1</td>
+                    <td class="font-weight-bold">Types of Discontinuities</td>
+                    <td><span class="badge-admin-category">Limits and Continuity</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit mr-1">Edit</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td class="font-weight-bold">Intermediate Value Theorem and Bisection</td>
+                    <td><span class="badge-admin-category">Limits and Continuity</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit mr-1">Edit</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>3</td>
+                    <td class="font-weight-bold">The Derivative</td>
+                    <td><span class="badge-admin-category">Derivatives</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit active-editing mr-1">Editing</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>4</td>
+                    <td class="font-weight-bold">Extreme Value Theorem and Local Extrema</td>
+                    <td><span class="badge-admin-category">Derivatives</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit mr-1">Edit</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td class="font-weight-bold">Mean Value Theorem, Newton's and Secant Methods</td>
+                    <td><span class="badge-admin-category">Derivatives</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit mr-1">Edit</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>6</td>
+                    <td class="font-weight-bold">Implicit Differentiation</td>
+                    <td><span class="badge-admin-category">Derivatives</span></td>
+                    <td class="text-nowrap text-right">
+                      <button class="btn btn-table-edit mr-1">Edit</button>
+                      <button class="btn btn-table-delete">Delete</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Edit Topic Form -->
+        <div class="col-12 col-lg-5">
+          <div class="card classroom-side-card">
+            <h2 class="card-section-heading mb-3">EDIT TOPIC 3</h2>
+            <form id="editTopicForm">
+              <div class="form-group mb-3">
+                <label for="topicTitle" class="input-group-label">TITLE</label>
+                <input type="text" id="topicTitle" class="form-control form-control-standard" value="The Derivative">
+              </div>
+
+              <div class="row">
+                <div class="col-6 form-group mb-3">
+                  <label for="topicCategory" class="input-group-label">CATEGORY</label>
+                  <select id="topicCategory" class="form-control form-control-standard">
+                    <option selected>Derivatives</option>
+                    <option>Limits and Continuity</option>
+                    <option>Integrals</option>
+                  </select>
+                </div>
+                <div class="col-6 form-group mb-3">
+                  <label for="topicVisualization" class="input-group-label">VISUALIZATION</label>
+                  <select id="topicVisualization" class="form-control form-control-standard">
+                    <option selected>Tangent line</option>
+                    <option>Secant line</option>
+                    <option>Area under curve</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group mb-2">
+                <label for="topicContent" class="input-group-label">CONTENT</label>
+                <textarea id="topicContent" rows="5"
+                  class="form-control form-control-standard">The derivative of a function at a point tells us how fast the function is changing there. Write math in LaTeX, e.g. $f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h}$</textarea>
+              </div>
+              <small class="form-hint-latex d-block mb-4">Math is typeset from LaTeX when the topic is shown.</small>
+
+              <div class="d-flex align-items-center">
+                <button type="submit" class="btn btn-pill-action mx-0 mr-2 mb-0">Save topic</button>
+                <button type="button" class="btn btn-pill-cancel">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <script src="js/jquery-3.7.1.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/darkmode.js"></script>
+</body>
+
+</html>

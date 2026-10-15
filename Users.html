@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Users - The Lasallian's Guide to Calculus</title>
+
+    <!-- Local Offline CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Floating Dark Mode Toggle -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+            </path>
+        </svg>
+    </button>
+
+    <!-- Admin Top Navigation Bar -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
+
+                <!-- HOMEPAGE -->
+                <a href="Admin.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="nav-label text-nowrap">HOMEPAGE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Manage Topics -->
+                <a href="ManageTopics.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span class="nav-label text-nowrap">MANAGE TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Profile -->
+                <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Logout -->
+                <a href="Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 py-4">
+        <div class="container text-center mb-4">
+            <h1 class="welcome-heading mb-1">MANAGE USERS</h1>
+            <p class="sub-text mb-0">See every account, deactivate users and create other admins</p>
+        </div>
+
+        <div class="container" style="max-width: 1140px;">
+            <div class="row">
+
+                <!-- Left: All Users Table -->
+                <div class="col-12 col-lg-7 mb-4 mb-lg-0">
+                    <div class="card classmates-card">
+                        <div class="classmates-card-header d-flex flex-wrap justify-content-between align-items-center">
+                            <h2 class="card-section-heading mb-2 mb-sm-0">ALL USERS (6)</h2>
+                            <div class="d-flex align-items-center">
+                                <select class="form-control form-control-sm mr-2"
+                                    style="width: auto; border-radius: 6px;">
+                                    <option>All roles</option>
+                                    <option>Admin</option>
+                                    <option>Teacher</option>
+                                    <option>Student</option>
+                                </select>
+                                <input type="text" placeholder="Search" class="form-control form-control-sm"
+                                    style="width: 130px; border-radius: 6px;">
+                            </div>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table classmates-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" style="width: 45%;">USER</th>
+                                        <th scope="col" style="width: 20%;">ROLE</th>
+                                        <th scope="col" style="width: 15%;">STATUS</th>
+                                        <th scope="col" style="width: 20%;" class="text-right"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Admin User -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">AU</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Admin User</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">admin@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-admin">Admin</span></td>
+                                        <td><span class="badge-status-active">Active</span></td>
+                                        <td class="text-right"><small class="text-muted">You</small></td>
+                                    </tr>
+
+                                    <!-- Teacher Maria Santos -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">MS</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Maria Santos</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">maria.santos@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-teacher">Teacher</span></td>
+                                        <td><span class="badge-status-active">Active</span></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-table-delete">Deactivate</button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Teacher Rafael Bautista -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">RB</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Rafael Bautista</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">rafael.bautista@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-teacher">Teacher</span></td>
+                                        <td><span class="badge-status-active">Active</span></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-table-delete">Deactivate</button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Student Juan Dela Cruz -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">JD</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Juan Dela Cruz</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">juan_delacruz@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-student">Student</span></td>
+                                        <td><span class="badge-status-active">Active</span></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-table-delete">Deactivate</button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Deactivated Student Ana Reyes -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">AR</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Ana Reyes</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">ana_reyes@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-student">Student</span></td>
+                                        <td><span class="badge-status-deactivated">Deactivated</span></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-table-edit">Activate</button>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Student Carlo Mendoza -->
+                                    <tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span class="user-avatar-badge mr-2">CM</span>
+                                                <div>
+                                                    <div class="member-name font-weight-bold">Carlo Mendoza</div>
+                                                    <small class="text-muted d-block"
+                                                        style="font-size: 0.72rem;">carlo_mendoza@dlsu.edu.ph</small>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td><span class="badge-role-student">Student</span></td>
+                                        <td><span class="badge-status-active">Active</span></td>
+                                        <td class="text-right">
+                                            <button class="btn btn-table-delete">Deactivate</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Create an Admin Card -->
+                <div class="col-12 col-lg-5">
+                    <div class="card classroom-side-card">
+                        <h2 class="card-section-heading mb-1">CREATE AN ADMIN</h2>
+                        <p class="text-muted mb-3" style="font-size: 0.78rem;">Admins cannot sign up. Only an existing
+                            admin can create another one.</p>
+
+                        <form id="createAdminForm">
+                            <div class="form-group mb-3">
+                                <label for="adminName" class="input-group-label">FULL NAME</label>
+                                <input type="text" id="adminName" class="form-control form-control-standard" required>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="adminEmail" class="input-group-label">EMAIL</label>
+                                <input type="email" id="adminEmail" class="form-control form-control-standard" required>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="adminPassword" class="input-group-label">TEMPORARY PASSWORD</label>
+                                <input type="password" id="adminPassword" class="form-control form-control-standard"
+                                    required>
+                            </div>
+
+                            <button type="submit" class="btn btn-pill-action w-100 mx-0 mb-0">Create admin</button>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Footer -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+</body>
+
+</html>

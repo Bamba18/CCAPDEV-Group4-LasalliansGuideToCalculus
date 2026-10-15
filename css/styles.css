@@ -757,8 +757,169 @@ body.dark-mode .badge-group-soft {
   color: var(--dlsu-accent-green);
 }
 
+/* Admin Manage Topics - Dark Mode Adjustments */
+body.dark-mode .classmates-table tbody td {
+  color: var(--page-text) !important;
+}
+
+body.dark-mode .classmates-table tbody td .font-weight-bold {
+  color: #ffffff !important;
+}
+
+body.dark-mode .badge-admin-category {
+  background-color: #163625;
+  color: var(--dlsu-accent-green);
+}
+
+body.dark-mode .btn-table-edit {
+  border-color: var(--dlsu-accent-green);
+  color: var(--dlsu-accent-green);
+}
+
+body.dark-mode .btn-table-edit:hover,
+body.dark-mode .btn-table-edit.active-editing {
+  background-color: var(--dlsu-accent-green);
+  color: #102d1e !important;
+}
+
+body.dark-mode .form-hint-latex {
+  color: #a0b2a7;
+}
+
+body.dark-mode .btn-pill-cancel {
+  border-color: #a0b2a7;
+  color: #ffffff !important;
+}
+
+body.dark-mode .btn-pill-cancel:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
 /* =========================================
-   11. RESPONSIVE MOBILE VIEW
+   11. ADMIN SECTION STYLES
+   ========================================= */
+
+/* Action Badges in Admin Table */
+.badge-admin-category {
+  background-color: #e8f5ee;
+  color: var(--dlsu-nav-green);
+  font-weight: 700;
+  font-size: 0.74rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Edit / Delete Buttons */
+.btn-table-edit {
+  border: 1.5px solid var(--dlsu-nav-green);
+  color: var(--dlsu-nav-green);
+  background: transparent;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-radius: 6px;
+  padding: 4px 12px;
+  transition: all 0.15s ease;
+  text-decoration: none !important;
+}
+
+.btn-table-edit:hover,
+.btn-table-edit.active-editing {
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff !important;
+}
+
+.btn-table-delete {
+  border: 1.5px solid #e06d6d;
+  color: #d94343;
+  background: transparent;
+  font-size: 0.74rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 4px 10px;
+  transition: all 0.15s ease;
+  text-decoration: none !important;
+}
+
+.btn-table-delete:hover {
+  background-color: #fdf2f2;
+  color: #c52929;
+  border-color: #c52929;
+}
+
+/* User Role & Status Badges */
+.badge-role-admin {
+  background-color: #f0a500;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.badge-role-teacher {
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.badge-role-student {
+  background-color: #e8f5ee;
+  color: var(--dlsu-nav-green);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.badge-status-active {
+  background-color: #28a745;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+.badge-status-deactivated {
+  background-color: #6c757d;
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+}
+
+/* Form Helper Text */
+.form-hint-latex {
+  font-size: 0.72rem;
+  color: #777777;
+}
+
+/* Cancel Button */
+.btn-pill-cancel {
+  border: 1.5px solid var(--dlsu-nav-green);
+  color: var(--dlsu-nav-green) !important;
+  border-radius: 50px;
+  padding: 8px 22px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  background: transparent;
+  transition: all 0.15s ease;
+  text-decoration: none !important;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.btn-pill-cancel:hover {
+  background-color: #e8f5ee;
+}
+
+/* =========================================
+   12. RESPONSIVE MOBILE VIEW
    ========================================= */
 @media (max-width: 575.98px) {
   .page-header-inner {
