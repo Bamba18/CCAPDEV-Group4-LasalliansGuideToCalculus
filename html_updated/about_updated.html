@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>About This Website - The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. Offline Project & Bootstrap Styles -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+
+  <style>
+    .theme-icon { width: 24px !important; height: 24px !important; max-width: 24px; }
+    .nav-icon { width: 22px !important; height: 22px !important; max-width: 22px; }
+    
+  </style>
+
+  <!-- 2. Core Desmos API File (Must load before KaTeX and scripts.js) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+
+  <!-- 3. KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.getElementById('mathArticle'));"></script>
+
+  <!-- 4. Safe Custom Converter Script (Restricted strictly to #mathArticle content) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("mathArticle");
+      if (!container) return;
+
+      container.querySelectorAll("math").forEach(m => {
+        // Prevent touching anything inside a Desmos canvas or calculator container
+        if (m.closest('.dcg-calculator-api-container')) return;
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle Button -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- 1. Top Pill Navigation Bar -->
+  <header class="page-header py-3 py-md-4">
+    <div class="page-header-inner">
+      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
+        <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label">LOGIN</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="../Student.html#topics" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Main Article / Content Container -->
+  <main class="flex-grow-1 py-4">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Header Titles -->
+      <div class="text-center mb-4">
+        <h1 class="welcome-heading mb-2">ABOUT THIS WEBSITE</h1>
+        <p class="sub-text mb-0">An accompanying guide for calculus students</p>
+      </div>
+
+      <!-- Content Card Container with Isolated ID -->
+      <div class="card classroom-side-card p-4 p-md-5 shadow-sm border-0 mb-5" id="mathArticle">
+          <p style="line-height: 1.7;">Welcome to <em>The Lasallian's Guide to Calculus</em> (or TLGC for
+            short)! We aim to provide an accompanying guide for calculus classes for
+            students of a variety of courses; including but not limited to
+            mathematics, statistics, computer science, engineering, physics,
+            chemistry, etc.</p>
+          <p style="line-height: 1.7;">Many popular resources already exist, such as <a href="https://tutorial.math.lamar.edu/">Paul’s Online Notes</a>
+            and
+            various classic textbooks by Leithold, Stewart, Simmons, and more. (In
+            fact, Simmons’ book <span class="citation" data-cites="simmons"></span>
+            is used as a reference for our website). However, we aim to provide two
+            things that the other sources either do not have or do not cover in as
+            much breadth:</p>
+          <ol>
+            <li>
+              <p style="line-height: 1.7;">interactive visualizations;</p>
+            </li>
+            <li>
+              <p style="line-height: 1.7;">applications to numerical approximation.</p>
+            </li>
+          </ol>
+          <p style="line-height: 1.7;">The interactive graphs are created via <a href="https://www.desmos.com/my-api">Desmos applets</a>, and
+            math text is rendered via <a href="https://latex.vercel.app/">LaTeX.css</a>. We chose to include a
+            handful of topics in numerical approximation to show some immediate
+            payoff for the concepts learned, and because such topics also appear in
+            future courses for mathematics, computer science, and engineering
+            majors. Numerical analysis is the cornerstone of many applications of
+            mathematics, and we believe that applications are a great source of
+            motivation <em>and</em> illustration for abstract mathematical concepts.
+            It’s easier to understand concepts when you see them in live action —
+            after all, calculus is the study of continuous change!</p>
+          <p style="line-height: 1.7;">It is the <em>understanding</em> of concepts which we hope to enhance
+            through this website. Techniques such as the chain rule and integration
+            by parts are already covered indepth in the resources listed above, and
+            we choose not to repeat them here. We would have included proofs of why
+            these techniques work, but decided against it because (1) they are
+            already on Wikipedia, and (2) we reasonably assume that such proofs
+            would only be accessible to understanding for math majors, even if a
+            rigorous grounding would benefit understanding for everyone.</p>
+          <p style="line-height: 1.7;">We hope that our unique approach achieves our aim of presenting
+            topics in calculus to a wide audience of students in a more digestible
+            and motivated manner, as compared to how it has been traditionally
+            taught.</p>
+
+  
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/darkmode.js"></script>
+  
+  <!-- Desmos Initialization Script (Runs after DOM and Desmos API are ready) -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>

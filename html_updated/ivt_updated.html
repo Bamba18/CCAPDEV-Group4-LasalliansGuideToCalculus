@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Intermediate Value Theorem - The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. Offline Project & Bootstrap Styles -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+
+  <style>
+    .theme-icon { width: 24px !important; height: 24px !important; max-width: 24px; }
+    .nav-icon { width: 22px !important; height: 22px !important; max-width: 22px; }
+    
+    /* Explicit dimensions required by Desmos */
+    #calculator6 {
+      width: 100% !important;
+      height: 420px !important;
+      min-height: 420px !important;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      display: block;
+      position: relative;
+    }
+  </style>
+
+  <!-- 2. Core Desmos API File (Must load before KaTeX and scripts.js) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+
+  <!-- 3. KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.getElementById('mathArticle'));"></script>
+
+  <!-- 4. Safe Custom Converter Script (Restricted strictly to #mathArticle content) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("mathArticle");
+      if (!container) return;
+
+      container.querySelectorAll("math").forEach(m => {
+        // Prevent touching anything inside a Desmos canvas or calculator container
+        if (m.closest('.dcg-calculator-api-container') || m.closest('#calculator6')) return;
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle Button -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- 1. Top Pill Navigation Bar -->
+  <header class="page-header py-3 py-md-4">
+    <div class="page-header-inner">
+      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
+        <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label">LOGIN</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="../Student.html#topics" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Main Article / Content Container -->
+  <main class="flex-grow-1 py-4">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Header Titles -->
+      <div class="text-center mb-4">
+        <h1 class="welcome-heading mb-2">INTERMEDIATE VALUE THEOREM</h1>
+        <p class="sub-text mb-0">Continuity, completeness, and the bisection method</p>
+      </div>
+
+      <!-- Content Card Container with Isolated ID -->
+      <div class="card classroom-side-card p-4 p-md-5 shadow-sm border-0 mb-5" id="mathArticle">
+          <p style="line-height: 1.7;">Calculus is the study of continuous functions. Knowing that a
+            function is continuous allows us to make use of a wealth of properties
+            that range from the obvious to the subtle. Perhaps the most intuitive
+            theorem of calculus is the <em>intermediate value theorem</em>
+            (IVT):</p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-nav-green); background-color: rgba(10, 91, 55, 0.09); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Theorem 4</strong> (Intermediate value theorem). <em>If
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>y</mi>
+                      <mo>=</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">y=f(x)</annotation>
+                  </semantics>
+                </math>
+                is a function that is defined and continuous on a closed interval
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">[</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">]</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">[a,b]</annotation>
+                  </semantics>
+                </math>,
+                then this function assumes every value between
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(a)</annotation>
+                  </semantics>
+                </math>
+                and
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(b)</annotation>
+                  </semantics>
+                </math>.
+                In other words, if
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mi>L</mi>
+                    <annotation encoding="application/x-tex">L</annotation>
+                  </semantics>
+                </math>
+                is a real number such that
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>&lt;</mo>
+                      <mi>L</mi>
+                      <mo>&lt;</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(a)&lt;L&lt;f(b)</annotation>
+                  </semantics>
+                </math>
+                or
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>&gt;</mo>
+                      <mi>L</mi>
+                      <mo>&gt;</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(a)&gt;L&gt;f(b)</annotation>
+                  </semantics>
+                </math>,
+                then there exists at least one point
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mi>c</mi>
+                    <annotation encoding="application/x-tex">c</annotation>
+                  </semantics>
+                </math>
+                in
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">(a,b)</annotation>
+                  </semantics>
+                </math>
+                such that
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>c</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>=</mo>
+                      <mi>L</mi>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(c)=L</annotation>
+                  </semantics>
+                </math>.</em></p>
+          </div>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid rgba(128, 128, 128, 0.6); background-color: rgba(128, 128, 128, 0.08); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><em>Remark 1</em>. While this theorem might seem obvious, it is
+              actually a <em>defining</em> property of the real numbers, as compared
+              to other sets of numbers such as the rational numbers. Such defining
+              properties are called <em>completeness axioms</em>, and many theorems of
+              calculus may be taken as a single completeness axiom for the real
+              numbers. Such an axiom is not proven, as opposed to a theorem; it must
+              be taken as an assumption. The IVT can either be taken as a completeness
+              axiom, or be proved from another completeness axiom. For interested
+              readers with an understanding of proofs, see 
+              <a href="https://arxiv.org/pdf/1204.4483">this article</a>.</p>
+          </div>
+          <h3 class="h4 mt-4 mb-3" id="bisection-method">Bisection method</h3>
+          <p style="line-height: 1.7;">The reason why the IVT is useful is the case where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>L</mi>
+                  <mo>=</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">L=0</annotation>
+              </semantics>
+            </math>.
+            It says that any function
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            has a real-valued root whenever there exists a closed interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[a,b]</annotation>
+              </semantics>
+            </math>
+            where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(a)</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(b)</annotation>
+              </semantics>
+            </math>
+            have opposite signs.
+          </p>
+          <p style="line-height: 1.7;">The <em>bisection method</em> goes as follows. We first choose
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>X</mi>
+                <annotation encoding="application/x-tex">X</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Y</mi>
+                <annotation encoding="application/x-tex">Y</annotation>
+              </semantics>
+            </math>
+            in the domain of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>.
+            If
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            changes sign on the interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[a,b]</annotation>
+              </semantics>
+            </math>,
+            or equivalently if
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&lt;</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(a)f(b)&lt;0</annotation>
+              </semantics>
+            </math>,
+            then we <em>bisect</em> the interval by computing the midpoint
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>c</mi>
+                  <mo>=</mo>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>+</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mi>/</mi>
+                  <mn>2</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">c=(a+b)/2</annotation>
+              </semantics>
+            </math>.
+            This is our first guess of the root of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>.
+          </p>
+          <p style="line-height: 1.7;">If
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>c</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(c)=0</annotation>
+              </semantics>
+            </math>,
+            then we are done. (You’d have to get seriously lucky for this to occur!)
+            If not,
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            either changes sign in
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>c</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(a,c)</annotation>
+              </semantics>
+            </math>
+            or in
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>c</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(c,b)</annotation>
+              </semantics>
+            </math>.
+            The interval containing the sign change contains the root in the same
+            place, and once the proper interval is determined, it is bisected as we
+            did earlier. This process of bisection can be repeated until a point of
+            bisection is reached that approximates the root of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            to a desired level of accuracy (e.g. correct to 4 decimal places).
+          </p>
+          <p style="line-height: 1.7;">This method works best when we have little information about the
+            function
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>.
+            However, convergence depends on the initial choice of interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[a,b]</annotation>
+              </semantics>
+            </math>,
+            and convergence to the root may be rather slow.
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-card-green); background-color: rgba(10, 93, 54, 0.05); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Example 5</strong>. Consider the function
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>f</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mo>=</mo>
+                    <msup>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msup>
+                    <mo>−</mo>
+                    <mi>x</mi>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">f(x)=x^2-x-1.</annotation>
+                </semantics>
+              </math>
+            </p>
+          </div>
+
+        <!-- desmos graph -->
+          <div id="calculator6"></div>
+        <p style="line-height: 1.7;">Observe from Figure 4 that
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>1</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <mi>−</mi>
+                  <mn>1</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(1)=-1</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>2</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <mn>1</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(2)=1</annotation>
+              </semantics>
+            </math>,
+            so there is a change in sign across the interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mn>1</mn>
+                  <mo>,</mo>
+                  <mn>2</mn>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[1,2]</annotation>
+              </semantics>
+            </math>
+            and thus the root of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            must lie in here. So we bisect this interval, and our first
+            approximation of the root of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            is
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>=</mo>
+                  <mn>1.5</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">x=1.5</annotation>
+              </semantics>
+            </math>.
+            Now we evaluate
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>1.5</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(1.5)</annotation>
+              </semantics>
+            </math>;
+            it turns out this is less than 0, so the root must lie in
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>1.5</mn>
+                  <mo>,</mo>
+                  <mn>2</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(1.5,2)</annotation>
+              </semantics>
+            </math>.
+            Then we bisect <em>this</em> interval to get the second approximation of
+            the root
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>=</mo>
+                  <mn>1.75</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">x=1.75</annotation>
+              </semantics>
+            </math>.
+            But now
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>1.75</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&gt;</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(1.75)&gt;0</annotation>
+              </semantics>
+            </math>,
+            so the root lies in
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>1.5</mn>
+                  <mo>,</mo>
+                  <mn>1.75</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(1.5,1.75)</annotation>
+              </semantics>
+            </math>.
+            It turns out that the real root of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            within
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mn>1</mn>
+                  <mo>,</mo>
+                  <mn>2</mn>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[1,2]</annotation>
+              </semantics>
+            </math>
+            is the <em>golden ratio</em>
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>ϕ</mi>
+                  <mo>=</mo>
+                  <mn>1.618</mn>
+                  <mi>…</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">\phi = 1.618 \dots</annotation>
+              </semantics>
+            </math>,
+            and we can carry out this process until our approximation is correct to
+            2 decimal places.
+          </p>
+          <p style="line-height: 1.7;">
+            Try writing out your own code for this and see how
+            long it takes to arrive at a suitable approximation!
+          </p>
+
+  
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/darkmode.js"></script>
+  
+  <!-- Desmos Initialization Script (Runs after DOM and Desmos API are ready) -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>

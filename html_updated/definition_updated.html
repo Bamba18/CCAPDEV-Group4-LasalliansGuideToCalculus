@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Definition of a Function - The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. Offline Project & Bootstrap Styles -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+
+  <style>
+    .theme-icon { width: 24px !important; height: 24px !important; max-width: 24px; }
+    .nav-icon { width: 22px !important; height: 22px !important; max-width: 22px; }
+    
+    /* Explicit dimensions required by Desmos */
+    #calculator4, #calculator5 {
+      width: 100% !important;
+      height: 420px !important;
+      min-height: 420px !important;
+      margin: 1.5rem 0;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      display: block;
+      position: relative;
+    }
+  </style>
+
+  <!-- 2. Core Desmos API File (Must load before KaTeX and scripts.js) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+
+  <!-- 3. KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.getElementById('mathArticle'));"></script>
+
+  <!-- 4. Safe Custom Converter Script (Restricted strictly to #mathArticle content) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("mathArticle");
+      if (!container) return;
+
+      container.querySelectorAll("math").forEach(m => {
+        // Prevent touching anything inside a Desmos canvas or calculator container
+        if (m.closest('.dcg-calculator-api-container') || m.closest('#calculator4') || m.closest('#calculator5')) return;
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle Button -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- 1. Top Pill Navigation Bar -->
+  <header class="page-header py-3 py-md-4">
+    <div class="page-header-inner">
+      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
+        <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label">LOGIN</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="../Student.html#topics" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Main Article / Content Container -->
+  <main class="flex-grow-1 py-4">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Header Titles -->
+      <div class="text-center mb-4">
+        <h1 class="welcome-heading mb-2">DEFINITION OF A FUNCTION</h1>
+        <p class="sub-text mb-0">The foundational language of change in calculus</p>
+      </div>
+
+      <!-- Content Card Container with Isolated ID -->
+      <div class="card classroom-side-card p-4 p-md-5 shadow-sm border-0 mb-5" id="mathArticle">
+        <p style="line-height: 1.7;">
+          In high school math, we have an intuitive understanding of a function as a curve which represents an association between an input variable
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+          and an output variable
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>.
+          In this section, we will refine this understanding by precisely defining what a function is. Functions are much more than curves on a grid, and opening ourselves up to a more precise and general definition is the first step to familiarize ourselves with the variety of definitions and theorems we encounter in calculus.
+        </p>
+
+        <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-nav-green); background-color: rgba(10, 91, 55, 0.05); border-radius: 0 8px 8px 0;">
+          <p class="mb-0" style="line-height: 1.7;">
+            <strong>Definition. </strong>Given two sets
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>,
+            a <strong>function</strong> from
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+            to
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+            is a rule or mapping that takes each element of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+            and associates with it a single element of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>.
+            In this case, we write
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi>X</mi><mo>→</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">f:X \to Y</annotation></semantics></math>.
+          </p>
+        </div>
+
+        <p style="line-height: 1.7;">
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>X</mi><annotation encoding="application/x-tex">X</annotation></semantics></math>
+          is said to be the <strong>domain</strong> of the function
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>,
+          while
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+          is said to be its <strong>codomain</strong>. All elements of
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+          do not necessarily occur as outputs of
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>,
+          and the ones that do form a subset of
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>Y</mi><annotation encoding="application/x-tex">Y</annotation></semantics></math>
+          known as the <strong>range</strong> of
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>f</mi><annotation encoding="application/x-tex">f</annotation></semantics></math>.
+        </p>
+
+        <p style="line-height: 1.7;">
+          You are already familiar with functions: linear equations
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>m</mi><mi>x</mi><mo>+</mo><mi>b</mi></mrow><annotation encoding="application/x-tex">y=mx+b</annotation></semantics></math>
+          and quadratic equations
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>a</mi><msup><mi>x</mi><mn>2</mn></msup><mo>+</mo><mi>b</mi><mi>x</mi><mo>+</mo><mi>c</mi></mrow><annotation encoding="application/x-tex">y=ax^2+bx+c</annotation></semantics></math>
+          are examples of functions of the variable
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>,
+          where constants are used. In this case, we write
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y=f(x)</annotation></semantics></math>.
+          Given any input
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+          in the domain,
+          <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math>
+          produces one and <em>only</em> one value.
+        </p>
+
+        <p style="line-height: 1.7;">
+          This leads us to the familiar notion of the <em>vertical line test:</em> at any point on the graph of the function, it must intersect a vertical line exactly once.
+        </p>
+
+        <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-card-green); background-color: rgba(10, 93, 54, 0.05); border-radius: 0 8px 8px 0;">
+          <p class="mb-0" style="line-height: 1.7;">
+            <strong>Example 1</strong>. Consider the mapping
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo>:</mo><mi mathvariant="double-struck">ℝ</mi><mo>→</mo><mi mathvariant="double-struck">ℝ</mi></mrow><annotation encoding="application/x-tex">f: \mathbb{R} \to \mathbb{R}</annotation></semantics></math>
+            defined by
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msup><mi>x</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">f(x)=x^2</annotation></semantics></math>.
+            Then
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mo stretchy="false" form="prefix">(</mo><mi>x</mi><mo stretchy="false" form="postfix">)</mo><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">f(x) \geq 0</annotation></semantics></math>
+            for all values of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
+          </p>
+        </div>
+
+        <!-- Desmos graph 1 -->
+        <div id="calculator4"></div>
+
+        <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-card-green); background-color: rgba(10, 93, 54, 0.05); border-radius: 0 8px 8px 0;">
+          <p class="mb-0" style="line-height: 1.7;">
+            <strong>Example 3</strong>. Let
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>y</mi><mn>2</mn></msup><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">y^2=x</annotation></semantics></math>.
+            Then
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>=</mo><mi>±</mi><msqrt><mi>x</mi></msqrt></mrow><annotation encoding="application/x-tex">y=\pm \sqrt x</annotation></semantics></math>.
+            Since a single value of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
+            outputs two distinct numbers,
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math>
+            is not a function of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>.
+          </p>
+        </div>
+
+        <!-- Desmos graph 2 -->
+        <div id="calculator5"></div>
+
+        <p class="mb-0" style="line-height: 1.7;">Try the vertical line test on the graph above.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/darkmode.js"></script>
+  
+  <!-- Desmos Initialization Script (Runs after DOM and Desmos API are ready) -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>

@@ -145,7 +145,7 @@
             </div>
 
             <!-- 2. Explore The Topics Section -->
-            <h2 class="welcome-heading mb-4">EXPLORE THE TOPICS</h2>
+            <h2 class="welcome-heading mb-7">EXPLORE THE TOPICS</h2>
 
             <!-- Topics Carousel Container -->
             <div class="topic-carousel-container shadow-sm mb-5 text-center">
@@ -154,11 +154,11 @@
                     aria-label="Previous topic">&lt;</button>
 
                 <div id="topicSlideContent">
-                    <h3 class="carousel-title" id="topicTitle">Types of Discontinuities</h3>
+                    <h3 class="carousel-title" id="topicTitle">Definition of a Function</h3>
                     <p class="carousel-desc" id="topicDesc">
-                        Removable, jump, and essential: see what breaks a graph and why it matters.
+                        How functions are defined in terms of sets.
                     </p>
-                    <a href="#" class="btn btn-open-topic">Open topic</a>
+                    <a href="html_updated/definition_updated.html" class="btn btn-open-topic">Open topic</a>
                 </div>
 
                 <!-- Next Arrow -->
@@ -170,6 +170,9 @@
                     <span class="dash-indicator" data-index="1"></span>
                     <span class="dash-indicator" data-index="2"></span>
                     <span class="dash-indicator" data-index="3"></span>
+                    <span class="dash-indicator" data-index="4"></span>
+                    <span class="dash-indicator" data-index="5"></span>
+                    <span class="dash-indicator" data-index="6"></span>
                 </div>
             </div>
 
@@ -242,23 +245,40 @@
     <!-- Carousel & Dashboard Logic -->
     <script>
         $(document).ready(function () {
-            // 4 Core Calculus Topics
+            // 7 Core Calculus Topics
             const topics = [
                 {
+                    title: "Definition of a Function",
+                    desc: "How functions are defined in terms of sets.",
+                    link: "html_updated/definition_updated.html"
+                },
+                {
                     title: "Types of Discontinuities",
-                    desc: "Removable, jump, and essential: see what breaks a graph and why it matters."
+                    desc: "Removable, jump, and essential discontinuities; formulating the concept of a limit.",
+                    link: "html_updated/discontinuities_updated.html"
+                },
+                {
+                    title: "Limits and Continuity",
+                    desc: "Explaining the epsilon-delta definition of continuity and limits of a function.",
+                    link: "html_updated/epsilondelta_updated.html"
                 },
                 {
                     title: "Intermediate Value Theorem",
-                    desc: "Root finding and continuous functions using the bisection method."
+                    desc: "Approximating roots using the bisection method.",
+                    link: "html_updated/ivt_updated.html"
                 },
                 {
                     title: "The Derivative",
-                    desc: "Slope of tangent lines, rate of change, and differentiable functions."
+                    desc: "Slope of tangent lines, differentiability, local behavior of functions, and the Extreme Value Theorem.",
+                    link: "html_updated/derivatives_updated.html"
                 },
                 {
-                    title: "Extreme Value Theorem",
-                    desc: "Locating global bounds and finding local extrema of functions."
+                    title: "Approximation Methods",
+                    desc: "Mean value theorem, Newton's method, secant method."
+                },
+                {
+                    title: "The Integral",
+                    desc: "The Riemann integral and the trapezoid rule."
                 }
             ];
 
@@ -267,6 +287,10 @@
             function renderTopic(index) {
                 $("#topicTitle").text(topics[index].title);
                 $("#topicDesc").text(topics[index].desc);
+                
+                // 2. Update the button's href dynamically when rendering
+                $(".btn-open-topic").attr("href", topics[index].link);
+                
                 $(".dash-indicator").removeClass("active").eq(index).addClass("active");
             }
 

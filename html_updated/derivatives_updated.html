@@ -1,0 +1,1613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Derivative and Differentiable Functions - The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. Offline Project & Bootstrap Styles -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+
+  <style>
+    .theme-icon { width: 24px !important; height: 24px !important; max-width: 24px; }
+    .nav-icon { width: 22px !important; height: 22px !important; max-width: 22px; }
+    
+
+    /* Embedded Desmos graphs (iframes) */
+    .desmos-embed {
+      width: 100%;
+      height: 500px;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 12px;
+      display: block;
+    }
+  </style>
+
+  <!-- 2. Core Desmos API File (Must load before KaTeX and scripts.js) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+
+  <!-- 3. KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.getElementById('mathArticle'));"></script>
+
+  <!-- 4. Safe Custom Converter Script (Restricted strictly to #mathArticle content) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("mathArticle");
+      if (!container) return;
+
+      container.querySelectorAll("math").forEach(m => {
+        // Prevent touching anything inside a Desmos canvas or calculator container
+        if (m.closest('.dcg-calculator-api-container')) return;
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle Button -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- 1. Top Pill Navigation Bar -->
+  <header class="page-header py-3 py-md-4">
+    <div class="page-header-inner">
+      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
+        <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+          </svg>
+          <span class="nav-label">LOGIN</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="../Student.html#topics" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 2. Main Article / Content Container -->
+  <main class="flex-grow-1 py-4">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Header Titles -->
+      <div class="text-center mb-4">
+        <h1 class="welcome-heading mb-2">THE DERIVATIVE AND DIFFERENTIABLE FUNCTIONS</h1>
+        <p class="sub-text mb-0">From tangent lines to extreme values</p>
+      </div>
+
+      <!-- Content Card Container with Isolated ID -->
+      <div class="card classroom-side-card p-4 p-md-5 shadow-sm border-0 mb-5" id="mathArticle">
+          <p style="line-height: 1.7;">In class, you may be familiar with the notion of the derivative of a
+            function at a point as the line that is tangent to the curve of the
+            function at that point. But how do we properly define the tangent line?
+            Thankfully, since we have already tackled the notion of a limit, we have
+            the tools to answer this question.</p>
+          <!-- desmos iframe -->
+          <iframe class="desmos-embed" src="https://www.desmos.com/calculator/schwuihqyw" loading="lazy" title="Interactive Desmos graph"></iframe>
+
+          <p style="line-height: 1.7;">Consider a curve
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>y</mi>
+                  <mo>=</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">y=f(x)</annotation>
+              </semantics>
+            </math>,
+            and let
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>
+            be a given fixed point on the curve. Let
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            be a second point on the curve, and the line through
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            is said to be the <strong>secant line</strong>
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>P</mi>
+                  <mi>Q</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">PQ</annotation>
+              </semantics>
+            </math>.
+            Drag the slider for
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>h</mi>
+                <annotation encoding="application/x-tex">h</annotation>
+              </semantics>
+            </math>
+            above to slide
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            along the curve. As
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            slides along the curve towards
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>,
+            in the limit where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>
+            are at the same point, the secant line is said to be a <strong>tangent
+              line</strong> of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>.
+          </p>
+          <p style="line-height: 1.7;">Recall from high school math, or from precalculus, that the slope of
+            the line through any two points
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            is given by
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>m</mi>
+                  <mo>=</mo>
+                  <mfrac>
+                    <mrow>
+                      <msub>
+                        <mi>y</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo>−</mo>
+                      <msub>
+                        <mi>y</mi>
+                        <mn>1</mn>
+                      </msub>
+                    </mrow>
+                    <mrow>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo>−</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>1</mn>
+                      </msub>
+                    </mrow>
+                  </mfrac>
+                  <mo>,</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">m=\frac{y_2-y_1}{x_2-x_1},</annotation>
+              </semantics>
+            </math>
+            commonly known as . Since
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>y</mi>
+                  <mo>=</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">y=f(x)</annotation>
+              </semantics>
+            </math>,
+            let’s rewrite this as
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>m</mi>
+                  <mo>=</mo>
+                  <mfrac>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>1</mn>
+                      </msub>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <mrow>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo>−</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>1</mn>
+                      </msub>
+                    </mrow>
+                  </mfrac>
+                  <mi>.</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">m=\frac{f(x_2)-f(x_1)}{x_2-x_1}.</annotation>
+              </semantics>
+            </math>
+            Let
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>P</mi>
+                  <mo>=</mo>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">P=(a,f(a))</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>Q</mi>
+                  <mo>=</mo>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo>,</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">Q=(x,f(x))</annotation>
+              </semantics>
+            </math>.
+            To get the tangent line we want the limit of this value as
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            approaches
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>;
+            in other words, as
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>x</mi>
+                <annotation encoding="application/x-tex">x</annotation>
+              </semantics>
+            </math>
+            approaches
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>a</mi>
+                <annotation encoding="application/x-tex">a</annotation>
+              </semantics>
+            </math>.
+            Hence we write
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <munder>
+                    <mi mathvariant="normal">lim</mi>
+                    <mrow>
+                      <mi>x</mi>
+                      <mo>→</mo>
+                      <mi>a</mi>
+                    </mrow>
+                  </munder>
+                  <mfrac>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <mrow>
+                      <mi>x</mi>
+                      <mo>−</mo>
+                      <mi>a</mi>
+                    </mrow>
+                  </mfrac>
+                  <mo>,</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f&#39;(a)=\lim_{x \to a}\frac{f(x)-f(a)}{x-a},</annotation>
+              </semantics>
+            </math>
+            where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f&#39;(a)</annotation>
+              </semantics>
+            </math>
+            denotes the <strong>derivative</strong> of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            at the point
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>=</mo>
+                  <mi>a</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">x=a</annotation>
+              </semantics>
+            </math>.
+            If we make the substitution
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>=</mo>
+                  <mi>a</mi>
+                  <mo>+</mo>
+                  <mi>h</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">x=a+h</annotation>
+              </semantics>
+            </math>,
+            the above definition becomes
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <munder>
+                    <mi mathvariant="normal">lim</mi>
+                    <mrow>
+                      <mi>x</mi>
+                      <mo>→</mo>
+                      <mi>a</mi>
+                    </mrow>
+                  </munder>
+                  <mfrac>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo>+</mo>
+                      <mi>h</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo>+</mo>
+                      <mi>h</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>a</mi>
+                    </mrow>
+                  </mfrac>
+                  <mo>=</mo>
+                  <munder>
+                    <mi mathvariant="normal">lim</mi>
+                    <mrow>
+                      <mi>h</mi>
+                      <mo>→</mo>
+                      <mn>0</mn>
+                    </mrow>
+                  </munder>
+                  <mfrac>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo>+</mo>
+                      <mi>h</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <mi>a</mi>
+                  </mfrac>
+                  <mo>,</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f&#39;(a) = \lim_{x \to a}\frac{f(a+h)-f(a)}{(a+h)-a} = \lim_{h \to
+                  0}\frac{f(a+h)-f(a)}{a},</annotation>
+              </semantics>
+            </math>
+            since
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>→</mo>
+                  <mi>a</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">x \to a</annotation>
+              </semantics>
+            </math>
+            means
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo>−</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>→</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">(x-a) \to 0</annotation>
+              </semantics>
+            </math>
+            and thus
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>h</mi>
+                  <mo>→</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">h \to 0</annotation>
+              </semantics>
+            </math>
+            since
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>h</mi>
+                  <mo>=</mo>
+                  <mi>x</mi>
+                  <mo>−</mo>
+                  <mi>a</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">h=x-a</annotation>
+              </semantics>
+            </math>,
+            by rearranging our substitution. Here
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>h</mi>
+                <annotation encoding="application/x-tex">h</annotation>
+              </semantics>
+            </math>
+            represents the horizontal distance between
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>P</mi>
+                  <mo>=</mo>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">P=(a,f(a))</annotation>
+              </semantics>
+            </math>
+            and
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>Q</mi>
+                  <mo>=</mo>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>+</mo>
+                  <mi>h</mi>
+                  <mo>,</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo>+</mo>
+                  <mi>h</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">Q=(a+h,f(a+h))</annotation>
+              </semantics>
+            </math>,
+            and as
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>Q</mi>
+                <annotation encoding="application/x-tex">Q</annotation>
+              </semantics>
+            </math>
+            approaches
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>,
+            this distance goes to 0. This definition of the derivative might be what
+            you are more familiar with, and we have just shown that there are two
+            equivalent ways to define it. Taking the derivative of a function is
+            also said to be <strong>differentiating</strong> the function.
+          </p>
+          <p style="line-height: 1.7;">Most functions can be differentiated more than once. We define the
+            <em>second-order</em> and <em>third-order</em> derivatives to be
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>″</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>,</mo>
+                  <mspace width="2.0em"></mspace>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>‴</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>″</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>;</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f&#39;&#39;(x) = f&#39;(f&#39;(x)), \qquad f&#39;&#39;&#39;(x) =
+                  f&#39;(f&#39;&#39;(x));</annotation>
+              </semantics>
+            </math>
+            and in general the
+            <em><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>n</mi>
+                  <annotation encoding="application/x-tex">n</annotation>
+                </semantics>
+              </math>th-order</em>
+            derivative is denoted
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>n</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f^{(n)}(x)</annotation>
+              </semantics>
+            </math>.
+            (We stop with apostrophes and start writing numbers after the
+            third-order derivative.) Functions that are differentiable an
+            <em>infinite</em> amount of times in their domain are said to be
+            <em><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <msup>
+                    <mi>C</mi>
+                    <mi>∞</mi>
+                  </msup>
+                  <annotation encoding="application/x-tex">C^{\infty}</annotation>
+                </semantics>
+              </math>-functions,</em>
+            and this class includes your usual functions: polynomials, rational
+            functions, trig functions, the exponential
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi>e</mi>
+                  <mi>x</mi>
+                </msup>
+                <annotation encoding="application/x-tex">e^x</annotation>
+              </semantics>
+            </math>
+            (obviously), logarithms like
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mrow>
+                    <mi mathvariant="normal">ln</mi>
+                    <mo>&#8289;</mo>
+                  </mrow>
+                  <mi>x</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">\ln x</annotation>
+              </semantics>
+            </math>,
+            etc.
+          </p>
+          <p style="line-height: 1.7;">Observe from both equivalent definitions of the derivative that they
+            require
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            to be defined and continuous at
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>x</mi>
+                  <mo>=</mo>
+                  <mi>a</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">x=a</annotation>
+              </semantics>
+            </math>.
+            While this might seem obvious, what may not be is the fact that a
+            function that is continuous at a point <em>is not necessarily
+              differentiable there.</em>
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-card-green); background-color: rgba(10, 93, 54, 0.05); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Example 1</strong>. Let
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>f</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mo>=</mo>
+                    <mo stretchy="false" form="prefix">|</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="prefix">|</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">f(x)=|x|</annotation>
+                </semantics>
+              </math>.
+              Since the slope to the left of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>x</mi>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x=0</annotation>
+                </semantics>
+              </math>
+              is
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>−</mi>
+                    <mn>1</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">-1</annotation>
+                </semantics>
+              </math>
+              and the slope to the right of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>x</mi>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x=0</annotation>
+                </semantics>
+              </math>
+              is 1, the left-hand and right-hand limits in the definition of the
+              derivatives are not equal. Thus the derivative of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">|</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="prefix">|</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">|x|</annotation>
+                </semantics>
+              </math>
+              does not exist at
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>x</mi>
+                    <mo>=</mo>
+                    <mn>0</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x=0</annotation>
+                </semantics>
+              </math>.
+            </p>
+          </div>
+          <p style="line-height: 1.7;">Fortunately, in the words of famous math writer Ian Stewart, <a
+              href="https://www.youtube.com/watch?v=tf1CEN5OpbI">we avoid this problem by ignoring it.</a> In calculus
+            class, we only really consider
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi>C</mi>
+                  <mi>∞</mi>
+                </msup>
+                <annotation encoding="application/x-tex">C^{\infty}</annotation>
+              </semantics>
+            </math>-functions
+            for simplicity, and ignore such examples as above, which are said to be
+            <em>pathological.</em> (This example is quite tame: there exist
+            functions that are continuous everywhere but <a
+              href="https://en.wikipedia.org/wiki/Weierstrass_function_(nowhere-differentiable_function)">differentiable
+              <em>nowhere.</em></a> <em>This</em> is a truly pathological
+            function.)
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid rgba(128, 128, 128, 0.6); background-color: rgba(128, 128, 128, 0.08); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><em>Remark</em>. It is due to these pathological functions that
+              mathematicians felt the need to properly and rigorously formalize the
+              entire field of calculus, leading to the epsilon-delta definition of a
+              limit we tackled previously. This lead to the establishment of <em>real
+                analysis,</em> which is something math majors will encounter later.
+              While the rest of you don’t need to worry about this for your grades,
+              the theory is still beautiful and worth learning about.</p>
+          </div>
+          <h3 class="h4 mt-4 mb-3" id="applications-of-the-derivative">Applications of the
+            derivative</h3>
+          <p style="line-height: 1.7;">The value of the slope of a tangent line gives us vital information
+            about the behavior of the function around the point of tangency. First,
+            it tells us where the function is increasing or decreasing.
+            Increasing/decreasing behavior is easy to see visually, so we can
+            formalize this notion by saying that a function is
+            <strong>increasing</strong> on an interval if, given
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo>,</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_1,x_2</annotation>
+              </semantics>
+            </math>
+            in this interval,
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo>&lt;</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_1&lt;x_2</annotation>
+              </semantics>
+            </math>
+            implies
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&lt;</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x_1)&lt;f(x_2)</annotation>
+              </semantics>
+            </math>.
+            Analogously, a function is <strong>decreasing</strong> if
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo>&lt;</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_1&lt;x_2</annotation>
+              </semantics>
+            </math>
+            implies
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&gt;</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x_1)&gt;f(x_2)</annotation>
+              </semantics>
+            </math>.
+          </p>
+          <!-- desmos iframe -->
+          <iframe class="desmos-embed" src="https://www.desmos.com/calculator/ac01n2x9fx" loading="lazy" title="Interactive Desmos graph"></iframe>
+
+          <p style="line-height: 1.7;">
+            The function
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>g</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=-</mo>
+                  <mi>x^2</mi>
+                  <mo>+</mo>
+                  <mi>2</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">g(x) = -x^2 + 2</annotation>
+              </semantics>
+            </math>
+            above is increasing on
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>-∞</mi>
+                  <mo>,</mo>
+                  <mn>0</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(-∞,0),</annotation>
+              </semantics>
+            </math>
+            and decreasing on
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>0</mn>
+                  <mo>,</mo>
+                  <mi>∞</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(0,∞).</annotation>
+              </semantics>
+            </math>
+          </p>
+          <p style="line-height: 1.7;">Let
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            be a
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msup>
+                  <mi>C</mi>
+                  <mi>∞</mi>
+                </msup>
+                <annotation encoding="application/x-tex">C^{\infty}</annotation>
+              </semantics>
+            </math>-function.
+            If
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            is increasing on an interval, then
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo>&lt;</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_1&lt;x_2</annotation>
+              </semantics>
+            </math>
+            implies
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&lt;</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x_1)&lt;f(x_2)</annotation>
+              </semantics>
+            </math>
+            for any
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo>,</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_1,x_2</annotation>
+              </semantics>
+            </math>
+            in that interval. We can restate this as saying that
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo>−</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&gt;</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">(x_2-x_1)&gt;0</annotation>
+              </semantics>
+            </math>
+            implies
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>−</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&gt;</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x_2)-f(x_1)&gt;0</annotation>
+              </semantics>
+            </math>.
+            Then since the slope is given by
+            <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>m</mi>
+                  <mo>=</mo>
+                  <mfrac>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>1</mn>
+                      </msub>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <mrow>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>2</mn>
+                      </msub>
+                      <mo>−</mo>
+                      <msub>
+                        <mi>x</mi>
+                        <mn>1</mn>
+                      </msub>
+                    </mrow>
+                  </mfrac>
+                </mrow>
+                <annotation encoding="application/x-tex">m=\frac{f(x_2)-f(x_1)}{x_2-x_1}</annotation>
+              </semantics>
+            </math>
+            as we wrote earlier, since both the numerator and denominator are
+            positive, the slope
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>m</mi>
+                <annotation encoding="application/x-tex">m</annotation>
+              </semantics>
+            </math>
+            must be positive. When
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            is decreasing, we have
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>2</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>−</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                  </msub>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>&lt;</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x_2)-f(x_1)&lt;0</annotation>
+              </semantics>
+            </math>,
+            hence
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>m</mi>
+                <annotation encoding="application/x-tex">m</annotation>
+              </semantics>
+            </math>
+            is negative. Since the derivative is the limit as
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>x</mi>
+                  <mn>2</mn>
+                </msub>
+                <annotation encoding="application/x-tex">x_2</annotation>
+              </semantics>
+            </math>
+            approaches
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <msub>
+                  <mi>x</mi>
+                  <mn>1</mn>
+                </msub>
+                <annotation encoding="application/x-tex">x_1</annotation>
+              </semantics>
+            </math>,
+            it follows that the derivative must be positive on an interval where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            is increasing, and negative when
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            is decreasing.
+          </p>
+          <p style="line-height: 1.7;">But what if we take an interval where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            increases in one area <em>and</em> decreases in another; for example the interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mn>-2</mn>
+                  <mo>,</mo>
+                  <mn>2</mn>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(-2,2)</annotation>
+              </semantics>
+            </math>
+            on
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>g</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">g(x)?</annotation>
+              </semantics>
+            </math>
+            Then the slope
+            of the tangent line must go from positive to negative (or vice versa),
+            so as a point
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo>,</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">(x,f(x))</annotation>
+              </semantics>
+            </math>
+            slides from left to right (i.e. as
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>x</mi>
+                <annotation encoding="application/x-tex">x</annotation>
+              </semantics>
+            </math>
+            increases along the interval), it passes through a point on
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            where the slope of the tangent line is equal to 0. That is, there exists
+            a point on
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>
+            such that
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msup>
+                    <mi>f</mi>
+                    <mo>′</mo>
+                  </msup>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>=</mo>
+                  <mn>0</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">f&#39;(x)=0</annotation>
+              </semantics>
+            </math>.
+            Visually, these look like peaks or valleys in the graph of the function,
+            points
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>x</mi>
+                <annotation encoding="application/x-tex">x</annotation>
+              </semantics>
+            </math>
+            for which
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>x</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">f(x)</annotation>
+              </semantics>
+            </math>
+            attains either the highest value (<strong>maximum</strong>) or lowest
+            value (<strong>minimum</strong>) on some interval containing
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>x</mi>
+                <annotation encoding="application/x-tex">x</annotation>
+              </semantics>
+            </math>.
+            We call such points <strong>extreme values</strong> or
+            <strong>extrema</strong> of
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>f</mi>
+                <annotation encoding="application/x-tex">f</annotation>
+              </semantics>
+            </math>.
+            It turns out that, for any closed interval
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">]</mo>
+                </mrow>
+                <annotation encoding="application/x-tex">[a,b]</annotation>
+              </semantics>
+            </math>,
+            extreme values <em>always exist:</em>
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-nav-green); background-color: rgba(10, 91, 55, 0.09); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Theorem</strong> (Extreme value theorem). <em>If
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>y</mi>
+                      <mo>=</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">y=f(x)</annotation>
+                  </semantics>
+                </math>
+                is a function that is defined and continuous on a closed interval
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">[</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">]</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">[a,b]</annotation>
+                  </semantics>
+                </math>,
+                then this function attains both a maximum and a minimum at some points
+                in the interval; that is, there exist points
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mi>c</mi>
+                    <annotation encoding="application/x-tex">c</annotation>
+                  </semantics>
+                </math>
+                and
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mi>d</mi>
+                    <annotation encoding="application/x-tex">d</annotation>
+                  </semantics>
+                </math>
+                in
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">[</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">]</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">[a,b]</annotation>
+                  </semantics>
+                </math>
+                such that
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>c</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>≤</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>≤</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>d</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(c) \leq f(x) \leq f(d)</annotation>
+                  </semantics>
+                </math>
+                for all
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mi>x</mi>
+                    <annotation encoding="application/x-tex">x</annotation>
+                  </semantics>
+                </math>
+                in
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">[</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">]</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">[a,b]</annotation>
+                  </semantics>
+                </math>.</em></p>
+          </div>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid rgba(128, 128, 128, 0.6); background-color: rgba(128, 128, 128, 0.08); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><em>Remark</em>. Like the intermediate value theorem (IVT), the
+              extreme value theorem is also a completeness axiom. See <a href="ivt.html">the IVT page</a> for
+              more info.</p>
+          </div>
+
+  
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/darkmode.js"></script>
+  
+  <!-- Desmos Initialization Script (Runs after DOM and Desmos API are ready) -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>
