@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. The LaTeX Framework Styling -->
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+  <!-- 2. The Upgraded KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script ddefer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  <!-- 3. Safe Custom Converter Script (Skips Desmos elements) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("math").forEach(m => {
+        if (m.closest('#calculator')) return; // Leave Desmos math tags alone!
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 4. Core Desmos API File (Updated to correct script URL) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <h1 class="title">The Lasallian Guide to Calculus</h1>
+  </header>
+
+  <h2 id="types-of-discontinuities">Types of discontinuities</h2>
+  <p>The functions we’ve usually encountered, such as linear equations,
+    quadratic equations, and polynomials of any degree
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>n</mi>
+        <annotation encoding="application/x-tex">n</annotation>
+      </semantics>
+    </math>,
+    obey useful properties: they are defined for all real numbers, and they
+    are <em>continuous</em> everywhere. Intuitively, we say a function is
+    continuous if we can draw its graph with a pencil without ever lifting
+    it. We will make this precise soon, but (by taking the contrapositive
+    statement) we can intuitively understand <em>dis</em>continuities as
+    points on a function’s graph where you <em>would</em> need to lift the
+    pencil. There are three kinds of discontinuities, and each of them
+    require in different ways.
+  </p>
+
+  <h3 id="removable-discontinuity">Removable discontinuity</h3>
+  <p>Consider the function
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mfrac>
+            <mrow>
+              <mn>2</mn>
+              <msup>
+                <mi>x</mi>
+                <mn>2</mn>
+              </msup>
+              <mo>+</mo>
+              <mi>x</mi>
+            </mrow>
+            <mi>x</mi>
+          </mfrac>
+          <mi>,</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)=\frac{2x^2+x}{x}</annotation>
+      </semantics>
+    </math>
+
+    <!-- desmos graph -->
+  <div id="calculator1"></div>
+
+  Click and drag along the graph, and notice that the y-values get closer and closer to 1 from both sides as the
+  x-values approach 0. But at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>
+  itself, we get
+  <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mn>0</mn>
+        <mi>,</mi>
+        <mtext>undefined</mtext>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">(0, \text{undefined})</annotation>
+    </semantics>
+  </math>
+  and this is because we end up dividing by 0, and remember that any number divided by 0 gives an undefined value. So
+  even though the function seems to &ldquo;close in&rdquo; on the point
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>,
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(x)</annotation>
+    </semantics>
+  </math>
+  itself is not defined at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>,
+  and we can say that its domain is
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi mathvariant="double-struck">ℝ</mi>
+        <mo>∖</mo>
+        <mo stretchy="false" form="prefix">{</mo>
+        <mn>0</mn>
+        <mo stretchy="false" form="postfix">}</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">\mathbb{R} \backslash \{0\}</annotation>
+    </semantics>
+  </math>
+  (all real numbers except 0). But we can easily factor the numerator of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>f</mi>
+      <annotation encoding="application/x-tex">f</annotation>
+    </semantics>
+  </math>
+  and get
+  <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+        <mo>=</mo>
+        <mfrac>
+          <mrow>
+            <mn>2</mn>
+            <msup>
+              <mi>x</mi>
+              <mn>2</mn>
+            </msup>
+            <mo>+</mo>
+            <mi>x</mi>
+          </mrow>
+          <mi>x</mi>
+        </mfrac>
+        <mo>=</mo>
+        <mfrac>
+          <mrow>
+            <menclose notation="updiagonalstrike">
+              <mi>x</mi>
+            </menclose>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mn>2</mn>
+            <mi>x</mi>
+            <mo>+</mo>
+            <mn>1</mn>
+            <mo stretchy="false" form="postfix">)</mo>
+          </mrow>
+          <menclose notation="updiagonalstrike">
+            <mi>x</mi>
+          </menclose>
+        </mfrac>
+        <mo>=</mo>
+        <mn>2</mn>
+        <mi>x</mi>
+        <mo>+</mo>
+        <mn>1</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">f(x)=\frac{2x^2+x}{x}=\frac{\cancel{x}(2x+1)}{\cancel{x}}=2x+1.
+      </annotation>
+    </semantics>
+  </math>
+  <em>Now</em> we can evaluate this function at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>;
+  we easily get
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mn>0</mn>
+        <mo stretchy="false" form="postfix">)</mo>
+        <mo>=</mo>
+        <mn>2</mn>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mn>0</mn>
+        <mo stretchy="false" form="postfix">)</mo>
+        <mo>+</mo>
+        <mn>1</mn>
+        <mo>=</mo>
+        <mn>1</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">f(0)=2(0)+1=1</annotation>
+    </semantics>
+  </math>.
+  But originally
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>f</mi>
+      <annotation encoding="application/x-tex">f</annotation>
+    </semantics>
+  </math>
+  was not defined for this value! What we have just done is evaluate the
+  <em>limit</em> of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(x)</annotation>
+    </semantics>
+  </math>
+  as
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>x</mi>
+      <annotation encoding="application/x-tex">x</annotation>
+    </semantics>
+  </math>
+  &ldquo;approaches&rdquo; 0 (we will soon elaborate what we precisely mean by &ldquo;approaching&rdquo;).</p>
+  <p>Observe the graph of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>.
+    It looks exactly like how one would graph the line
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mn>2</mn>
+          <mi>x</mi>
+          <mo>+</mo>
+          <mn>1</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">y=2x+1</annotation>
+      </semantics>
+    </math>,
+    but with a at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">x=0</annotation>
+      </semantics>
+    </math>,
+    where the function is not defined. This hole is said to be a
+    <strong>removable discontinuity</strong>. When a function has a
+    removable discontinuity, the limit can be evaluated at that point. Hence
+    we write
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <mn>0</mn>
+            </mrow>
+          </munder>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <mn>0</mn>
+            </mrow>
+          </munder>
+          <mfrac>
+            <mrow>
+              <mn>2</mn>
+              <msup>
+                <mi>x</mi>
+                <mn>2</mn>
+              </msup>
+              <mo>+</mo>
+              <mi>x</mi>
+            </mrow>
+            <mi>x</mi>
+          </mfrac>
+          <mo>=</mo>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <mn>0</mn>
+            </mrow>
+          </munder>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mn>2</mn>
+          <mi>x</mi>
+          <mo>+</mo>
+          <mn>1</mn>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>2</mn>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mn>0</mn>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>+</mo>
+          <mn>1</mn>
+          <mo>=</mo>
+          <mn>1</mn>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">\lim_{x \to 0} f(x) = \lim_{x \to 0} \frac{2x^2+x}{x} = \lim_{x \to
+          0}(2x+1) = 2(0)+1 = 1.</annotation>
+      </semantics>
+    </math>
+    In general, if the limit exists at a point
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>
+    even though
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(a)</annotation>
+      </semantics>
+    </math>
+    is undefined, then
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mrow>
+              <mi mathvariant="normal">lim</mi>
+              <mo>&#8289;</mo>
+            </mrow>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <mi>a</mi>
+            </mrow>
+          </msub>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">\lim_{x \to a} f(x) = f(a)</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <p>Going back to the idea of graphs drawn with pencils, we can represent
+    a removable discontinuity at a point by erasing a part of the graph
+    around said point. Obviously, since a point is arbitrarily small, such
+    an erasure is not to scale.</p>
+
+  <h3 id="jump-discontinuity">Jump discontinuity</h3>
+  <p>Functions may be defined by different equations on different
+    intervals; this is not inconsistent with our definition of a function as
+    long as the equations are functions themselves. We call such functions
+    <strong>piecewise-defined</strong> or simply
+    <strong>piecewise</strong>.
+  </p>
+  <p>Consider the following piecewise function, constant across two
+    different intervals:</p>
+  <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mrow>
+            <mo stretchy="true" form="prefix">{</mo>
+            <mtable>
+              <mtr>
+                <mtd columnalign="left" style="text-align: left">
+                  <mn>0</mn>
+                  <mo>,</mo>
+                </mtd>
+                <mtd columnalign="left" style="text-align: left">
+                  <mi>x</mi>
+                  <mo>&lt;</mo>
+                  <mn>0</mn>
+                  <mo>;</mo>
+                </mtd>
+              </mtr>
+              <mtr>
+                <mtd columnalign="left" style="text-align: left">
+                  <mn>1</mn>
+                  <mo>,</mo>
+                </mtd>
+                <mtd columnalign="left" style="text-align: left">
+                  <mi>x</mi>
+                  <mo>&gt;</mo>
+                  <mn>0</mn>
+                  <mi>.</mi>
+                </mtd>
+              </mtr>
+            </mtable>
+          </mrow>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x) =
+          \begin{cases}
+          0, &amp; x&lt;0; \\
+          1, &amp; x&gt;0
+          \end{cases}</annotation>
+      </semantics>
+    </math>
+    <!-- desmos graph -->
+  <div id="calculator2"></div>
+
+  This function occurs frequently in engineering and is known as the
+  <em>Heaviside function.</em> Observe that if we approach 0 from the left
+  (i.e. for negative values of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>x</mi>
+      <annotation encoding="application/x-tex">x</annotation>
+    </semantics>
+  </math>),
+  we have
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mn>0</mn>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(0)</annotation>
+    </semantics>
+  </math>
+  0, and if we approach 0 from the right (i.e. for positive values of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>x</mi>
+      <annotation encoding="application/x-tex">x</annotation>
+    </semantics>
+  </math>),
+  we have
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mn>0</mn>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(0)</annotation>
+    </semantics>
+  </math>
+  1 instead! We write this as
+  <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <munder>
+          <mi mathvariant="normal">lim</mi>
+          <mrow>
+            <mi>x</mi>
+            <mo>→</mo>
+            <msup>
+              <mn>0</mn>
+              <mo>−</mo>
+            </msup>
+          </mrow>
+        </munder>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+        <mo>=</mo>
+        <mn>0</mn>
+        <mo>,</mo>
+        <mspace width="2.0em"></mspace>
+        <munder>
+          <mi mathvariant="normal">lim</mi>
+          <mrow>
+            <mi>x</mi>
+            <mo>→</mo>
+            <msup>
+              <mn>0</mn>
+              <mo>+</mo>
+            </msup>
+          </mrow>
+        </munder>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+        <mo>=</mo>
+        <mn>1</mn>
+        <mo>,</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">\lim_{x \to 0^-} f(x)=0, \qquad \lim_{x \to 0^+} f(x)=1,</annotation>
+    </semantics>
+  </math>
+  and we say that these are the <strong>left-hand</strong> and
+  <strong>right-hand limits</strong> of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(x)</annotation>
+    </semantics>
+  </math>
+  at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>.
+  (The fact that a limit can be approached from both directions is not
+  something we mentioned in the previous example, and we now show it
+  here.) Since these limits both exist but aren’t equal,
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>f</mi>
+        <mo stretchy="false" form="prefix">(</mo>
+        <mi>x</mi>
+        <mo stretchy="false" form="postfix">)</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">f(x)</annotation>
+    </semantics>
+  </math>
+  is said to have a <strong>jump discontinuity</strong> at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>0</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=0</annotation>
+    </semantics>
+  </math>.
+  A proper limit as we have exhibited previously <em>cannot exist</em> at
+  a jump discontinuity, because the limits from both sides need to be
+  equal, and this is true even if the domain of the function is all of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi mathvariant="double-struck">ℝ</mi>
+      <annotation encoding="application/x-tex">\mathbb{R}</annotation>
+    </semantics>
+  </math>.
+  </p>
+  <p>When drawing a jump discontinuity, we lift the pencil at the point of
+    the jump discontinuity and then move our hand vertically, either upwards
+    or downwards, from where we continue drawing the function. We mark jump
+    discontinuities by drawing small holes to indicate that the function is
+    not defined there.</p>
+
+  <h3 id="essential-discontinuity">Essential discontinuity</h3>
+  <p>Now consider the function
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mfrac>
+            <mn>1</mn>
+            <mrow>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo>−</mo>
+              <mn>1</mn>
+              <msup>
+                <mo stretchy="false" form="postfix">)</mo>
+                <mn>2</mn>
+              </msup>
+            </mrow>
+          </mfrac>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)=\frac{1}{(x-1)^2}.</annotation>
+      </semantics>
+    </math>
+
+    <!-- desmos graph -->
+  <div id="calculator3"></div>
+
+  Easily we see that the domain of
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>f</mi>
+      <annotation encoding="application/x-tex">f</annotation>
+    </semantics>
+  </math>
+  is
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi mathvariant="double-struck">ℝ</mi>
+        <mo>∖</mo>
+        <mo stretchy="false" form="prefix">{</mo>
+        <mn>1</mn>
+        <mo stretchy="false" form="postfix">}</mo>
+      </mrow>
+      <annotation encoding="application/x-tex">\mathbb{R} \backslash \{1\}</annotation>
+    </semantics>
+  </math>.
+  Is it possible to evaluate the limit of this function at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>1</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=1</annotation>
+    </semantics>
+  </math>?
+  Unlike with our example for the removable discontinuity, there isn’t any
+  way to get
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>x</mi>
+      <annotation encoding="application/x-tex">x</annotation>
+    </semantics>
+  </math>
+  out of the denominator. Thus
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mi>f</mi>
+      <annotation encoding="application/x-tex">f</annotation>
+    </semantics>
+  </math>
+  has an <strong>essential discontinuity</strong> at
+  <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+    <semantics>
+      <mrow>
+        <mi>x</mi>
+        <mo>=</mo>
+        <mn>1</mn>
+      </mrow>
+      <annotation encoding="application/x-tex">x=1</annotation>
+    </semantics>
+  </math>.
+  Limits <em>cannot</em> be evaluated at essential discontinuities.
+  </p>
+  <p>Hover your mouse over the graph and scroll down to zoom out the graph, and notice that, no matter how far you zoom
+    out,
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    blows up towards
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>+</mi>
+          <mi>∞</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">+\infty</annotation>
+      </semantics>
+    </math>
+    for values of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    approaching 1, both from the right and the left. We thus write
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <msup>
+                <mn>1</mn>
+                <mo>−</mo>
+              </msup>
+            </mrow>
+          </munder>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mi>+</mi>
+          <mi>∞</mi>
+          <mo>,</mo>
+          <mspace width="2.0em"></mspace>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <msup>
+                <mn>1</mn>
+                <mo>+</mo>
+              </msup>
+            </mrow>
+          </munder>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mi>+</mi>
+          <mi>∞</mi>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">\lim_{x \to 1^-} f(x) = +\infty, \qquad \lim_{x \to 1^+} f(x) =
+          +\infty.</annotation>
+      </semantics>
+    </math>
+    However, since
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>∞</mi>
+        <annotation encoding="application/x-tex">\infty</annotation>
+      </semantics>
+    </math>
+    is not a number, we cannot say that the left-hand and right-hand limits
+    are equal. They just both grow without bound.
+  </p>
+  <p>Observe from the graph of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>
+    that the dotted vertical line at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mn>1</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">x=1</annotation>
+      </semantics>
+    </math>
+    is a <em>vertical asymptote</em>, and this is a characteristic of any
+    essential discontinuity at any point. When we draw a function with an
+    essential singularity, the graph of the function splits across the
+    vertical asymptote, approaching but never touching it.
+  </p>
+  <script src="scripts.js"></script>
+</body>
+
+</html>

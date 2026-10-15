@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. The LaTeX Framework Styling -->
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+  <!-- 2. The Upgraded KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script ddefer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  <!-- 3. Safe Custom Converter Script (Skips Desmos elements) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("math").forEach(m => {
+        if (m.closest('#calculator')) return; // Leave Desmos math tags alone!
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 4. Core Desmos API File (Updated to correct script URL) -->
+  <script src="https://desmos.com"></script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <h1 class="title">The Lasallian Guide to Calculus</h1>
+  </header>
+
+  <h2 id="limits-and-continuity">Limits and continuity</h2>
+  <p>So far, all of our notions of limits have been quite hand-wavy and
+    imprecise. We are basing it off of visual characteristics of their
+    occurence in graphs of functions, rather than on a condition that can be
+    verified mathematically for any arbitrary function. But there is a
+    common thread through all the discontinuities we have just tackled,
+    which allows us to give a precise definition of the limit.</p>
+  <p>Let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    be an arbitrary function. Let’s first look at the cases when the limit
+    of does <em>not</em> exist at a point
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>:
+    when
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    has a jump or essential discontinuity at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>a</mi>
+        <annotation encoding="application/x-tex">a</annotation>
+      </semantics>
+    </math>. Let’s start with the jump discontinuity in Figure 2. Its graph is given below, except we have defined
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mn>0</mn>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">f(0)=0</annotation>
+      </semantics>
+    </math>:
+  </p>
+
+  <!-- desmos iframe -->
+  <iframe src="https://www.desmos.com/calculator/s7papn0vmn" width="100%" height="500" style="border: 1px solid #ccc"
+    frameborder=0></iframe>
+
+  <p>Play with the sliders on the side to get a sense of what is happening. Let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>δ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+      </semantics>
+    </math>
+    be an arbitrary real number, and consider the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>−</mi>
+          <mi>δ</mi>
+          <mo>,</mo>
+          <mi>δ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(-\delta,\delta)</annotation>
+      </semantics>
+    </math>
+    along the x-axis centered at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>.
+    As
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>δ</mi>
+        <annotation encoding="application/x-tex">\delta</annotation>
+      </semantics>
+    </math>
+    gets smaller and smaller, this interval stays nonempty, since the domain
+    of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>
+    is comprised of every real number except 0. Now let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>
+    be another arbitrary real number, and consider the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>−</mi>
+          <mi>ϵ</mi>
+          <mo>,</mo>
+          <mi>ϵ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(-\epsilon,\epsilon)</annotation>
+      </semantics>
+    </math>
+    along the y-axis about
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)=0</annotation>
+      </semantics>
+    </math>.
+    Since
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>
+    only ever evaluates to 0 or 1, this interval only contains values of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>≠</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x) \neq 0</annotation>
+      </semantics>
+    </math>
+    when
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>=</mo>
+          <mrow>
+            <mo stretchy="true" form="prefix">|</mo>
+            <munder>
+              <mi mathvariant="normal">lim</mi>
+              <mrow>
+                <mi>x</mi>
+                <mo>→</mo>
+                <msup>
+                  <mn>0</mn>
+                  <mo>−</mo>
+                </msup>
+              </mrow>
+            </munder>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>−</mo>
+            <munder>
+              <mi mathvariant="normal">lim</mi>
+              <mrow>
+                <mi>x</mi>
+                <mo>→</mo>
+                <msup>
+                  <mn>0</mn>
+                  <mo>+</mo>
+                </msup>
+              </mrow>
+            </munder>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo stretchy="true" form="postfix">|</mo>
+          </mrow>
+          <mo>=</mo>
+          <mn>1</mn>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon = \left| \lim_{x \to 0^-} f(x) - \lim_{x \to 0^+} f(x) \right|
+          = 1.</annotation>
+      </semantics>
+    </math>
+    But this means that
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    for
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>&lt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">x&lt;0</annotation>
+      </semantics>
+    </math>
+    never approaches
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mrow>
+              <mi mathvariant="normal">lim</mi>
+              <mo>&#8289;</mo>
+            </mrow>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <msup>
+                <mn>0</mn>
+                <mo>+</mo>
+              </msup>
+            </mrow>
+          </msub>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>1</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\lim_{x \to 0^+} f(x) = 1</annotation>
+      </semantics>
+    </math>,
+    because if we could, the left-hand and right-hand limits would approach each other, i.e. the difference
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="true" form="prefix">|</mo>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <msup>
+                <mn>0</mn>
+                <mo>−</mo>
+              </msup>
+            </mrow>
+          </munder>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>−</mo>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <msup>
+                <mn>0</mn>
+                <mo>+</mo>
+              </msup>
+            </mrow>
+          </munder>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo stretchy="true" form="postfix">|</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">\begin{equation*}
+          \left| \lim_{x \to 0^-} f(x) - \lim_{x \to 0^+} f(x) \right|
+          \end{equation*}</annotation>
+      </semantics>
+    </math>
+    could be made arbitrarily small! If we adjust the sliders on the left so that
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&lt;</mo>
+          <mn>1</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &lt;1,</annotation>
+      </semantics>
+    </math>
+    then the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>−</mi>
+          <mi>ϵ</mi>
+          <mo>,</mo>
+          <mi>ϵ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(-\epsilon,\epsilon)</annotation>
+      </semantics>
+    </math>
+    does not contain any other points except those for which
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)=0</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <p>We thus define a function
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    to be <strong>discontinuous</strong> at a point
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>
+    if the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo>−</mo>
+          <mi>δ</mi>
+          <mo>,</mo>
+          <mi>a</mi>
+          <mo>+</mo>
+          <mi>δ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(a-\delta,a+\delta)</annotation>
+      </semantics>
+    </math>
+    contains elements in the domain of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    no matter how small
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>δ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+      </semantics>
+    </math>
+    is, but there is a minimum
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>ϵ</mi>
+        <annotation encoding="application/x-tex">\epsilon</annotation>
+      </semantics>
+    </math>
+    such that
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>f(a)</mi>
+          <mo>−</mo>
+          <mi>ϵ</mi>
+          <mo>,</mo>
+          <mi>f(a)</mi>
+          <mo>+</mo>
+          <mi>ϵ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(f(a)-\epsilon, f(a)+\epsilon)</annotation>
+      </semantics>
+    </math>
+    contains other values in the range of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>.
+    Equivalently (and phrased in a more precise but perhaps complicated
+    way),
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    is discontinuous at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>
+    if we can find some
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>
+    such that, for any
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>δ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+      </semantics>
+    </math>
+    you choose, we have
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mn>0</mn>
+          <mo>&lt;</mo>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>x</mi>
+          <mo>−</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>&lt;</mo>
+          <mi>δ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
+      </semantics>
+    </math>,
+    but
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>−</mo>
+          <mi>L</mi>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>≥</mo>
+          <mi>ϵ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">|f(x)-L|\geq\epsilon</annotation>
+      </semantics>
+    </math>.
+    Can you see how these are equivalent?
+  </p>
+  <p>We can thus define continuity as the negation of the above condition:
+    a function
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    is <strong>continuous</strong> at a point
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>
+    if the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo>−</mo>
+          <mi>δ</mi>
+          <mo>,</mo>
+          <mi>a</mi>
+          <mo>+</mo>
+          <mi>δ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(a-\delta,a+\delta)</annotation>
+      </semantics>
+    </math>
+    contains elements in the range of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    no matter how small
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>
+    is. Equivalently,
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    is continuous at
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>x</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x=a</annotation>
+      </semantics>
+    </math>
+    if for all
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>,
+    there exists
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>δ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+      </semantics>
+    </math>
+    such that
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mn>0</mn>
+          <mo>&lt;</mo>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>x</mi>
+          <mo>−</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>&lt;</mo>
+          <mi>δ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
+      </semantics>
+    </math>
+    implies
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>−</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>&lt;</mo>
+          <mi>ϵ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">|f(x)-f(a)|&lt;\epsilon</annotation>
+      </semantics>
+    </math>.
+    This is now closer to a definition you might be familiar with.
+  </p>
+  <p>
+    Clearly, functions can only be continuous or discontinuous at points they are defined at, so we define
+    <em>limits</em> as points where a function is not defined yet satisfies the above conditions. We can restate this
+    formally to get our familiar epsilon-delta definition of a limit:
+  </p>
+  <div class="definition">
+    <p><strong>Definition. </strong>Let
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>L</mi>
+            <mo>=</mo>
+            <msub>
+              <mrow>
+                <mi mathvariant="normal">lim</mi>
+                <mo>&#8289;</mo>
+              </mrow>
+              <mrow>
+                <mi>x</mi>
+                <mo>→</mo>
+                <mi>a</mi>
+              </mrow>
+            </msub>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">L = \lim_{x \to a} f(x)</annotation>
+        </semantics>
+      </math>. We say that the <strong>limit</strong>
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>L</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">L</annotation>
+        </semantics>
+      </math>
+      exists if, for all <br>
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>ϵ</mi>
+            <mo>&gt;</mo>
+            <mn>0</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+        </semantics>
+      </math>,
+      there exists
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>δ</mi>
+            <mo>&gt;</mo>
+            <mn>0</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+        </semantics>
+      </math>
+      such that
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mn>0</mn>
+            <mo>&lt;</mo>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mi>x</mi>
+            <mo>−</mo>
+            <mi>a</mi>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mo>&lt;</mo>
+            <mi>δ</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
+        </semantics>
+      </math>
+      implies
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>−</mo>
+            <mi>L</mi>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mo>&lt;</mo>
+            <mi>ϵ</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">|f(x)-L|&lt;\epsilon</annotation>
+        </semantics>
+      </math>.
+    </p>
+  </div>
+
+  <!-- desmos iframe -->
+  <iframe src="https://www.desmos.com/calculator/96to8xe3rn" width="100%" height="500" style="border: 1px solid #ccc"
+    frameborder=0></iframe>
+
+  <p>
+    If we try this with the graph in Figure 1, the function with a removable discontinuity, we see that no matter how
+    small
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>
+    is, the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>L</mi>
+          <mi>−</mi>
+          <mi>ϵ</mi>
+          <mo>,</mo>
+          <mi>L</mi>
+          <mi>+</mi>
+          <mi>ϵ</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(L-\epsilon,L+\epsilon)</annotation>
+      </semantics>
+    </math>
+    is always nonempty.
+  </p>
+
+  <p>
+    Just to quell any worries: besides math majors who will eventually take MTH245A/Advanced Calculus, the rest of you
+    don't need to worry about this definition showing up on a quiz. This is usually just provided in calculus courses
+    for completeness, but the definition remains obtuse and abstract. We hope that this has helped you gained a better
+    understanding of limits, since limits are what the entirety of calculus is built upon.
+  </p>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

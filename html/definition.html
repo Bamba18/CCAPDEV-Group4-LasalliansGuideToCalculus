@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. The LaTeX Framework Styling -->
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+  <!-- 2. The Upgraded KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script ddefer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  <!-- 3. Safe Custom Converter Script (Skips Desmos elements) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("math").forEach(m => {
+        if (m.closest('#calculator')) return; // Leave Desmos math tags alone!
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 4. Core Desmos API File (Updated to correct script URL) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <h1 class="title">The Lasallian Guide to Calculus</h1>
+  </header>
+
+  <h2 id="definition-of-a-function">Definition of a function</h2>
+  <p>In high school math, we have an intuitive understanding of a function
+    as a curve which represents an association between an input variable
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    and an output variable
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>y</mi>
+        <annotation encoding="application/x-tex">y</annotation>
+      </semantics>
+    </math>.
+    In this section, we will refine this understanding by precisely defining
+    what a function is. Functions are much more than curves on a grid, and
+    opening ourselves up to a more precise and general definition is the
+    first step to familiarize ourselves with the variety of definitions and
+    theorems we encounter in calculus.
+  </p>
+  <div class="definition">
+    <p><strong>Definition. </strong>Given two sets
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>X</mi>
+          <annotation encoding="application/x-tex">X</annotation>
+        </semantics>
+      </math>
+      and
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>Y</mi>
+          <annotation encoding="application/x-tex">Y</annotation>
+        </semantics>
+      </math>,
+      a <strong>function</strong> from
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>X</mi>
+          <annotation encoding="application/x-tex">X</annotation>
+        </semantics>
+      </math>
+      to
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>Y</mi>
+          <annotation encoding="application/x-tex">Y</annotation>
+        </semantics>
+      </math>
+      is a rule or mapping that takes each element of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>X</mi>
+          <annotation encoding="application/x-tex">X</annotation>
+        </semantics>
+      </math>
+      and associates with it a single element of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>Y</mi>
+          <annotation encoding="application/x-tex">Y</annotation>
+        </semantics>
+      </math>.
+      In this case, we write
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo>:</mo>
+            <mi>X</mi>
+            <mo>→</mo>
+            <mi>Y</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">f:X \to Y</annotation>
+        </semantics>
+      </math>.
+    </p>
+  </div>
+  <p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>X</mi>
+        <annotation encoding="application/x-tex">X</annotation>
+      </semantics>
+    </math>
+    is said to be the <strong>domain</strong> of the function
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>,
+    while
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>Y</mi>
+        <annotation encoding="application/x-tex">Y</annotation>
+      </semantics>
+    </math>
+    is said to be its <strong>codomain</strong>. All elements of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>Y</mi>
+        <annotation encoding="application/x-tex">Y</annotation>
+      </semantics>
+    </math>
+    do not necessarily occur as outputs of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>,
+    and the ones that do form a subset of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>Y</mi>
+        <annotation encoding="application/x-tex">Y</annotation>
+      </semantics>
+    </math>
+    known as the <strong>range</strong> of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <p>You are already familiar with functions: linear equations
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>m</mi>
+          <mi>x</mi>
+          <mo>+</mo>
+          <mi>b</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">y=mx+b</annotation>
+      </semantics>
+    </math>
+    and quadratic equations
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>a</mi>
+          <msup>
+            <mi>x</mi>
+            <mn>2</mn>
+          </msup>
+          <mo>+</mo>
+          <mi>b</mi>
+          <mi>x</mi>
+          <mo>+</mo>
+          <mi>c</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">y=ax^2+bx+c</annotation>
+      </semantics>
+    </math>
+    are examples of functions of the variable
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>,
+    where
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>m</mi>
+          <mo>,</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo>,</mo>
+          <mi>c</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">m,a,b,c</annotation>
+      </semantics>
+    </math>
+    are constants. In this case, we write
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">y=f(x)</annotation>
+      </semantics>
+    </math>,
+    where
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    represents elements of the domain and
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>y</mi>
+        <annotation encoding="application/x-tex">y</annotation>
+      </semantics>
+    </math>
+    represents elements of the range. Given any
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    in the domain,
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    produces one and <em>only</em> one value.
+  </p>
+  <p>This leads us to the familiar notion of the <em>vertical line
+      test:</em> at any point on the graph of the function, it must intersect
+    a vertical line exactly once. A graph failing the vertical line test is
+    equivalent to the existence of an element
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    of the domain that is associated to more than one element of the
+    codomain. Such a graph would not represent a proper function, because we
+    need each element of the domain to output an single value to the range
+    under
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <p>Here’s an example to illustrate why distinguishing between the
+    codomain and range is important:</p>
+  <div class="example">
+    <p><strong>Example 1</strong>. Consider the mapping
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo>:</mo>
+            <mi mathvariant="double-struck">ℝ</mi>
+            <mo>→</mo>
+            <mi mathvariant="double-struck">ℝ</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">f: \mathbb{R} \to \mathbb{R}</annotation>
+        </semantics>
+      </math>
+      defined by
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <msup>
+              <mi>x</mi>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <annotation encoding="application/x-tex">f(x)=x^2</annotation>
+        </semantics>
+      </math>.
+      Then
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>≥</mo>
+            <mn>0</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">f(x) \geq 0</annotation>
+        </semantics>
+      </math>
+      for all values of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>x</mi>
+          <annotation encoding="application/x-tex">x</annotation>
+        </semantics>
+      </math>,
+      since the square of a real number can never be negative. Here the
+      codomain does not equal the range, because
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi mathvariant="double-struck">ℝ</mi>
+          <annotation encoding="application/x-tex">\mathbb{R}</annotation>
+        </semantics>
+      </math>
+      includes all negative real numbers, none of which appear in the range of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>f</mi>
+          <annotation encoding="application/x-tex">f</annotation>
+        </semantics>
+      </math>.
+      Below is a graph of this example:
+    </p>
+  </div>
+
+  <!-- desmos graph -->
+  <div id="calculator4"></div>
+
+  <p>Note that we made no mention about the amount of elements in
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>X</mi>
+        <annotation encoding="application/x-tex">X</annotation>
+      </semantics>
+    </math>
+    and
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>Y</mi>
+        <annotation encoding="application/x-tex">Y</annotation>
+      </semantics>
+    </math>.
+    A mapping
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo>:</mo>
+          <mi>X</mi>
+          <mo>→</mo>
+          <mi>Y</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">f:X \to Y</annotation>
+      </semantics>
+    </math>
+    can be a function regardless of whether
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>X</mi>
+        <annotation encoding="application/x-tex">X</annotation>
+      </semantics>
+    </math>
+    and
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>Y</mi>
+        <annotation encoding="application/x-tex">Y</annotation>
+      </semantics>
+    </math>
+    are finite or infinite sets (such as the integers and the rational
+    numbers).
+  </p>
+  <div class="example">
+    <p><strong>Example 2</strong>. Let
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>X</mi>
+            <mo>=</mo>
+            <mi>Y</mi>
+            <mo>=</mo>
+            <mo stretchy="false" form="prefix">{</mo>
+            <mn>1</mn>
+            <mo>,</mo>
+            <mn>2</mn>
+            <mo>,</mo>
+            <mn>3</mn>
+            <mo stretchy="false" form="postfix">}</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">X = Y = \{1,2,3\}</annotation>
+        </semantics>
+      </math>.
+      Then the mapping
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo>:</mo>
+            <mi>X</mi>
+            <mo>→</mo>
+            <mi>Y</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">f:X \to Y</annotation>
+        </semantics>
+      </math>
+      defined by
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mn>1</mn>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <mn>2</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">f(1)=2</annotation>
+        </semantics>
+      </math>,
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mn>2</mn>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <mn>3</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">f(2)=3</annotation>
+        </semantics>
+      </math>,
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mn>3</mn>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">f(3)=1</annotation>
+        </semantics>
+      </math>
+      is a function.
+    </p>
+  </div>
+  <p>For the scope of this material, however, we will mainly consider
+    functions
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo>:</mo>
+          <mo stretchy="false" form="prefix">[</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo stretchy="false" form="postfix">]</mo>
+          <mo>→</mo>
+          <mi mathvariant="double-struck">ℝ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">f:[a,b] \to \mathbb{R}</annotation>
+      </semantics>
+    </math>,
+    where
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi mathvariant="double-struck">ℝ</mi>
+        <annotation encoding="application/x-tex">\mathbb{R}</annotation>
+      </semantics>
+    </math>
+    denotes the real numbers, and
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">[</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo stretchy="false" form="postfix">]</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">[a,b]</annotation>
+      </semantics>
+    </math>
+    denotes an interval of real numbers containing the endpoints
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>a</mi>
+        <annotation encoding="application/x-tex">a</annotation>
+      </semantics>
+    </math>
+    and
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>b</mi>
+        <annotation encoding="application/x-tex">b</annotation>
+      </semantics>
+    </math>.
+    Such intervals are said to be <strong>closed</strong>, while intervals
+    not containing their endpoints are said to be <strong>open</strong> and
+    are denoted
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(a,b)</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <div class="example">
+    <p><strong>Example 3</strong>. Let
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <msup>
+              <mi>y</mi>
+              <mn>2</mn>
+            </msup>
+            <mo>=</mo>
+            <mi>x</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">y^2=x</annotation>
+        </semantics>
+      </math>.
+      Then
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>y</mi>
+            <mo>=</mo>
+            <mi>±</mi>
+            <msqrt>
+              <mi>x</mi>
+            </msqrt>
+          </mrow>
+          <annotation encoding="application/x-tex">y=\pm \sqrt x</annotation>
+        </semantics>
+      </math>,
+      and setting
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>x</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">x=1</annotation>
+        </semantics>
+      </math>
+      gives
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>y</mi>
+            <mo>=</mo>
+            <mn>1</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">y=1</annotation>
+        </semantics>
+      </math>
+      and
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>y</mi>
+            <mo>=</mo>
+            <mi>−</mi>
+            <mn>1</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">y=-1</annotation>
+        </semantics>
+      </math>.
+      Since a single value of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>x</mi>
+          <annotation encoding="application/x-tex">x</annotation>
+        </semantics>
+      </math>
+      outputs two distinct numbers,
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>y</mi>
+          <annotation encoding="application/x-tex">y</annotation>
+        </semantics>
+      </math>
+      is not a function of
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mi>x</mi>
+          <annotation encoding="application/x-tex">x</annotation>
+        </semantics>
+      </math>. Below is a graph of this example:
+    </p>
+  </div>
+
+  <!-- desmos graph -->
+  <div id="calculator5"></div>
+
+  <p>
+    Try the vertical line test on this graph.
+  </p>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>
