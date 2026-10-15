@@ -98,9 +98,21 @@
         <mi>a</mi>
         <annotation encoding="application/x-tex">a</annotation>
       </semantics>
-    </math>. Let’s start with the jump discontinuity in Figure 2, whose graph is given below:
+    </math>. Let’s start with the jump discontinuity in Figure 2. Its graph is given below, except we have defined
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mn>0</mn>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">f(0)=0</annotation>
+      </semantics>
+    </math>:
   </p>
-  <br>
 
   <!-- desmos iframe -->
   <iframe src="https://www.desmos.com/calculator/s7papn0vmn" width="100%" height="500" style="border: 1px solid #ccc"
@@ -121,14 +133,14 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>−</mi>
           <mi>δ</mi>
           <mo>,</mo>
           <mi>δ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
+          <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">[-\delta,\delta]</annotation>
+        <annotation encoding="application/x-tex">(-\delta,\delta)</annotation>
       </semantics>
     </math>
     along the x-axis centered at
@@ -172,14 +184,14 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>−</mi>
           <mi>ϵ</mi>
           <mo>,</mo>
           <mi>ϵ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
+          <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">[-\epsilon,\epsilon]</annotation>
+        <annotation encoding="application/x-tex">(-\epsilon,\epsilon)</annotation>
       </semantics>
     </math>
     along the y-axis about
@@ -375,43 +387,32 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>−</mi>
           <mi>ϵ</mi>
           <mo>,</mo>
           <mi>ϵ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
+          <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">[-\epsilon,\epsilon]</annotation>
+        <annotation encoding="application/x-tex">(-\epsilon,\epsilon)</annotation>
       </semantics>
     </math>
-  </p>
-  <p>Let
+    does not contain any other points except those for which
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mi>L</mi>
-          <mo>=</mo>
-          <msub>
-            <mrow>
-              <mi mathvariant="normal">lim</mi>
-              <mo>&#8289;</mo>
-            </mrow>
-            <mrow>
-              <mi>x</mi>
-              <mo>→</mo>
-              <mi>a</mi>
-            </mrow>
-          </msub>
           <mi>f</mi>
           <mo stretchy="false" form="prefix">(</mo>
           <mi>x</mi>
           <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <mn>0</mn>
         </mrow>
-        <annotation encoding="application/x-tex">L = \lim_{x \to a} f(x)</annotation>
+        <annotation encoding="application/x-tex">f(x)=0</annotation>
       </semantics>
     </math>.
-    We thus define a function
+  </p>
+  <p>We thus define a function
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
@@ -438,7 +439,7 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>a</mi>
           <mo>−</mo>
           <mi>δ</mi>
@@ -446,9 +447,9 @@
           <mi>a</mi>
           <mo>+</mo>
           <mi>δ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
+          <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">[a-\delta,a+\delta]</annotation>
+        <annotation encoding="application/x-tex">(a-\delta,a+\delta)</annotation>
       </semantics>
     </math>
     contains elements in the domain of
@@ -485,17 +486,17 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
-          <mi>L</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>f(a)</mi>
           <mo>−</mo>
           <mi>ϵ</mi>
           <mo>,</mo>
-          <mi>L</mi>
+          <mi>f(a)</mi>
           <mo>+</mo>
           <mi>ϵ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
+          <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">[L-\epsilon, L+\epsilon]</annotation>
+        <annotation encoding="application/x-tex">(f(a)-\epsilon, f(a)+\epsilon)</annotation>
       </semantics>
     </math>
     contains other values in the range of
@@ -593,36 +594,6 @@
     </math>.
     Can you see how these are equivalent?
   </p>
-  <p>This applies to the essential discontinuity in Figure 3 as well:
-    since
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>L</mi>
-          <mo>=</mo>
-          <mi>+</mi>
-          <mi>∞</mi>
-        </mrow>
-        <annotation encoding="application/x-tex">L = +\infty</annotation>
-      </semantics>
-    </math>,
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mo stretchy="false" form="prefix">|</mo>
-          <mi>f</mi>
-          <mo stretchy="false" form="prefix">(</mo>
-          <mi>x</mi>
-          <mo stretchy="false" form="postfix">)</mo>
-          <mo>−</mo>
-          <mi>L</mi>
-          <mo stretchy="false" form="prefix">|</mo>
-        </mrow>
-        <annotation encoding="application/x-tex">|f(x)-L|</annotation>
-      </semantics>
-    </math>
-    is always arbitrarily <em>large.</em>
-  </p>
   <p>We can thus define continuity as the negation of the above condition:
     a function
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
@@ -651,7 +622,7 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>a</mi>
           <mo>−</mo>
           <mi>δ</mi>
@@ -659,49 +630,9 @@
           <mi>a</mi>
           <mo>+</mo>
           <mi>δ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
-        </mrow>
-        <annotation encoding="application/x-tex">[a-\delta,a+\delta]</annotation>
-      </semantics>
-    </math>
-    contains elements in the domain of
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>f</mi>
-          <mo stretchy="false" form="prefix">(</mo>
-          <mi>x</mi>
           <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">f(x)</annotation>
-      </semantics>
-    </math>
-    no matter how small
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>δ</mi>
-          <mo>&gt;</mo>
-          <mn>0</mn>
-        </mrow>
-        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
-      </semantics>
-    </math>
-    is, and
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
-          <mi>L</mi>
-          <mo>−</mo>
-          <mi>ϵ</mi>
-          <mo>,</mo>
-          <mi>L</mi>
-          <mo>+</mo>
-          <mi>ϵ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
-        </mrow>
-        <annotation encoding="application/x-tex">[L-\epsilon, L+\epsilon]</annotation>
+        <annotation encoding="application/x-tex">(a-\delta,a+\delta)</annotation>
       </semantics>
     </math>
     contains elements in the range of
@@ -799,6 +730,105 @@
           <mi>x</mi>
           <mo stretchy="false" form="postfix">)</mo>
           <mo>−</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>&lt;</mo>
+          <mi>ϵ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">|f(x)-f(a)|&lt;\epsilon</annotation>
+      </semantics>
+    </math>.
+    This is now closer to a definition you might be familiar with.
+  </p>
+  <p>
+    Clearly, functions can only be continuous or discontinuous at points they are defined at, so we define limits as points where a function is not defined yet satisfies the above conditions. We can restate this formally to get our familiar epsilon-delta definition of a limit:
+  </p>
+  <div class="definition">
+    <p><strong>Definition. </strong>Let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>L</mi>
+          <mo>=</mo>
+          <msub>
+            <mrow>
+              <mi mathvariant="normal">lim</mi>
+              <mo>&#8289;</mo>
+            </mrow>
+            <mrow>
+              <mi>x</mi>
+              <mo>→</mo>
+              <mi>a</mi>
+            </mrow>
+          </msub>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">L = \lim_{x \to a} f(x)</annotation>
+      </semantics>
+    </math>. We say that the <strong>limit</strong>
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>L</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">L</annotation>
+      </semantics>
+    </math>
+    exists if, for all <br>
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>ϵ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+      </semantics>
+    </math>,
+    there exists
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>δ</mi>
+          <mo>&gt;</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+      </semantics>
+    </math>
+    such that
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mn>0</mn>
+          <mo>&lt;</mo>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>x</mi>
+          <mo>−</mo>
+          <mi>a</mi>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mo>&lt;</mo>
+          <mi>δ</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
+      </semantics>
+    </math>
+    implies
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">|</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>−</mo>
           <mi>L</mi>
           <mo stretchy="false" form="prefix">|</mo>
           <mo>&lt;</mo>
@@ -807,9 +837,8 @@
         <annotation encoding="application/x-tex">|f(x)-L|&lt;\epsilon</annotation>
       </semantics>
     </math>.
-    This is now the definition you might be familiar with.
-  </p>
-  <br>
+    </p>
+  </div>
 
   <!-- desmos iframe -->
   <iframe src="https://www.desmos.com/calculator/96to8xe3rn" width="100%" height="500" style="border: 1px solid #ccc"
@@ -832,7 +861,7 @@
     <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
       <semantics>
         <mrow>
-          <mo stretchy="false" form="prefix">[</mo>
+          <mo stretchy="false" form="prefix">(</mo>
           <mi>L</mi>
           <mi>−</mi>
           <mi>ϵ</mi>
@@ -840,24 +869,12 @@
           <mi>L</mi>
           <mi>+</mi>
           <mi>ϵ</mi>
-          <mo stretchy="false" form="postfix">]</mo>
-        </mrow>
-        <annotation encoding="application/x-tex">[L-\epsilon,L+\epsilon]</annotation>
-      </semantics>
-    </math>
-    is always nonempty other than the point
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mo stretchy="false" form="prefix">(</mo>
-          <mi>a</mi>
-          <mo>,</mo>
-          <mi>L</mi>
           <mo stretchy="false" form="postfix">)</mo>
         </mrow>
-        <annotation encoding="application/x-tex">(a,L).</annotation>
+        <annotation encoding="application/x-tex">(L-\epsilon,L+\epsilon)</annotation>
       </semantics>
     </math>
+    is always nonempty.
   </p>
 
   <script src="scripts.js"></script>
