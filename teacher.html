@@ -29,12 +29,25 @@
         </svg>
     </button>
 
-    <!-- Top Pill Navigation Bar (4-item Student Variant) -->
+    <!-- Top Pill Navigation Bar -->
     <header class="page-header py-3">
         <div class="container d-flex justify-content-center px-2">
             <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
 
-                <!-- Enroll to a Class -->
+                <!-- Dashboard -->
+                <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="18" y1="20" x2="18" y2="9"></line>
+                    </svg>
+                    <span class="nav-label text-nowrap">DASHBOARD</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Classrooms -->
                 <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
                     <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
                         stroke-linecap="round" stroke-linejoin="round">
@@ -43,7 +56,7 @@
                         <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                         <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                     </svg>
-                    <span class="nav-label text-nowrap">ENROLL TO A CLASS</span>
+                    <span class="nav-label text-nowrap">CLASSROOMS</span>
                 </a>
 
                 <div class="nav-divider"></div>
@@ -94,12 +107,13 @@
             <!-- 1. Header Title & Greeting -->
             <h1 class="welcome-heading mb-3">THE LASALLIAN'S GUIDE TO CALCULUS</h1>
             <h2 class="student-subheading">HELLO TEACHER!</h2>
-            <p class="signed-in-text mb-3">Signed in as <span id="userEmailSpan">juan.delacruz@dlsu.edu.ph</span></p>
+            <p class="signed-in-text mb-3">Signed in as <span id="userEmailSpan">faculty.name@dlsu.edu.ph</span></p>
 
             <!-- Quick Action Pill Buttons -->
-            <div class="d-flex justify-content-center gap-2 mb-4">
-                <a href="#" class="btn btn-student-action mr-2">Create a classroom</a>
-                <a href="#" class="btn btn-student-action">Browse topics</a>
+            <div class="d-flex justify-content-center flex-wrap mb-4">
+                <a href="teacher.html" class="btn btn-pill-action mr-2">Homepage</a>
+                <a href="#" class="btn btn-pill-action mr-2">Create a classroom</a>
+                <a href="#" class="btn btn-pill-action">Browse topics</a>
             </div>
 
             <!-- Hero Calculus Graph Illustration (Vector SVG) -->
@@ -165,6 +179,7 @@
 
             <!-- 3. About The Website Section -->
             <h2 class="welcome-heading mb-3">ABOUT THE WEBSITE</h2>
+            <a href="#" class="btn btn-pill-action mb-3">Learn more</a>
             <p class="about-desc-text mx-auto mb-5">
                 Calculus is the study of change, and change is hard to picture on a static slide. The Lasallian’s Guide
                 to Calculus gives every topic a graph you can control: move a slider, press a button, and watch the idea

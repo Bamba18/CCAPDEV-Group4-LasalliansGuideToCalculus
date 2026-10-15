@@ -231,7 +231,7 @@ header {
   opacity: 0.9;
 }
 
-/* Action Buttons & Links */
+/* Auth Buttons & Links */
 .btn-login {
   background-color: var(--dlsu-btn-dark);
   color: #ffffff;
@@ -278,17 +278,39 @@ header {
 }
 
 /* =========================================
-   6. STUDENT DASHBOARD STYLES (GLOBAL)
+   6. UNIFIED PILL ACTION BUTTONS
    ========================================= */
+.btn-pill-action{
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff !important;
+  border-radius: 50px;
+  padding: 8px 22px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+  text-decoration: none !important;
+  display: inline-block;
+  margin: 0 4px 8px;
+  line-height: 1.5;
+  cursor: pointer;
+}
 
-/* Wider 4-item navigation pill */
+.btn-pill-action:hover{
+  color: #ffffff !important;
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+/* =========================================
+   7. STUDENT/TEACHER DASHBOARD STYLES
+   ========================================= */
 .nav-pill-student {
   width: min(100%, 540px) !important;
   gap: 16px;
   padding: 8px 24px;
 }
 
-/* User Greeting & Badges */
 .student-subheading {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-weight: 800;
@@ -302,27 +324,6 @@ header {
   color: #6c757d;
 }
 
-/* Rounded Action Buttons */
-.btn-student-action {
-  background-color: var(--dlsu-nav-green);
-  color: #ffffff !important;
-  border-radius: 50px;
-  padding: 8px 22px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  border: none;
-  transition: opacity 0.15s ease, transform 0.15s ease;
-  text-decoration: none !important;
-  display: inline-block;
-}
-
-.btn-student-action:hover {
-  color: #ffffff;
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
-/* Hero Calculus Graph Card */
 .graph-preview-card {
   background-color: #ffffff;
   border-radius: 20px;
@@ -340,7 +341,6 @@ header {
   display: block;
 }
 
-/* Topics Carousel Banner */
 .topic-carousel-container {
   background-color: var(--dlsu-card-green) !important;
   border-radius: 18px;
@@ -410,7 +410,6 @@ header {
   right: 10px;
 }
 
-/* Carousel Custom Indicators */
 .carousel-dashes {
   display: flex;
   justify-content: center;
@@ -432,7 +431,6 @@ header {
   background-color: #ffffff !important;
 }
 
-/* Explanatory Text */
 .about-desc-text {
   max-width: 680px;
   font-size: 0.88rem;
@@ -440,7 +438,6 @@ header {
   color: #4a4a4a;
 }
 
-/* 4 Feature Cards */
 .feature-card {
   background-color: #ffffff;
   border-radius: 16px;
@@ -471,27 +468,297 @@ header {
   margin-bottom: 0;
 }
 
-/* Dark Mode Harmonization */
+/* =========================================
+   8. MY CLASSES PAGE STYLES
+   ========================================= */
+.classroom-card {
+  background-color: #ffffff;
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+  padding: 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.classroom-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.09);
+}
+
+.classroom-title {
+  color: var(--dlsu-nav-green);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.badge-section {
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 6px;
+  display: inline-block;
+  margin-bottom: 14px;
+}
+
+.classroom-meta {
+  font-size: 0.85rem;
+  color: #6c757d;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.classroom-meta strong {
+  color: #333333;
+}
+
+/* =========================================
+   9. CLASSROOM PAGE STYLES
+   ========================================= */
+.back-link {
+  color: var(--dlsu-nav-green);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none !important;
+  display: inline-flex;
+  align-items: center;
+  transition: opacity 0.15s ease;
+}
+
+.back-link:hover {
+  opacity: 0.8;
+  color: var(--dlsu-card-green);
+}
+
+.classroom-header-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 24px 28px;
+}
+
+.classroom-header-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 1.8rem;
+  color: #1a1a1a;
+  margin-bottom: 6px;
+}
+
+.classroom-header-sub {
+  font-size: 0.82rem;
+  color: #666666;
+  margin-bottom: 0;
+}
+
+.btn-outline-danger-custom {
+  border: 1.5px solid #e06d6d;
+  color: #d94343;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 6px 14px;
+  transition: all 0.15s ease;
+  text-decoration: none !important;
+  display: inline-block;
+}
+
+.btn-outline-danger-custom:hover {
+  background-color: #fdf2f2;
+  color: #c52929;
+  border-color: #c52929;
+}
+
+.classroom-side-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  padding: 22px 24px;
+}
+
+.card-section-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+}
+
+.group-name-highlight {
+  color: var(--dlsu-nav-green);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.group-meta-sub {
+  font-size: 0.76rem;
+  color: #777777;
+  margin-bottom: 16px;
+}
+
+.user-avatar-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.member-name {
+  font-size: 0.85rem;
+  color: #2b2b2b;
+  font-weight: 500;
+}
+
+.badge-you {
+  background-color: #f0a500;
+  color: #ffffff;
+  font-size: 0.68rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  margin-left: 6px;
+}
+
+.input-group-label {
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #2b2b2b;
+  margin-bottom: 6px;
+}
+
+.form-control-standard {
+  border-radius: 6px;
+  border: 1px solid #dcdcdc;
+  padding: 9px 14px;
+  font-size: 0.85rem;
+}
+
+.classmates-card {
+  background-color: #ffffff;
+  border-radius: 16px;
+  border: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.classmates-card-header {
+  padding: 20px 24px 12px;
+}
+
+.classmates-table {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.classmates-table thead th {
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  border: none;
+  padding: 10px 24px;
+}
+
+.classmates-table tbody td {
+  padding: 12px 24px;
+  vertical-align: middle;
+  border-top: 1px solid #f2f2f2;
+  font-size: 0.85rem;
+}
+
+.badge-group-soft {
+  background-color: #e8f5ee;
+  color: var(--dlsu-nav-green);
+  font-weight: 700;
+  font-size: 0.74rem;
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.text-no-group {
+  color: #8c8c8c;
+  font-size: 0.82rem;
+}
+
+/* =========================================
+   10. DARK MODE HARMONIZATION
+   ========================================= */
 body.dark-mode .graph-preview-card,
-body.dark-mode .feature-card {
+body.dark-mode .feature-card,
+body.dark-mode .classroom-card,
+body.dark-mode .classroom-header-card,
+body.dark-mode .classroom-side-card,
+body.dark-mode .classmates-card {
   background-color: var(--input-background);
   color: var(--page-text);
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
 }
 
-body.dark-mode .feature-card-title {
+body.dark-mode .feature-card-title,
+body.dark-mode .classroom-title,
+body.dark-mode .group-name-highlight {
   color: var(--dlsu-accent-green);
+}
+
+body.dark-mode .classroom-header-title,
+body.dark-mode .card-section-heading,
+body.dark-mode .member-name,
+body.dark-mode .input-group-label {
+  color: var(--page-text);
 }
 
 body.dark-mode .feature-card-desc,
 body.dark-mode .about-desc-text,
-body.dark-mode .signed-in-text {
+body.dark-mode .signed-in-text,
+body.dark-mode .classroom-meta,
+body.dark-mode .classroom-header-sub,
+body.dark-mode .group-meta-sub {
+  color: #a0b2a7;
+}
+
+body.dark-mode .classroom-meta strong {
   color: var(--page-text);
-  opacity: 0.85;
+}
+
+body.dark-mode .form-control-standard {
+  background-color: #1a2a22;
+  border-color: #2b4538;
+  color: #ffffff;
+}
+
+body.dark-mode .classmates-table tbody td {
+  border-top-color: #1e3328;
+}
+
+body.dark-mode .badge-group-soft {
+  background-color: #163625;
+  color: var(--dlsu-accent-green);
 }
 
 /* =========================================
-   7. RESPONSIVE MOBILE VIEW
+   11. RESPONSIVE MOBILE VIEW
    ========================================= */
 @media (max-width: 575.98px) {
   .page-header-inner {

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Lasallian's Guide to Calculus - My Classes</title>
+
+    <!-- Local Offline CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Floating Dark Mode Toggle -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+                d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+            </path>
+        </svg>
+    </button>
+
+    <!-- Top Pill Navigation Bar (Student 4-Item) -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
+
+                <!-- HOMEPAGE -->
+                <a href="Student.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span class="nav-label text-nowrap">HOMEPAGE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Enroll to a Class -->
+                <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    <span class="nav-label text-nowrap">ENROLL CLASS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Topics Link -->
+                <a href="student.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Profile Link -->
+                <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Logout Link -->
+                <a href="Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow-1 py-4">
+        <div class="container text-center">
+
+            <!-- Headings -->
+            <h1 class="welcome-heading mb-2">MY CLASSES</h1>
+            <p class="sub-text text-muted mb-4">The classrooms you have joined</p>
+
+
+            <!-- Classroom Cards Grid -->
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="row">
+
+                        <!-- Class Card 1: Calculus 1 -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="card classroom-card">
+                                <div>
+                                    <h2 class="classroom-title">Calculus 1</h2>
+                                    <div>
+                                        <span class="badge-section">Section N24</span>
+                                    </div>
+                                    <div class="classroom-meta">
+                                        <div>Teacher: Maria Santos</div>
+                                        <div>42 classmates &bull; Your group: <strong>Gradients</strong></div>
+                                    </div>
+                                </div>
+                                <a href="CalculusClass.html" class="btn btn-pill-action">Open classroom</a>
+                            </div>
+                        </div>
+
+                        <!-- Class Card 2: Engineering Calculus -->
+                        <div class="col-12 col-md-6 mb-4">
+                            <div class="card classroom-card">
+                                <div>
+                                    <h2 class="classroom-title">Engineering Calculus</h2>
+                                    <div>
+                                        <span class="badge-section">Section S11</span>
+                                    </div>
+                                    <div class="classroom-meta">
+                                        <div>Teacher: Rafael Bautista</div>
+                                        <div>14 classmates &bull; Your group: <strong>none yet</strong></div>
+                                    </div>
+                                </div>
+                                <a href="#" class="btn btn-pill-action">Open classroom</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Bottom Footer -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+    <!-- Local Offline Scripts -->
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+</body>
+
+</html>

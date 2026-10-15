@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Lasallian's Guide to Calculus - Classroom</title>
+
+  <!-- Local Offline CSS -->
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- Top Navigation Pill -->
+  <header class="page-header py-3">
+    <div class="container d-flex justify-content-center px-2">
+      <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
+
+        <!-- My Classes -->
+        <a href="MyClasses.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span class="nav-label text-nowrap">MY CLASSES</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <!-- Topics -->
+        <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+          </svg>
+          <span class="nav-label">TOPICS</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="#" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="nav-label">PROFILE</span>
+        </a>
+
+        <div class="nav-divider"></div>
+
+        <a href="Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </svg>
+          <span class="nav-label">LOGOUT</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="flex-grow-1 py-3">
+    <div class="container" style="max-width: 1040px;">
+
+      <!-- Classroom Header Card -->
+      <div class="card classroom-header-card mb-4">
+        <div class="d-flex flex-wrap justify-content-between align-items-center">
+          <div>
+            <h1 class="classroom-header-title">Calculus 1</h1>
+            <div class="d-flex align-items-center flex-wrap">
+              <span class="badge-section mr-2 mb-0">Section N24</span>
+              <p class="classroom-header-sub">Teacher: Maria Santos &bull; Joined Sep 12, 2026</p>
+            </div>
+          </div>
+          <div class="mt-3 mt-sm-0">
+            <button type="button" class="btn btn-outline-danger-custom" id="btnLeaveClass">Leave class</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Layout: Groups Column (Left) | Classmates Table (Right) -->
+      <div class="row">
+
+        <!-- Left Column -->
+        <div class="col-12 col-md-5 mb-4 mb-md-0">
+
+          <!-- 1. MY GROUP Card -->
+          <div class="card classroom-side-card mb-4">
+            <h2 class="card-section-heading">MY GROUP</h2>
+            <div class="group-name-highlight">Gradients</div>
+            <div class="group-meta-sub">Made by your teacher &bull; 5 members</div>
+
+            <ul class="list-unstyled mb-4">
+              <li class="d-flex align-items-center mb-2">
+                <span class="user-avatar-badge mr-2">JD</span>
+                <span class="member-name">Juan Dela Cruz</span>
+                <span class="badge-you">You</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <span class="user-avatar-badge mr-2">AR</span>
+                <span class="member-name">Ana Reyes</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <span class="user-avatar-badge mr-2">PG</span>
+                <span class="member-name">Paolo Garcia</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <span class="user-avatar-badge mr-2">IC</span>
+                <span class="member-name">Isabel Cruz</span>
+              </li>
+              <li class="d-flex align-items-center mb-2">
+                <span class="user-avatar-badge mr-2">DL</span>
+                <span class="member-name">Diego Luna</span>
+              </li>
+            </ul>
+
+            <div>
+              <button type="button" class="btn btn-outline-danger-custom" id="btnLeaveGroup">Leave group</button>
+            </div>
+          </div>
+
+          <!-- 2. CREATE A GROUP Card -->
+          <div class="card classroom-side-card">
+            <h2 class="card-section-heading">CREATE A GROUP</h2>
+            <form id="createGroupForm">
+              <div class="form-group mb-3">
+                <label for="groupNameInput" class="input-group-label">GROUP NAME</label>
+                <input type="text" class="form-control form-control-standard" id="groupNameInput"
+                  placeholder="e.g. Integrals" required>
+              </div>
+              <button type="submit" class="btn btn-pill-action mx-0 mb-0">Create group</button>
+            </form>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Classmates List -->
+        <div class="col-12 col-md-7">
+          <div class="card classmates-card">
+            <div class="classmates-card-header">
+              <h2 class="card-section-heading mb-0">CLASSMATES (42)</h2>
+            </div>
+
+            <div class="table-responsive">
+              <table class="table classmates-table">
+                <thead>
+                  <tr>
+                    <th scope="col" style="width: 60%;">NAME</th>
+                    <th scope="col" style="width: 40%;">GROUP</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">AR</span>
+                        <span class="member-name">Ana Reyes</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge-group-soft">Gradients</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">CM</span>
+                        <span class="member-name">Carlo Mendoza</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge-group-soft">Limits</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">BV</span>
+                        <span class="member-name">Bea Villanueva</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge-group-soft">Limits</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">MT</span>
+                        <span class="member-name">Miguel Torres</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="text-no-group">No group yet</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">SL</span>
+                        <span class="member-name">Sofia Lim</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge-group-soft">Tangents</span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        <span class="user-avatar-badge mr-2">PG</span>
+                        <span class="member-name">Paolo Garcia</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span class="badge-group-soft">Gradients</span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="js/jquery-3.7.1.js"></script>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/darkmode.js"></script>
+
+  <!-- Client-side Interactive Actions -->
+  <script>
+    $(document).ready(function () {
+      // Leave Class confirmation
+      $("#btnLeaveClass").on("click", function () {
+        if (confirm("Are you sure you want to leave Calculus 1?")) {
+          window.location.href = "MyClasses.html";
+        }
+      });
+
+      // Leave Group confirmation
+      $("#btnLeaveGroup").on("click", function () {
+        if (confirm("Are you sure you want to leave group Gradients?")) {
+          alert("You left the group.");
+        }
+      });
+
+      // Handle group creation
+      $("#createGroupForm").on("submit", function (e) {
+        e.preventDefault();
+        const groupName = $("#groupNameInput").val().trim();
+        if (groupName) {
+          alert(`Group "${groupName}" created!`);
+          $("#groupNameInput").val("");
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
