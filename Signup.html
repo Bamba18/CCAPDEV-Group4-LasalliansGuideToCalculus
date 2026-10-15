@@ -154,48 +154,40 @@
 
   <!-- Interactive Scripts -->
   <script>
-    const ThemeController = (() => {
-      const STORAGE_KEY = "theme";
-      const $themeToggle = $("[data-theme-toggle]");
-      const $themeLabel = $(".theme-toggle-label");
-
-      function applyTheme(isDarkMode) {
-        $("body").toggleClass("dark-mode", isDarkMode);
-        $themeLabel.text(isDarkMode ? "LIGHT MODE" : "DARK MODE");
-      }
-
-      function init() {
-        const savedTheme = localStorage.getItem(STORAGE_KEY) === "dark";
-        applyTheme(savedTheme);
-
-        $themeToggle.on("click", function () {
-          const nextTheme = !$("body").hasClass("dark-mode");
-          applyTheme(nextTheme);
-          localStorage.setItem(STORAGE_KEY, nextTheme ? "dark" : "light");
-        });
-      }
-
-      return { init, applyTheme };
-    })();
-
     const SignupController = (() => {
+      function detectRole(email) {
+        const $roleBadge = $("#roleBadge");
+        const cleanEmail = (email || "").trim().toLowerCase();
+
+        // Reset all state classes
+        $roleBadge.removeClass("badge-detect-student badge-detect-teacher badge-detect-idle");
+
+        if (!cleanEmail) {
+          $roleBadge.text("Enter your university email").addClass("badge-detect-idle");
+          return;
+        }
+
+        const localPart = cleanEmail.split("@")[0];
+
+        if (localPart.includes(".")) {
+          $roleBadge.text("Teacher account detected").addClass("badge-detect-teacher");
+        } else if (localPart.includes("_")) {
+          $roleBadge.text("Student account detected").addClass("badge-detect-student");
+        } else {
+          $roleBadge.text("University account (Pending format)").addClass("badge-detect-idle");
+        }
+      }
+
       function init() {
         const $emailInput = $("#signupEmail");
-        const $roleBadge = $("#roleBadge");
 
-        // Live detection: dot (.) = teacher, underscore (_) = student
-        $emailInput.on("input", function () {
-          const val = $(this).val().toLowerCase();
-          const localPart = val.split("@")[0];
-
-          if (localPart.includes(".")) {
-            $roleBadge.text("Teacher account detected");
-          } else if (localPart.includes("_")) {
-            $roleBadge.text("Student account detected");
-          } else {
-            $roleBadge.text("University account");
-          }
+        // Listen to all input variations (typing, pasting, autofill)
+        $emailInput.on("input keyup change paste", function () {
+          detectRole($(this).val());
         });
+
+        // Trigger on initial page render
+        detectRole($emailInput.val());
 
         // Form submit validation
         $("#signupForm").on("submit", function (e) {
@@ -224,7 +216,6 @@
     })();
 
     $(document).ready(function () {
-      ThemeController.init();
       SignupController.init();
     });
   </script>

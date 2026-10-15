@@ -41,15 +41,20 @@ header {
   min-height: 62px;
 }
 
+/* Base top nav pill (Default for 2-item pills like Login, Signup, About) */
 .top-nav-pill {
   background-color: var(--dlsu-nav-green);
   border-radius: 50px;
-  padding: 8px 28px;
-  gap: 28px;
-  width: 320px;
+  padding: 8px 24px;
+  width: auto;
+  min-width: 260px;
+  max-width: fit-content;
   height: 62px;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.08);
   margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav-item-btn {
@@ -62,8 +67,9 @@ header {
   align-items: center;
   background: transparent;
   border: 0;
-  padding: 0;
+  padding: 0 12px;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .nav-item-btn:hover {
@@ -84,10 +90,15 @@ header {
   line-height: 1;
 }
 
+/* Fixed Universal Divider: Cannot be crushed to 0px */
 .nav-divider {
-  width: 1px;
-  height: 32px;
-  background-color: rgba(255, 255, 255, 0.28);
+  width: 0 !important;
+  min-width: 0 !important;
+  height: 28px !important;
+  border-left: 1px solid rgba(255, 255, 255, 0.45) !important;
+  flex-shrink: 0 !important;
+  margin: 0 10px !important;
+  display: inline-block !important;
 }
 
 /* =========================================
@@ -122,7 +133,7 @@ header {
 }
 
 /* =========================================
-   3. ROLE TOGGLE (STUDENT / TEACHER)
+   3. ROLE TOGGLE (STUDENT / TEACHER / ADMIN)
    ========================================= */
 .role-toggle-container {
   background-color: var(--dlsu-toggle-dark);
@@ -154,6 +165,10 @@ header {
 .role-btn:focus {
   outline: none;
   box-shadow: none;
+}
+
+.w-33 {
+  width: 33.333% !important;
 }
 
 /* =========================================
@@ -280,7 +295,7 @@ header {
 /* =========================================
    6. UNIFIED PILL ACTION BUTTONS
    ========================================= */
-.btn-pill-action{
+.btn-pill-action {
   background-color: var(--dlsu-nav-green);
   color: #ffffff !important;
   border-radius: 50px;
@@ -296,19 +311,27 @@ header {
   cursor: pointer;
 }
 
-.btn-pill-action:hover{
+.btn-pill-action:hover {
   color: #ffffff !important;
   opacity: 0.9;
   transform: translateY(-1px);
 }
 
 /* =========================================
-   7. STUDENT/TEACHER DASHBOARD STYLES
+   7. STUDENT/TEACHER/ADMIN DASHBOARD STYLES
    ========================================= */
 .nav-pill-student {
-  width: min(100%, 540px) !important;
-  gap: 16px;
-  padding: 8px 24px;
+  width: min(100%, 620px) !important;
+  max-width: 620px !important;
+  padding: 8px 18px !important;
+}
+
+.nav-pill-student .nav-item-btn {
+  padding: 0 6px !important;
+}
+
+.nav-pill-student .nav-divider {
+  margin: 0 4px !important;
 }
 
 .student-subheading {
@@ -757,6 +780,14 @@ body.dark-mode .badge-group-soft {
   color: var(--dlsu-accent-green);
 }
 
+body.dark-mode .back-link {
+  color: #ffffff !important;
+}
+
+body.dark-mode .back-link:hover {
+  color: var(--dlsu-accent-green) !important;
+}
+
 /* Admin Manage Topics - Dark Mode Adjustments */
 body.dark-mode .classmates-table tbody td {
   color: var(--page-text) !important;
@@ -943,6 +974,10 @@ body.dark-mode .btn-pill-cancel:hover {
 
   .nav-pill-student .nav-label {
     font-size: 0.58rem;
+  }
+
+  .nav-pill-student .nav-divider {
+    margin: 0 2px !important;
   }
 
   .topic-carousel-container {
