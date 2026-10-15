@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Manage Classrooms | The Lasallian's Guide to Calculus</title>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+
+        <!-- teacher navbar -->
+        <nav class="nav navbar-dlsu justify-content-around fixed-top rounded-pill mx-auto" aria-label="Main navigation">
+            <a class="nav-link text-white" href="teacher-dashboard.html">
+                <img src="assets/icons/bar-chart.svg" width="26" height="26" alt="">
+                <span>Dashboard</span>
+            </a>
+            <a class="nav-link text-white" href="teacher-classes.html" aria-current="page">
+                <img src="assets/icons/users.svg" width="26" height="26" alt="">
+                <span>Classrooms</span>
+            </a>
+            <a class="nav-link text-white" href="teacher-exercise-results.html">
+                <img src="assets/icons/user.svg" width="26" height="26" alt="">
+                <span>Results</span>
+            </a>
+            <a class="nav-link text-white" href="topics.html">
+                <img src="assets/icons/book-open.svg" width="26" height="26" alt="">
+                <span>Topics</span>
+            </a>
+        </nav>
+
+        <main class="container pt-5 mt-5">
+            <h1 class="text-center text-uppercase font-weight-bold pt-4 mb-4">Manage classrooms</h1>
+            <p class="text-center">Create classrooms, share invite codes, and assign the Tangent lines exercise.</p>
+
+            <section class="row mt-4">
+                <!--  form goes in the left column -->
+                <div class="col-12 col-lg-4 mb-4">
+                    <article class="card">
+                        <div class="card-body">
+                            <h2>Create a classroom</h2>
+                            <form id="class-form">
+                                <div class="form-group">
+                                    <label for="class-name">Class name</label>
+                                    <input id="class-name" class="form-control" type="text" maxlength="80" placeholder="e.g. Calculus 1" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="class-section">Section</label>
+                                    <input id="class-section" class="form-control" type="text" maxlength="20" placeholder="e.g. N24" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="class-description">Description</label>
+                                    <textarea id="class-description" class="form-control" rows="3" maxlength="300" placeholder="A short note for your students"></textarea>
+                                </div>
+                                <!-- create behavior will be added during JavaScript practice -->
+                                <button id="create-class" class="btn btn-dlsu btn-block" type="button">Create classroom</button>
+                            </form>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- sample classroom cards go in the right column -->
+                <div class="col-12 col-lg-8">
+                    <div class="row">
+                        <div class="col-12 col-md-6 mb-4">
+                            <article class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <h2>Calculus 1</h2>
+                                    <span class="badge badge-green align-self-start mb-2">Section N24</span>
+                                    <p class="class-meta">42 students · 8 groups</p>
+                                    <p>Limits, derivatives, and their applications.</p>
+                                    <label for="invite-calc-one">Invite code</label>
+                                    <input id="invite-calc-one" class="form-control invite-code mb-3" type="text" value="CAL1-N24-7QX2" readonly>
+                                    <div class="class-actions mt-auto">
+                                        <button class="btn btn-outline-dlsu btn-sm" type="button">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm" type="button">Delete</button>
+                                        <a class="btn btn-dlsu btn-sm" href="teacher-exercise-results.html">Results</a>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                            <article class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <h2>Calculus 2</h2>
+                                    <span class="badge badge-green align-self-start mb-2">Section N25</span>
+                                    <p class="class-meta">31 students · 4 groups</p>
+                                    <p>More applications of calculus.</p>
+                                    <label for="invite-calc-two">Invite code</label>
+                                    <input id="invite-calc-two" class="form-control invite-code mb-3" type="text" value="CAL2-N25-4MB9" readonly>
+                                    <div class="class-actions mt-auto">
+                                        <button class="btn btn-outline-dlsu btn-sm" type="button">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm" type="button">Delete</button>
+                                        <button class="btn btn-outline-dlsu btn-sm" type="button" disabled>No results</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                        <div class="col-12 col-md-6 mb-4">
+                            <article class="card h-100">
+                                <div class="card-body d-flex flex-column">
+                                    <h2>Engineering Calculus</h2>
+                                    <span class="badge badge-green align-self-start mb-2">Section S11</span>
+                                    <p class="class-meta">14 students · 2 groups</p>
+                                    <p>Calculus for engineering problems.</p>
+                                    <label for="invite-engineering">Invite code</label>
+                                    <input id="invite-engineering" class="form-control invite-code mb-3" type="text" value="ENGC-S11-2KD5" readonly>
+                                    <div class="class-actions mt-auto">
+                                        <button class="btn btn-outline-dlsu btn-sm" type="button">Edit</button>
+                                        <button class="btn btn-outline-danger btn-sm" type="button">Delete</button>
+                                        <button class="btn btn-outline-dlsu btn-sm" type="button" disabled>No results</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- one pre-made exercise; teachers assign it, not create it -->
+            <section class="card mb-4">
+                <div class="card-body">
+                    <h2>Assign an exercise</h2>
+                    <h3>Tangent lines</h3>
+                    <p class="class-meta">2 multiple-choice questions · 10 points</p>
+                    <form id="assignment-form">
+                        <div class="form-row align-items-end">
+                            <div class="col-12 col-md-5 mb-3">
+                                <label for="assignment-class">Classroom</label>
+                                <select id="assignment-class" class="custom-select">
+                                    <option>Calculus 1 · N24</option>
+                                    <option>Calculus 2 · N25</option>
+                                    <option>Engineering Calculus · S11</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-4 mb-3">
+                                <label for="assignment-due">Due date</label>
+                                <input id="assignment-due" class="form-control" type="date" value="2026-10-20">
+                            </div>
+                            <div class="col-12 col-md-3 mb-3">
+                                <button class="btn btn-dlsu btn-block" type="button">Assign exercise</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-success text-white text-center p-3 mt-auto">
+            <p class="mb-0">The Lasallian's Guide to Calculus · CCAPDEV Group 4 · De La Salle University</p>
+        </footer>
+
+        <script src="../lib/jquery/jquery-3.7.1.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

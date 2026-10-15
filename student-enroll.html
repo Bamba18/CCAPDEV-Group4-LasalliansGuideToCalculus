@@ -1,0 +1,97 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Enroll to a Class | The Lasallian's Guide to Calculus</title>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+
+        <!-- student navbar -->
+        <nav class="nav navbar-dlsu justify-content-around fixed-top rounded-pill mx-auto" aria-label="Main navigation">
+            <a class="nav-link text-white" href="student-enroll.html" aria-current="page">
+                <img src="assets/icons/users.svg" width="26" height="26" alt="">
+                <span>Enroll</span>
+            </a>
+            <a class="nav-link text-white" href="student-assignments.html">
+                <img src="assets/icons/user.svg" width="26" height="26" alt="">
+                <span>Assignments</span>
+            </a>
+            <a class="nav-link text-white" href="topics.html">
+                <img src="assets/icons/book-open.svg" width="26" height="26" alt="">
+                <span>Topics</span>
+            </a>
+        </nav>
+
+        <main class="container pt-5 mt-5">
+            <h1 class="text-center text-uppercase font-weight-bold pt-4 mb-4">Enroll to a class</h1>
+            <p class="text-center">Enter the invite code given by your teacher.</p>
+
+            <section class="row justify-content-center mt-4">
+                <div class="col-12 col-md-8 col-lg-6 mb-4">
+                    <article class="card mb-4">
+                        <div class="card-body">
+                            <h2>Find your classroom</h2>
+                            <form id="enroll-form">
+                                <div class="form-group">
+                                    <label for="invite-code">Invite code</label>
+                                    <div class="input-group">
+                                        <input id="invite-code" class="form-control" type="text" maxlength="80" value="ENGC-S11-2KD5" required>
+                                        <div class="input-group-append">
+                                            
+                                            <button id="find-class" class="btn btn-dlsu" type="button">Find class</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <small class="text-muted">Ask your teacher for a code if you do not have one.</small>
+                            </form>
+                        </div>
+                    </article>
+
+                    <!-- sample class preview -->
+                    <article class="card">
+                        <div class="card-body">
+                            <h2>Engineering Calculus</h2>
+                            <span class="badge badge-green mb-3">Section S11</span>
+                            <dl class="row">
+                                <dt class="col-4">Teacher</dt>
+                                <dd class="col-8">Maria Santos</dd>
+                                <dt class="col-4">Students</dt>
+                                <dd class="col-8">14</dd>
+                                <dt class="col-4">About</dt>
+                                <dd class="col-8">Calculus for engineering problems.</dd>
+                            </dl>
+                            <button id="enroll-class" class="btn btn-dlsu btn-block" type="button">Enroll in this class</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section class="mb-4">
+                <h2 class="section-title">My classrooms</h2>
+                <div class="row justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6">
+                        <article class="card">
+                            <div class="card-body">
+                                <h2>Calculus 1</h2>
+                                <span class="badge badge-green mb-3">Section N24</span>
+                                <p class="class-meta">Teacher: Maria Santos</p>
+                                <p>Limits, derivatives, and their applications.</p>
+                                <a class="btn btn-dlsu" href="student-assignments.html">View assignments</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="bg-success text-white text-center p-3 mt-auto">
+            <p class="mb-0">The Lasallian's Guide to Calculus · CCAPDEV Group 4 · De La Salle University</p>
+        </footer>
+
+        <script src="../lib/jquery/jquery-3.7.1.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>

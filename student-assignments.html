@@ -1,0 +1,140 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Assignments | The Lasallian's Guide to Calculus</title>
+        <link rel="stylesheet" href="../lib/bootstrap/css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+    <body class="d-flex flex-column min-vh-100">
+
+        <!-- student navbar -->
+        <nav class="nav navbar-dlsu justify-content-around fixed-top rounded-pill mx-auto" aria-label="Main navigation">
+            <a class="nav-link text-white" href="student-enroll.html">
+                <img src="assets/icons/users.svg" width="26" height="26" alt="">
+                <span>Enroll</span>
+            </a>
+            <a class="nav-link text-white" href="student-assignments.html" aria-current="page">
+                <img src="assets/icons/user.svg" width="26" height="26" alt="">
+                <span>Assignments</span>
+            </a>
+            <a class="nav-link text-white" href="topics.html">
+                <img src="assets/icons/book-open.svg" width="26" height="26" alt="">
+                <span>Topics</span>
+            </a>
+        </nav>
+
+        <main class="container pt-5 mt-5">
+            <h1 class="text-center text-uppercase font-weight-bold pt-4 mb-4">My assignments</h1>
+            <p class="text-center">View the exercises assigned to your classrooms.</p>
+
+            
+            <ul class="nav nav-tabs assignment-tabs mb-4" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a id="pending-tab" class="nav-link active" href="#pending-assignments" data-toggle="tab" role="tab" aria-controls="pending-assignments" aria-selected="true">Pending (1)</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a id="completed-tab" class="nav-link" href="#completed-assignments" data-toggle="tab" role="tab" aria-controls="completed-assignments" aria-selected="false">Completed (0)</a>
+                </li>
+            </ul>
+
+            <div class="tab-content">
+                <!-- pending assignment -->
+                <section id="pending-assignments" class="tab-pane fade show active" role="tabpanel" aria-labelledby="pending-tab">
+                    <div class="row">
+                        <div class="col-12 col-md-8 col-lg-6 mb-4">
+                            <article class="card">
+                                <div class="card-body">
+                                    <span class="badge badge-soft mb-3">Calculus 1 · N24</span>
+                                    <h2>Tangent lines</h2>
+                                    <p>Answer two questions about the slope of a tangent line.</p>
+                                    <dl class="row">
+                                        <dt class="col-4">Teacher</dt>
+                                        <dd class="col-8">Maria Santos</dd>
+                                        <dt class="col-4">Due</dt>
+                                        <dd class="col-8">October 20, 2026</dd>
+                                        <dt class="col-4">Points</dt>
+                                        <dd class="col-8">10 points · 2 questions</dd>
+                                    </dl>
+                                    <div class="d-flex flex-wrap justify-content-between align-items-center">
+                                        <span class="badge badge-secondary mb-2">Not started</span>
+                                        <button class="btn btn-dlsu mb-2" type="button" data-toggle="modal" data-target="#assignment-preview">Start exercise</button>
+                                    </div>
+                                </div>
+                            </article>
+                        </div>
+                    </div>
+                </section>
+
+                
+                <section id="completed-assignments" class="tab-pane fade" role="tabpanel" aria-labelledby="completed-tab">
+                    <article class="card mb-4">
+                        <div class="card-body text-center">
+                            <h2>No completed assignments yet</h2>
+                            <p class="mb-0">Your submitted exercises and scores will appear here.</p>
+                        </div>
+                    </article>
+                </section>
+            </div>
+        </main>
+
+       
+        <div id="assignment-preview" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="assignment-title" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 id="assignment-title" class="h5 modal-title">Tangent lines</h2>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close exercise">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Choose one answer for each question. Each question is worth 5 points.</p>
+                        <form id="exercise-form">
+                            <fieldset class="mb-4">
+                                <legend class="h6">1. For y = x², what is the tangent slope at x = 2?</legend>
+                                <div class="custom-control custom-radio mb-2">
+                                    <input id="question-one-a" class="custom-control-input" type="radio" name="question-one" value="2" required>
+                                    <label class="custom-control-label" for="question-one-a">2</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2">
+                                    <input id="question-one-b" class="custom-control-input" type="radio" name="question-one" value="4">
+                                    <label class="custom-control-label" for="question-one-b">4</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="question-one-c" class="custom-control-input" type="radio" name="question-one" value="8">
+                                    <label class="custom-control-label" for="question-one-c">8</label>
+                                </div>
+                            </fieldset>
+                            <fieldset class="mb-4">
+                                <legend class="h6">2. For y = x², what is the tangent at x = 0?</legend>
+                                <div class="custom-control custom-radio mb-2">
+                                    <input id="question-two-a" class="custom-control-input" type="radio" name="question-two" value="horizontal" required>
+                                    <label class="custom-control-label" for="question-two-a">Horizontal</label>
+                                </div>
+                                <div class="custom-control custom-radio mb-2">
+                                    <input id="question-two-b" class="custom-control-input" type="radio" name="question-two" value="vertical">
+                                    <label class="custom-control-label" for="question-two-b">Vertical</label>
+                                </div>
+                                <div class="custom-control custom-radio">
+                                    <input id="question-two-c" class="custom-control-input" type="radio" name="question-two" value="one">
+                                    <label class="custom-control-label" for="question-two-c">Slope of 1</label>
+                                </div>
+                            </fieldset>
+                            <!-- submission and grading will be added during JavaScript practice -->
+                            <button id="submit-exercise" class="btn btn-dlsu" type="button">Submit answers</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-success text-white text-center p-3 mt-auto">
+            <p class="mb-0">The Lasallian's Guide to Calculus · CCAPDEV Group 4 · De La Salle University</p>
+        </footer>
+
+        <script src="../lib/jquery/jquery-3.7.1.min.js"></script>
+        <script src="../lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    </body>
+</html>
