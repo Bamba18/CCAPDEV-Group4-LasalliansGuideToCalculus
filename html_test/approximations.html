@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html xmlns="http://w3.org">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. The LaTeX Framework Styling -->
+  <link rel="stylesheet" href="https://latex.vercel.app/style.css">
+
+  <!-- 2. The Upgraded KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script ddefer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.body);"></script>
+
+  <!-- 3. Safe Custom Converter Script (Skips Desmos elements) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll("math").forEach(m => {
+        if (m.closest('#calculator')) return; // Leave Desmos math tags alone!
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+
+  <!-- 4. Core Desmos API File (Updated to correct script URL) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+</head>
+
+<body>
+  <header id="title-block-header">
+    <h1 class="title">The Lasallian's Guide to Calculus</h1>
+  </header>
+
+  <h2 id="approximation-methods">Approximation methods</h2>
+  <p>Another application of the derivative is its use in approximating
+    roots of continuous functions. We already saw the bisection method (see
+    IVT page), but we noted that its convergence was rather slow. It turns
+    out that, with the derivative, we can approximate roots much faster.</p>
+  <h3 id="newtons-method">Newton’s method</h3>
+  <p>Let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    be a function continuous on the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">[</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo stretchy="false" form="postfix">]</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">[a,b]</annotation>
+      </semantics>
+    </math>
+    and differentiable on the interval
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>a</mi>
+          <mo>,</mo>
+          <mi>b</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(a,b)</annotation>
+      </semantics>
+    </math>.
+    One can easily see from our discussion on the tangent line of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    that, in some small enough interval, the tangent line provides a good
+    approximation of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>
+    in that interval. Applying this thinking to root-finding, this means
+    that the point at which the tangent line intersects
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>y</mi>
+          <mo>=</mo>
+          <mn>0</mn>
+        </mrow>
+        <annotation encoding="application/x-tex">y=0</annotation>
+      </semantics>
+    </math>
+    is a suitable approximation of the root of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f(x)</annotation>
+      </semantics>
+    </math>.
+  </p>
+  <p>Let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <mo stretchy="false" form="prefix">(</mo>
+          <msub>
+            <mi>x</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>,</mo>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <msub>
+            <mi>x</mi>
+            <mn>0</mn>
+          </msub>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">(x_0,f(x_0))</annotation>
+      </semantics>
+    </math>
+    be the point of tangency, and let
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>x</mi>
+          <mn>1</mn>
+        </msub>
+        <annotation encoding="application/x-tex">x_1</annotation>
+      </semantics>
+    </math>
+    be our first approximation of the root
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>
+    of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>f</mi>
+        <annotation encoding="application/x-tex">f</annotation>
+      </semantics>
+    </math>.
+    Then given the distance
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mi>x</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>−</mo>
+          <msub>
+            <mi>x</mi>
+            <mn>0</mn>
+          </msub>
+        </mrow>
+        <annotation encoding="application/x-tex">x_1-x_0</annotation>
+      </semantics>
+    </math>,
+    the formula for the slope of the tangent line is given by
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mfrac>
+          <mrow>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <msub>
+              <mi>x</mi>
+              <mn>0</mn>
+            </msub>
+            <mo stretchy="false" form="postfix">)</mo>
+          </mrow>
+          <mrow>
+            <mi>−</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <msub>
+              <mi>x</mi>
+              <mn>1</mn>
+            </msub>
+            <mo>−</mo>
+            <msub>
+              <mi>x</mi>
+              <mn>0</mn>
+            </msub>
+            <mo stretchy="false" form="postfix">)</mo>
+          </mrow>
+        </mfrac>
+        <annotation encoding="application/x-tex">\frac{f(x_0)}{-(x_1-x_0)}</annotation>
+      </semantics>
+    </math>
+    Equating
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msup>
+            <mi>f</mi>
+            <mo>′</mo>
+          </msup>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f&#39;(x)</annotation>
+      </semantics>
+    </math>
+    and isolating
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <msub>
+          <mi>x</mi>
+          <mn>1</mn>
+        </msub>
+        <annotation encoding="application/x-tex">x_1</annotation>
+      </semantics>
+    </math>
+    gives
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mi>x</mi>
+            <mn>1</mn>
+          </msub>
+          <mo>=</mo>
+          <msub>
+            <mi>x</mi>
+            <mn>0</mn>
+          </msub>
+          <mo>−</mo>
+          <mfrac>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <msub>
+                <mi>x</mi>
+                <mn>0</mn>
+              </msub>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <mrow>
+              <msup>
+                <mi>f</mi>
+                <mo>′</mo>
+              </msup>
+              <mo stretchy="false" form="prefix">(</mo>
+              <msub>
+                <mi>x</mi>
+                <mn>0</mn>
+              </msub>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+          </mfrac>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x_1 = x_0 - \frac{f(x_0)}{f&#39;(x_0)}.</annotation>
+      </semantics>
+    </math>
+    This process can be repeated to get better approximations of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>x</mi>
+        <annotation encoding="application/x-tex">x</annotation>
+      </semantics>
+    </math>,
+    hence we write
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mi>x</mi>
+            <mrow>
+              <mi>n</mi>
+              <mo>+</mo>
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>=</mo>
+          <msub>
+            <mi>x</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>−</mo>
+          <mfrac>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <msub>
+                <mi>x</mi>
+                <mi>n</mi>
+              </msub>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <mrow>
+              <msup>
+                <mi>f</mi>
+                <mo>′</mo>
+              </msup>
+              <mo stretchy="false" form="prefix">(</mo>
+              <msub>
+                <mi>x</mi>
+                <mi>n</mi>
+              </msub>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+          </mfrac>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">x_{n+1} = x_n - \frac{f(x_n)}{f&#39;(x_n)}.</annotation>
+      </semantics>
+    </math>
+    and this iteration defines <strong>Newton’s method</strong>, also known
+    as the Newton-Raphson method.
+  </p>
+  <p>You can view an example in the graph below:</p>
+
+  <!-- desmos iframe -->
+   <iframe src="https://www.desmos.com/calculator/8dxnku7zxm" width="100%" height="500" style="border: 1px solid #ccc" frameborder=0></iframe>
+
+  <p>Try writing your own code for this, and compare its speed with that
+    of the bisection method. Do note that the derivative
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msup>
+            <mi>f</mi>
+            <mo>′</mo>
+          </msup>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f&#39;(x)</annotation>
+      </semantics>
+    </math>
+    must be known, and you should hardcode this in.
+  </p>
+  <h3 id="secant-method">Secant method</h3>
+  <p>Recall our definition of the derivative given by
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msup>
+            <mi>f</mi>
+            <mo>′</mo>
+          </msup>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>=</mo>
+          <munder>
+            <mi mathvariant="normal">lim</mi>
+            <mrow>
+              <mi>h</mi>
+              <mo>→</mo>
+              <mn>0</mn>
+            </mrow>
+          </munder>
+          <mfrac>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo>+</mo>
+              <mi>h</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mo>−</mo>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <mi>x</mi>
+          </mfrac>
+          <mo>,</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">f&#39;(x) = \lim_{h \to 0}\frac{f(x+h)-f(x)}{x},</annotation>
+      </semantics>
+    </math>
+    It obviously follows that for a small enough choice of
+    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mi>h</mi>
+        <annotation encoding="application/x-tex">h</annotation>
+      </semantics>
+    </math>,
+    we have
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msup>
+            <mi>f</mi>
+            <mo>′</mo>
+          </msup>
+          <mo stretchy="false" form="prefix">(</mo>
+          <mi>x</mi>
+          <mo stretchy="false" form="postfix">)</mo>
+          <mo>≈</mo>
+          <mfrac>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo>+</mo>
+              <mi>h</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mo>−</mo>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <mi>x</mi>
+          </mfrac>
+          <mi>.</mi>
+        </mrow>
+        <annotation encoding="application/x-tex">f&#39;(x) \approx \frac{f(x+h)-f(x)}{x}.</annotation>
+      </semantics>
+    </math>
+    This is said to be the <em>finite difference</em> approximation to the
+    derivative. Substituting this into the formula for Newton’s method, we
+    get
+    <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+      <semantics>
+        <mrow>
+          <msub>
+            <mi>x</mi>
+            <mrow>
+              <mi>n</mi>
+              <mo>+</mo>
+              <mn>1</mn>
+            </mrow>
+          </msub>
+          <mo>=</mo>
+          <msub>
+            <mi>x</mi>
+            <mi>n</mi>
+          </msub>
+          <mo>−</mo>
+          <mrow>
+            <mo stretchy="true" form="prefix">(</mo>
+            <mfrac>
+              <mrow>
+                <msub>
+                  <mi>x</mi>
+                  <mi>n</mi>
+                </msub>
+                <mo>−</mo>
+                <msub>
+                  <mi>x</mi>
+                  <mrow>
+                    <mi>n</mi>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+              </mrow>
+              <mrow>
+                <mi>f</mi>
+                <mo stretchy="false" form="prefix">(</mo>
+                <msub>
+                  <mi>x</mi>
+                  <mi>n</mi>
+                </msub>
+                <mo stretchy="false" form="postfix">)</mo>
+                <mo>−</mo>
+                <mi>f</mi>
+                <mo stretchy="false" form="prefix">(</mo>
+                <msub>
+                  <mi>x</mi>
+                  <mrow>
+                    <mi>n</mi>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                </msub>
+                <mo stretchy="false" form="postfix">)</mo>
+              </mrow>
+            </mfrac>
+            <mo stretchy="true" form="postfix">)</mo>
+          </mrow>
+          <mi>f</mi>
+          <mo stretchy="false" form="prefix">(</mo>
+          <msub>
+            <mi>x</mi>
+            <mi>n</mi>
+          </msub>
+          <mo stretchy="false" form="postfix">)</mo>
+        </mrow>
+        <annotation encoding="application/x-tex">x_{n+1} = x_n - \left( \frac{x_n - x_{n-1}}{f(x_n) - f(x_{n-1})}
+          \right) f(x_n)</annotation>
+      </semantics>
+    </math>
+    This allows a computer to approximate the derivative itself, instead of
+    needing to hardcode it in. This can be useful for when the derivative of
+    a function has a long, unwieldy formula. As with Newton’s method, try
+    writing your own code for this and compare the speed of convergence to
+    the two previous methods.
+  </p>
+  <h3 id="mean-value-theorem">Mean value theorem</h3>
+  <p>Along with the intermediate and extreme value theorems, we have a
+    third theorem which can be used to show that these methods do indeed
+    converge to a root.</p>
+  <div class="theorem">
+    <p><strong>Theorem 3</strong> (Mean value theorem). <em>Let
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mi>f</mi>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>x</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <annotation encoding="application/x-tex">f(x)</annotation>
+          </semantics>
+        </math>
+        be a function continuous on the interval
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mo stretchy="false" form="prefix">[</mo>
+              <mi>a</mi>
+              <mo>,</mo>
+              <mi>b</mi>
+              <mo stretchy="false" form="postfix">]</mo>
+            </mrow>
+            <annotation encoding="application/x-tex">[a,b]</annotation>
+          </semantics>
+        </math>
+        and differentiable on the interval
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>a</mi>
+              <mo>,</mo>
+              <mi>b</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <annotation encoding="application/x-tex">(a,b)</annotation>
+          </semantics>
+        </math>.
+        Then there exists at least one point
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mi>c</mi>
+            <annotation encoding="application/x-tex">c</annotation>
+          </semantics>
+        </math>
+        in the open interval
+        <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>a</mi>
+              <mo>,</mo>
+              <mi>b</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+            </mrow>
+            <annotation encoding="application/x-tex">(a,b)</annotation>
+          </semantics>
+        </math>
+        such that
+        <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+          <semantics>
+            <mrow>
+              <msup>
+                <mi>f</mi>
+                <mo>′</mo>
+              </msup>
+              <mo stretchy="false" form="prefix">(</mo>
+              <mi>c</mi>
+              <mo stretchy="false" form="postfix">)</mo>
+              <mo>=</mo>
+              <mfrac>
+                <mrow>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                  <mo>−</mo>
+                  <mi>f</mi>
+                  <mo stretchy="false" form="prefix">(</mo>
+                  <mi>a</mi>
+                  <mo stretchy="false" form="postfix">)</mo>
+                </mrow>
+                <mrow>
+                  <mi>b</mi>
+                  <mo>−</mo>
+                  <mi>a</mi>
+                </mrow>
+              </mfrac>
+              <mi>.</mi>
+            </mrow>
+            <annotation encoding="application/x-tex">f&#39;(c) = \frac{f(b)-f(a)}{b-a}.</annotation>
+          </semantics>
+        </math></em></p>
+  </div>
+  <p>While, like the other two, this seems intuitively obvious, it allows
+    us to say that the derivatives at any point in the interval we choose
+    actually exist, and hence Newton’s method (and thus the secant method)
+    converge to a true root of a function.</p>
+  <div class="remark">
+    <p><em>Remark 3</em>. Just like the intermediate and extreme value
+      theorems, this is also a completeness axiom. See the IVT page for
+      details.</p>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+
+</html>

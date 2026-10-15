@@ -83,32 +83,90 @@
     </svg>
   </button>
 
-  <!-- 1. Top Pill Navigation Bar -->
-  <header class="page-header py-3 py-md-4">
-    <div class="page-header-inner">
-      <nav class="top-nav-pill d-flex align-items-center justify-content-center">
-        <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-          </svg>
-          <span class="nav-label">LOGIN</span>
-        </a>
+  <!-- Top Pill Navigation Bar -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
 
-        <div class="nav-divider"></div>
+                <!-- Enroll to a Class -->
+                <a href="../student-enroll.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    <span class="nav-label text-nowrap">ENROLL CLASS</span>
+                </a>
 
-        <a href="../Student.html#topics" class="nav-item-btn d-flex flex-column align-items-center">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-            stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-          </svg>
-          <span class="nav-label">TOPICS</span>
-        </a>
-      </nav>
-    </div>
-  </header>
+                <div class="nav-divider"></div>
+
+
+                <!-- My Classes -->
+                <a href="../MyClasses.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span class="nav-label text-nowrap">MY CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Assignments -->
+                <a href="../student-assignments.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Topics -->
+                <a href="../topics.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Profile -->
+                <a href="../student-profile.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Logout -->
+                <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
 
   <!-- 2. Main Article / Content Container -->
   <main class="flex-grow-1 py-4">

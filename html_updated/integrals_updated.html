@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Definite Integrals - The Lasallian's Guide to Calculus</title>
+
+  <!-- 1. Offline Project & Bootstrap Styles -->
+  <link rel="stylesheet" href="../css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/darkmode.css">
+
+  <style>
+    .theme-icon { width: 24px !important; height: 24px !important; max-width: 24px; }
+    .nav-icon { width: 22px !important; height: 22px !important; max-width: 22px; }
+    
+
+    /* Embedded Desmos graphs (iframes) */
+    .desmos-embed {
+      width: 100%;
+      height: 500px;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(0, 0, 0, 0.12);
+      border-radius: 12px;
+      display: block;
+    }
+  </style>
+
+  <!-- 2. Core Desmos API File (Must load before KaTeX and scripts.js) -->
+  <script src="https://www.desmos.com/api/v1.13/calculator.js?apiKey=4deb0f19f96f4954964462325f8b5918"></script>
+
+  <!-- 3. KaTeX 0.19.0 Assets for Math Fonts -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.css"
+    integrity="sha384-3rdsX6e5mueWyoweR9NIVmtEsUkokpBT/0ALqKKIBMr9j4qhHkaIkAcGgsE6uVlp" crossorigin="anonymous">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/katex.min.js"
+    integrity="sha384-QFFtAGzvvj+bfgCGxXJlNZZR1nXEZgvG8tDLCCY1F19xl20WlfTYgguB4VcNdxYk"
+    crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.19.0/dist/contrib/auto-render.min.js"
+    integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous"
+    onload="renderMathInElement(document.getElementById('mathArticle'));"></script>
+
+  <!-- 4. Safe Custom Converter Script (Restricted strictly to #mathArticle content) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("mathArticle");
+      if (!container) return;
+
+      container.querySelectorAll("math").forEach(m => {
+        // Prevent touching anything inside a Desmos canvas or calculator container
+        if (m.closest('.dcg-calculator-api-container')) return;
+
+        const ann = m.querySelector('annotation[encoding="application/x-tex"]');
+        if (!ann) return;
+        const span = document.createElement("span");
+        katex.render(ann.textContent, span, {
+          displayMode: m.getAttribute("display") === "block",
+          throwOnError: false
+        });
+        m.replaceWith(span);
+      });
+    });
+  </script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <!-- Floating Dark Mode Toggle Button -->
+  <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle theme">
+    <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+    </svg>
+    <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+      stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path
+        d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42">
+      </path>
+    </svg>
+  </button>
+
+  <!-- Top Pill Navigation Bar -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around">
+
+                <!-- Enroll to a Class -->
+                <a href="../student-enroll.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="8.5" cy="7" r="4"></circle>
+                        <line x1="20" y1="8" x2="20" y2="14"></line>
+                        <line x1="23" y1="11" x2="17" y2="11"></line>
+                    </svg>
+                    <span class="nav-label text-nowrap">ENROLL CLASS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+
+                <!-- My Classes -->
+                <a href="../MyClasses.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                    <span class="nav-label text-nowrap">MY CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Assignments -->
+                <a href="../student-assignments.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                        <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                    </svg>
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Topics -->
+                <a href="../topics.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+                    </svg>
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Profile -->
+                <a href="../student-profile.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <!-- Logout -->
+                <a href="../Login.html" class="nav-item-btn d-flex flex-column align-items-center">
+                    <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                        <polyline points="16 17 21 12 16 7"></polyline>
+                        <line x1="21" y1="12" x2="9" y2="12"></line>
+                    </svg>
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+  <!-- 2. Main Article / Content Container -->
+  <main class="flex-grow-1 py-4">
+    <div class="container" style="max-width: 860px;">
+
+      <!-- Header Titles -->
+      <div class="text-center mb-4">
+        <h1 class="welcome-heading mb-2">DEFINITE INTEGRALS</h1>
+        <p class="sub-text mb-0">Partitions, Riemann sums, and the Fundamental Theorem of Calculus</p>
+      </div>
+
+      <!-- Content Card Container with Isolated ID -->
+      <div class="card classroom-side-card p-4 p-md-5 shadow-sm border-0 mb-5" id="mathArticle">
+          <p style="line-height: 1.7;">For someone acquainted with math history, it might seem strange that
+            integral calculus always comes after differential calculus, because
+            historically, the techniques associated with integration actually came
+            <em>first</em>. The main idea behind integration, of calculating areas
+            of shapes by first breaking them up into infinite sums of smaller shapes
+            goes back as far as Archimedes calculating the volume of a sphere.
+          </p>
+          <p style="line-height: 1.7;">The idea of the definite integral is clear to any student: it is the
+            area under the curve of a function. What may seem opaque is <em>why</em>
+            derivatives and integrals are inverses of each other. This leads us to
+            the <em>Fundamental Theorem of Calculus,</em> which links the derivative
+            and the definite integral. This answers our question of why differential
+            calculus is always learned first, even though integration is
+            historically an older method.</p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-nav-green); background-color: rgba(10, 91, 55, 0.09); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Theorem</strong> (Fundamental Theorem of Calculus). <em>If
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(x)</annotation>
+                  </semantics>
+                </math>
+                is continuous on a closed interval
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mo stretchy="false" form="prefix">[</mo>
+                      <mi>a</mi>
+                      <mo>,</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">]</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">[a,b]</annotation>
+                  </semantics>
+                </math>,
+                and if
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>F</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">F(x)</annotation>
+                  </semantics>
+                </math>
+                is any antiderivative of
+                <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">f(x)</annotation>
+                  </semantics>
+                </math>;
+                i.e.
+                <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <msup>
+                        <mi>F</mi>
+                        <mo>′</mo>
+                      </msup>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>=</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mspace width="1.0em"></mspace>
+                      <mo>⇔</mo>
+                      <mspace width="1.0em"></mspace>
+                      <mo>∫</mo>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mspace width="0.167em"></mspace>
+                      <mi>d</mi>
+                      <mi>x</mi>
+                      <mo>=</mo>
+                      <mi>F</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>,</mo>
+                    </mrow>
+                    <annotation encoding="application/x-tex">F&#39;(x) = f(x) \quad \iff \quad \int f(x) \, dx = F(x),
+                    </annotation>
+                  </semantics>
+                </math>
+                then
+                <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                  <semantics>
+                    <mrow>
+                      <msubsup>
+                        <mo>∫</mo>
+                        <mi>a</mi>
+                        <mi>b</mi>
+                      </msubsup>
+                      <mi>f</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>x</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mspace width="0.167em"></mspace>
+                      <mi>d</mi>
+                      <mi>x</mi>
+                      <mo>=</mo>
+                      <mi>F</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>b</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mo>−</mo>
+                      <mi>F</mi>
+                      <mo stretchy="false" form="prefix">(</mo>
+                      <mi>a</mi>
+                      <mo stretchy="false" form="postfix">)</mo>
+                      <mi>.</mi>
+                    </mrow>
+                    <annotation encoding="application/x-tex">\int_a^b f(x) \, dx = F(b)-F(a).</annotation>
+                  </semantics>
+                </math></em></p>
+          </div>
+          <p style="line-height: 1.7;">Before proving this, we first introduce the concept of a
+            <em>partition:</em>
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid var(--dlsu-nav-green); background-color: rgba(10, 91, 55, 0.05); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><strong>Definition</strong>. Given an interval
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <mi>a</mi>
+                    <mo>,</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">]</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[a,b]</annotation>
+                </semantics>
+              </math>,
+              a subdivision of this interval into
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>n</mi>
+                  <annotation encoding="application/x-tex">n</annotation>
+                </semantics>
+              </math>
+              equal or unequal subintervals by inserting
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>n</mi>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">n-1</annotation>
+                </semantics>
+              </math>
+              points of division
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <mi>…</mi>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x_1,x_2,\dots,x_{n-1}</annotation>
+                </semantics>
+              </math>,
+              so that
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>a</mi>
+                    <mo>=</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>0</mn>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <mi>⋯</mi>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>n</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mi>b</mi>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">a = x_0 &lt; x_1 &lt; \cdots &lt; x_{n-1} &lt; x_n = b.</annotation>
+                </semantics>
+              </math>
+              is said to constitute a <em>partition</em>
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>P</mi>
+                  <annotation encoding="application/x-tex">P</annotation>
+                </semantics>
+              </math>
+              of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <mi>a</mi>
+                    <mo>,</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">]</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[a,b]</annotation>
+                </semantics>
+              </math>
+              into the subintervals
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>0</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mo>,</mo>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mo>,</mo>
+                    <mi>…</mi>
+                    <mo>,</mo>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>n</mi>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[x_0,x_1], [x_1,x_2], \dots, [x_{n-1},x_n].</annotation>
+                </semantics>
+              </math>
+            </p>
+          </div>
+          <p style="line-height: 1.7;">An example partition into uniform lengths, i.e. where
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <msub>
+                    <mi>x</mi>
+                    <mrow>
+                      <mi>i</mi>
+                      <mo>+</mo>
+                      <mn>1</mn>
+                    </mrow>
+                  </msub>
+                  <mo>−</mo>
+                  <msub>
+                    <mi>x</mi>
+                    <mi>i</mi>
+                  </msub>
+                </mrow>
+                <annotation encoding="application/x-tex">x_{i+1}-x_i</annotation>
+              </semantics>
+            </math>
+            is constant for all
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mn>0</mn>
+                  <mo>≤</mo>
+                  <mi>i</mi>
+                  <mo>≤</mo>
+                  <mi>n</mi>
+                  <mo>−</mo>
+                  <mn>1</mn>
+                </mrow>
+                <annotation encoding="application/x-tex">0 \leq i \leq n-1</annotation>
+              </semantics>
+            </math>,
+            is given below, with the corresponding <em>Riemann sum</em>
+            visualized:
+
+            <!-- desmos iframe -->
+             <iframe class="desmos-embed" src="https://www.desmos.com/calculator/dqgu94pstn" loading="lazy" title="Interactive Desmos graph"></iframe>
+          </p>
+          <p style="line-height: 1.7;">Scroll down and slide
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>c</mi>
+                <annotation encoding="application/x-tex">c</annotation>
+              </semantics>
+            </math>
+            to choose between the lower, upper and <em>trapezoid</em> sums, the last
+            of which gets its name from the fact that the midpoint calculates the
+            same area as if these rectangles were instead trapezoids, with corners
+            on the partition points of the continuous function
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mrow>
+                  <mi>f</mi>
+                  <mo>:</mo>
+                  <mo stretchy="false" form="prefix">[</mo>
+                  <mi>a</mi>
+                  <mo>,</mo>
+                  <mi>b</mi>
+                  <mo stretchy="false" form="postfix">]</mo>
+                  <mo>→</mo>
+                  <mi mathvariant="double-struck">ℝ</mi>
+                </mrow>
+                <annotation encoding="application/x-tex">f:[a,b] \to \mathbb{R}</annotation>
+              </semantics>
+            </math>.
+            This is what is said to be the <strong>trapezoid rule</strong>.
+          </p>
+          <p style="line-height: 1.7;">However, the partition in our proof is not necessarily uniform. What
+            we will prove works for <em>any</em> partition
+            <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+              <semantics>
+                <mi>P</mi>
+                <annotation encoding="application/x-tex">P</annotation>
+              </semantics>
+            </math>.
+          </p>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid rgba(128, 128, 128, 0.6); background-color: rgba(128, 128, 128, 0.08); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><em>Proof.</em> Let
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>f</mi>
+                    <mo>:</mo>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <mi>a</mi>
+                    <mo>,</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mo>→</mo>
+                    <mi mathvariant="double-struck">ℝ</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">f:[a,b] \to \mathbb{R}</annotation>
+                </semantics>
+              </math>
+              be a continuous function of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>x</mi>
+                  <annotation encoding="application/x-tex">x</annotation>
+                </semantics>
+              </math>.
+              We subdivide this interval into
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>n</mi>
+                  <annotation encoding="application/x-tex">n</annotation>
+                </semantics>
+              </math>
+              equal or unequal subintervals by inserting
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>n</mi>
+                    <mo>−</mo>
+                    <mn>1</mn>
+                  </mrow>
+                  <annotation encoding="application/x-tex">n-1</annotation>
+                </semantics>
+              </math>
+              points of division
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <mi>…</mi>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x_1,x_2,\dots,x_{n-1}</annotation>
+                </semantics>
+              </math>,
+              so that
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>a</mi>
+                    <mo>=</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>0</mn>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <mi>⋯</mi>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>&lt;</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>n</mi>
+                    </msub>
+                    <mo>=</mo>
+                    <mi>b</mi>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">a = x_0 &lt; x_1 &lt; \cdots &lt; x_{n-1} &lt; x_n = b.</annotation>
+                </semantics>
+              </math>
+              These points are said to constitute a <em>partition</em>
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>P</mi>
+                  <annotation encoding="application/x-tex">P</annotation>
+                </semantics>
+              </math>
+              of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <mi>a</mi>
+                    <mo>,</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">]</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[a,b]</annotation>
+                </semantics>
+              </math>
+              into the subintervals
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>0</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mo>,</mo>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mo>,</mo>
+                    <mi>…</mi>
+                    <mo>,</mo>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>n</mi>
+                    </msub>
+                    <mo stretchy="false" form="postfix">]</mo>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[x_0,x_1], [x_1,x_2], \dots, [x_{n-1},x_n].</annotation>
+                </semantics>
+              </math>
+              Since we have defined
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>f</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">f(x)</annotation>
+                </semantics>
+              </math>
+              to be the derivative of
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>F</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">F(x)</annotation>
+                </semantics>
+              </math>,
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>F</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">F(x)</annotation>
+                </semantics>
+              </math>
+              is a continuous and differentiable function on
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mo stretchy="false" form="prefix">[</mo>
+                    <mi>a</mi>
+                    <mo>,</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">]</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">[a,b]</annotation>
+                </semantics>
+              </math>.
+              Thus
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>F</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>x</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                  </mrow>
+                  <annotation encoding="application/x-tex">F(x)</annotation>
+                </semantics>
+              </math>
+              satisfies the hypothesis of the mean value theorem, so for each point
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>1</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <msub>
+                      <mi>x</mi>
+                      <mn>2</mn>
+                    </msub>
+                    <mo>,</mo>
+                    <mi>…</mi>
+                    <msub>
+                      <mi>x</mi>
+                      <mrow>
+                        <mi>n</mi>
+                        <mo>−</mo>
+                        <mn>1</mn>
+                      </mrow>
+                    </msub>
+                  </mrow>
+                  <annotation encoding="application/x-tex">x_1, x_2, \dots x_{n-1}</annotation>
+                </semantics>
+              </math>
+              of the partition
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>P</mi>
+                  <annotation encoding="application/x-tex">P</annotation>
+                </semantics>
+              </math>,
+              there exists points
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <msubsup>
+                    <mi>x</mi>
+                    <mn>1</mn>
+                    <mo>*</mo>
+                  </msubsup>
+                  <annotation encoding="application/x-tex">x_1^*</annotation>
+                </semantics>
+              </math>
+              such that
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mtable>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <mfrac>
+                          <mrow>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>1</mn>
+                            </msub>
+                            <mo stretchy="false" form="postfix">)</mo>
+                            <mo>−</mo>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <mi>a</mi>
+                            <mo stretchy="false" form="postfix">)</mo>
+                          </mrow>
+                          <mrow>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>1</mn>
+                            </msub>
+                            <mo>−</mo>
+                            <mi>a</mi>
+                          </mrow>
+                        </mfrac>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <mfrac>
+                          <mrow>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>2</mn>
+                            </msub>
+                            <mo stretchy="false" form="postfix">)</mo>
+                            <mo>−</mo>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>1</mn>
+                            </msub>
+                            <mo stretchy="false" form="postfix">)</mo>
+                          </mrow>
+                          <mrow>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>2</mn>
+                            </msub>
+                            <mo>−</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mn>1</mn>
+                            </msub>
+                          </mrow>
+                        </mfrac>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mspace width="0.167em"></mspace>
+                        <mspace width="0.222em"></mspace>
+                        <mi>⋮</mi>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mi>b</mi>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <mfrac>
+                          <mrow>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <mi>b</mi>
+                            <mo stretchy="false" form="postfix">)</mo>
+                            <mo>−</mo>
+                            <mi>F</mi>
+                            <mo stretchy="false" form="prefix">(</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mrow>
+                                <mi>n</mi>
+                                <mo>−</mo>
+                                <mn>1</mn>
+                              </mrow>
+                            </msub>
+                            <mo stretchy="false" form="postfix">)</mo>
+                          </mrow>
+                          <mrow>
+                            <mi>b</mi>
+                            <mo>−</mo>
+                            <msub>
+                              <mi>x</mi>
+                              <mrow>
+                                <mi>n</mi>
+                                <mo>−</mo>
+                                <mn>1</mn>
+                              </mrow>
+                            </msub>
+                          </mrow>
+                        </mfrac>
+                        <mo>,</mo>
+                      </mtd>
+                    </mtr>
+                  </mtable>
+                  <annotation encoding="application/x-tex">\begin{align*}
+                    F&#39;(x_1^*) &amp; = \frac{F(x_1)-F(a)}{x_1-a} \\
+                    F&#39;(x_2^*) &amp; = \frac{F(x_2)-F(x_1)}{x_2-x_1} \\
+                    &amp; \,\ \vdots \\
+                    F&#39;(x_b^*) &amp; = \frac{F(b)-F(x_{n-1})}{b-x_{n-1}},
+                    \end{align*}</annotation>
+                </semantics>
+              </math> or equivalently
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mtable>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>−</mo>
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <mi>a</mi>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mo>−</mo>
+                        <mi>a</mi>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>=</mo>
+                        <mi>f</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mi mathvariant="normal">Δ</mi>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                        </msub>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>−</mo>
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                        </msub>
+                        <mo>−</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>1</mn>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>=</mo>
+                        <mi>f</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mi mathvariant="normal">Δ</mi>
+                        <msub>
+                          <mi>x</mi>
+                          <mn>2</mn>
+                        </msub>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0"></mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mspace width="0.167em"></mspace>
+                        <mspace width="0.222em"></mspace>
+                        <mi>⋮</mi>
+                      </mtd>
+                    </mtr>
+                    <mtr>
+                      <mtd columnalign="right" style="text-align: right; padding-right: 0">
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <mi>b</mi>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>−</mo>
+                        <mi>F</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow>
+                            <mi>n</mi>
+                            <mo>−</mo>
+                            <mn>1</mn>
+                          </mrow>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                      </mtd>
+                      <mtd columnalign="left" style="text-align: left; padding-left: 0">
+                        <mo>=</mo>
+                        <msup>
+                          <mi>F</mi>
+                          <mo>′</mo>
+                        </msup>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msup>
+                          <mi>b</mi>
+                          <mo>*</mo>
+                        </msup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <mi>b</mi>
+                        <mo>−</mo>
+                        <msub>
+                          <mi>x</mi>
+                          <mrow>
+                            <mi>n</mi>
+                            <mo>−</mo>
+                            <mn>1</mn>
+                          </mrow>
+                        </msub>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mo>=</mo>
+                        <mi>f</mi>
+                        <mo stretchy="false" form="prefix">(</mo>
+                        <msubsup>
+                          <mi>x</mi>
+                          <mi>n</mi>
+                          <mo>*</mo>
+                        </msubsup>
+                        <mo stretchy="false" form="postfix">)</mo>
+                        <mi mathvariant="normal">Δ</mi>
+                        <msub>
+                          <mi>x</mi>
+                          <mi>n</mi>
+                        </msub>
+                        <mi>.</mi>
+                      </mtd>
+                    </mtr>
+                  </mtable>
+                  <annotation encoding="application/x-tex">\begin{align*}
+                    F(x_1)-F(a) &amp; = F&#39;(x_1^*)(x_1-a) = f(x_1^*) \Delta x_1 \\
+                    F(x_2)-F(x_1) &amp; = F&#39;(x_2^*)(x_2-x_1) = f(x_2^*) \Delta x_2 \\
+                    &amp; \,\ \vdots \\
+                    F(b)-F(x_{n-1}) &amp; = F&#39;(b^*)(b-x_{n-1}) = f(x_n^*) \Delta x_n.
+                    \end{align*}</annotation>
+                </semantics>
+              </math> When we add all these terms
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>f</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <msubsup>
+                      <mi>x</mi>
+                      <mi>i</mi>
+                      <mo>*</mo>
+                    </msubsup>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mi mathvariant="normal">Δ</mi>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>i</mi>
+                    </msub>
+                  </mrow>
+                  <annotation encoding="application/x-tex">f(x_i^*) \Delta x_i</annotation>
+                </semantics>
+              </math>,
+              for
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mn>1</mn>
+                    <mo>≤</mo>
+                    <mi>i</mi>
+                    <mo>≤</mo>
+                    <mi>n</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">1 \leq i \leq n</annotation>
+                </semantics>
+              </math>,
+              we get
+              <math display="block" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mrow>
+                    <mi>F</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>b</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mo>−</mo>
+                    <mi>F</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <mi>a</mi>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mo>=</mo>
+                    <munderover>
+                      <mo>∑</mo>
+                      <mrow>
+                        <mi>i</mi>
+                        <mo>=</mo>
+                        <mn>1</mn>
+                      </mrow>
+                      <mi>n</mi>
+                    </munderover>
+                    <mi>f</mi>
+                    <mo stretchy="false" form="prefix">(</mo>
+                    <msubsup>
+                      <mi>x</mi>
+                      <mi>i</mi>
+                      <mo>*</mo>
+                    </msubsup>
+                    <mo stretchy="false" form="postfix">)</mo>
+                    <mi mathvariant="normal">Δ</mi>
+                    <msub>
+                      <mi>x</mi>
+                      <mi>i</mi>
+                    </msub>
+                    <mi>.</mi>
+                  </mrow>
+                  <annotation encoding="application/x-tex">F(b)-F(a) = \sum_{i=1}^n f(x_i^*) \Delta x_i.</annotation>
+                </semantics>
+              </math>
+              Since this is inbetween the lower and upper sums associated with the
+              partition
+              <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+                <semantics>
+                  <mi>P</mi>
+                  <annotation encoding="application/x-tex">P</annotation>
+                </semantics>
+              </math>,
+              the proof is complete. ◻
+            </p>
+          </div>
+          <div class="my-3 pl-3 py-2" style="border-left: 3px solid rgba(128, 128, 128, 0.6); background-color: rgba(128, 128, 128, 0.08); border-radius: 0 8px 8px 0;">
+            <p class="mb-0" style="line-height: 1.7;"><em>Remark</em>. If you check <a href="https://en.wikipedia.org/wiki/Fundamental_theorem_of_calculus">the Wikipedia page</a> for the FTC, what
+              we have stated above is actually the <em>second</em> FTC. However, since
+              we have only defined <em>definite</em> integrals, this theorem
+              suffices.</p>
+          </div>
+
+  
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 3. Bottom Footer -->
+  <footer class="footer-dlsu text-center py-3 mt-auto">
+    <div class="container">
+      <small class="footer-text">
+        The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+      </small>
+    </div>
+  </footer>
+
+  <!-- Local Offline Scripts -->
+  <script src="../js/jquery-3.7.1.js"></script>
+  <script src="../js/bootstrap.bundle.min.js"></script>
+  <script src="../js/darkmode.js"></script>
+  
+  <!-- Desmos Initialization Script (Runs after DOM and Desmos API are ready) -->
+  <script src="scripts.js"></script>
+</body>
+
+</html>
