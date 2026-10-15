@@ -744,99 +744,101 @@
     This is now closer to a definition you might be familiar with.
   </p>
   <p>
-    Clearly, functions can only be continuous or discontinuous at points they are defined at, so we define limits as points where a function is not defined yet satisfies the above conditions. We can restate this formally to get our familiar epsilon-delta definition of a limit:
+    Clearly, functions can only be continuous or discontinuous at points they are defined at, so we define
+    <em>limits</em> as points where a function is not defined yet satisfies the above conditions. We can restate this
+    formally to get our familiar epsilon-delta definition of a limit:
   </p>
   <div class="definition">
     <p><strong>Definition. </strong>Let
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>L</mi>
-          <mo>=</mo>
-          <msub>
-            <mrow>
-              <mi mathvariant="normal">lim</mi>
-              <mo>&#8289;</mo>
-            </mrow>
-            <mrow>
-              <mi>x</mi>
-              <mo>→</mo>
-              <mi>a</mi>
-            </mrow>
-          </msub>
-          <mi>f</mi>
-          <mo stretchy="false" form="prefix">(</mo>
-          <mi>x</mi>
-          <mo stretchy="false" form="postfix">)</mo>
-        </mrow>
-        <annotation encoding="application/x-tex">L = \lim_{x \to a} f(x)</annotation>
-      </semantics>
-    </math>. We say that the <strong>limit</strong>
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>L</mi>
-        </mrow>
-        <annotation encoding="application/x-tex">L</annotation>
-      </semantics>
-    </math>
-    exists if, for all <br>
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>ϵ</mi>
-          <mo>&gt;</mo>
-          <mn>0</mn>
-        </mrow>
-        <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
-      </semantics>
-    </math>,
-    there exists
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mi>δ</mi>
-          <mo>&gt;</mo>
-          <mn>0</mn>
-        </mrow>
-        <annotation encoding="application/x-tex">\delta &gt;0</annotation>
-      </semantics>
-    </math>
-    such that
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mn>0</mn>
-          <mo>&lt;</mo>
-          <mo stretchy="false" form="prefix">|</mo>
-          <mi>x</mi>
-          <mo>−</mo>
-          <mi>a</mi>
-          <mo stretchy="false" form="prefix">|</mo>
-          <mo>&lt;</mo>
-          <mi>δ</mi>
-        </mrow>
-        <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
-      </semantics>
-    </math>
-    implies
-    <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
-      <semantics>
-        <mrow>
-          <mo stretchy="false" form="prefix">|</mo>
-          <mi>f</mi>
-          <mo stretchy="false" form="prefix">(</mo>
-          <mi>x</mi>
-          <mo stretchy="false" form="postfix">)</mo>
-          <mo>−</mo>
-          <mi>L</mi>
-          <mo stretchy="false" form="prefix">|</mo>
-          <mo>&lt;</mo>
-          <mi>ϵ</mi>
-        </mrow>
-        <annotation encoding="application/x-tex">|f(x)-L|&lt;\epsilon</annotation>
-      </semantics>
-    </math>.
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>L</mi>
+            <mo>=</mo>
+            <msub>
+              <mrow>
+                <mi mathvariant="normal">lim</mi>
+                <mo>&#8289;</mo>
+              </mrow>
+              <mrow>
+                <mi>x</mi>
+                <mo>→</mo>
+                <mi>a</mi>
+              </mrow>
+            </msub>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+          </mrow>
+          <annotation encoding="application/x-tex">L = \lim_{x \to a} f(x)</annotation>
+        </semantics>
+      </math>. We say that the <strong>limit</strong>
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>L</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">L</annotation>
+        </semantics>
+      </math>
+      exists if, for all <br>
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>ϵ</mi>
+            <mo>&gt;</mo>
+            <mn>0</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">\epsilon &gt;0</annotation>
+        </semantics>
+      </math>,
+      there exists
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mi>δ</mi>
+            <mo>&gt;</mo>
+            <mn>0</mn>
+          </mrow>
+          <annotation encoding="application/x-tex">\delta &gt;0</annotation>
+        </semantics>
+      </math>
+      such that
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mn>0</mn>
+            <mo>&lt;</mo>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mi>x</mi>
+            <mo>−</mo>
+            <mi>a</mi>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mo>&lt;</mo>
+            <mi>δ</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">0&lt;|x-a|&lt;\delta</annotation>
+        </semantics>
+      </math>
+      implies
+      <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
+        <semantics>
+          <mrow>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mi>f</mi>
+            <mo stretchy="false" form="prefix">(</mo>
+            <mi>x</mi>
+            <mo stretchy="false" form="postfix">)</mo>
+            <mo>−</mo>
+            <mi>L</mi>
+            <mo stretchy="false" form="prefix">|</mo>
+            <mo>&lt;</mo>
+            <mi>ϵ</mi>
+          </mrow>
+          <annotation encoding="application/x-tex">|f(x)-L|&lt;\epsilon</annotation>
+        </semantics>
+      </math>.
     </p>
   </div>
 
@@ -875,6 +877,13 @@
       </semantics>
     </math>
     is always nonempty.
+  </p>
+
+  <p>
+    Just to quell any worries: besides math majors who will eventually take MTH245A/Advanced Calculus, the rest of you
+    don't need to worry about this definition showing up on a quiz. This is usually just provided in calculus courses
+    for completeness, but the definition remains obtuse and abstract. We hope that this has helped you gained a better
+    understanding of limits, since limits are what the entirety of calculus is built upon.
   </p>
 
   <script src="scripts.js"></script>
