@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Classrooms - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="teacher-dashboard.html" class="nav-item-btn">
+                    <img src="assets/icons/bar-chart.svg" alt="" class="nav-icon">
+                    <span class="nav-label">DASHBOARD</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-classes.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSROOMS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">MANAGE CLASSROOMS</h1>
+                <p class="sub-text">Create classrooms and share the invite code with your students.</p>
+            </div>
+
+            <!-- tabs -->
+            <ul class="nav nav-tabs assignment-tabs mb-4" role="tablist">
+                <li class="nav-item">
+                    <a id="classrooms-tab" class="nav-link active" href="#classrooms" data-toggle="tab" role="tab">Classrooms</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="assignments-tab" class="nav-link" href="#assignments" data-toggle="tab" role="tab">Assignments</a>
+                </li>
+            </ul>
+
+
+            <div class="tab-content">
+
+                <!-- classrooms tab -->
+                <section id="classrooms" class="tab-pane fade show active" role="tabpanel">
+
+                    <p id="class-message" class="alert" role="status" hidden></p>
+
+
+                    <div class="row">
+
+                        <!-- create / edit form -->
+                        <div class="col-12 col-lg-4 mb-4">
+                            <div class="card classroom-side-card">
+                                <h2 id="form-title" class="card-section-heading">CREATE A CLASSROOM</h2>
+
+                                <form id="class-form" novalidate>
+
+                                    <div class="form-group">
+                                        <label for="class-name" class="input-group-label">CLASS NAME</label>
+                                        <input type="text" id="class-name" class="form-control form-control-standard" placeholder="e.g. Calculus 1" maxlength="50">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="class-section" class="input-group-label">SECTION</label>
+                                        <input type="text" id="class-section" class="form-control form-control-standard" placeholder="e.g. N24" maxlength="10">
+                                    </div>
+
+                                    <button type="submit" id="save-button" class="btn btn-pill-action mx-0">Create classroom</button>
+                                    <button type="button" id="cancel-button" class="btn btn-pill-cancel" hidden>Cancel</button>
+
+                                </form>
+                            </div>
+                        </div>
+
+
+                        <!-- classroom cards (made by js) -->
+                        <div class="col-12 col-lg-8">
+                            <div id="class-list" class="row"></div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- assignments tab -->
+                <section id="assignments" class="tab-pane fade" role="tabpanel">
+
+                    <!-- pick a classroom -->
+                    <div class="card classroom-side-card mb-4">
+                        <label for="results-class" class="input-group-label">CLASSROOM</label>
+                        <select id="results-class" class="custom-select w-auto"></select>
+
+                        <h2 class="group-name-highlight mt-3 mb-0">Tangent lines</h2>
+                        <p id="assignment-info" class="group-meta-sub mb-0"></p>
+                    </div>
+
+
+                    <!-- numbers -->
+                    <div class="row">
+
+                        <div class="col-6 col-lg-3 mb-4">
+                            <div class="card classroom-side-card text-center">
+                                <p id="submitted-count" class="stat-number">0</p>
+                                <h3 class="stat-label">Submitted</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3 mb-4">
+                            <div class="card classroom-side-card text-center">
+                                <p id="not-submitted-count" class="stat-number">0</p>
+                                <h3 class="stat-label">Not yet</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3 mb-4">
+                            <div class="card classroom-side-card text-center">
+                                <p id="average-score" class="stat-number">0</p>
+                                <h3 class="stat-label">Average / 10</h3>
+                            </div>
+                        </div>
+
+                        <div class="col-6 col-lg-3 mb-4">
+                            <div class="card classroom-side-card text-center">
+                                <p id="perfect-count" class="stat-number">0</p>
+                                <h3 class="stat-label">Got 10 / 10</h3>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <!-- chart -->
+                        <div class="col-12 col-lg-5 mb-4">
+                            <section class="card classroom-side-card">
+                                <h2 class="card-section-heading">SCORE DISTRIBUTION</h2>
+                                <div class="chart-box">
+                                    <canvas id="scores-chart"></canvas>
+                                </div>
+                            </section>
+                        </div>
+
+
+                        <!-- table -->
+                        <div class="col-12 col-lg-7 mb-4">
+                            <section class="card classmates-card">
+
+                                <div class="classmates-card-header">
+                                    <h2 class="card-section-heading">STUDENTS WHO SUBMITTED</h2>
+
+                                    <div class="d-flex flex-wrap">
+                                        <input type="search" id="search-box" class="form-control form-control-standard w-auto mr-2 mb-2" placeholder="Search a student" aria-label="Search a student">
+
+                                        <select id="score-filter" class="custom-select w-auto mb-2" aria-label="Filter by score">
+                                            <option value="all">All scores</option>
+                                            <option value="0">0 / 10</option>
+                                            <option value="5">5 / 10</option>
+                                            <option value="10">10 / 10</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="table-responsive">
+                                    <table class="table classmates-table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">STUDENT</th>
+                                                <th scope="col">SCORE</th>
+                                                <th scope="col">TIME SUBMITTED</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody id="results-list"></tbody>
+                                    </table>
+                                </div>
+
+                            </section>
+                        </div>
+
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"></script>
+    <script src="js/teacher-classes.js"></script>
+</body>
+
+</html>

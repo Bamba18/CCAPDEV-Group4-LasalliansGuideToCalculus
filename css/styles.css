@@ -994,3 +994,98 @@ body.dark-mode .btn-pill-cancel:hover {
     font-size: 2.2rem;
   }
 }
+
+
+
+/* =========================================
+   13. IVAN'S PAGES (topics, enroll, assignments, teacher pages)
+   ========================================= */
+
+/* nav icons are img files so they need a size */
+img.nav-icon {
+  object-fit: contain;
+}
+
+/* numbers on the dashboard */
+.stat-number {
+  color: var(--dlsu-nav-green);
+  font-size: 2.2rem;
+  font-weight: 800;
+  margin-bottom: 0;
+}
+
+.stat-label {
+  color: #6c757d;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+
+/* charts need a box with a height */
+.chart-box {
+  position: relative;
+  height: 260px;
+}
+
+/* the circle with the topic number */
+.topic-number {
+  background-color: var(--dlsu-nav-green);
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+/* pending / completed tabs */
+.assignment-tabs .nav-link {
+  color: var(--dlsu-nav-green);
+  font-weight: 700;
+}
+
+.assignment-tabs .nav-link.active {
+  background-color: var(--dlsu-nav-green);
+  border-color: var(--dlsu-nav-green);
+  color: #ffffff;
+}
+
+/* popup and inputs in dark mode */
+body.dark-mode .modal-content,
+body.dark-mode .form-control,
+body.dark-mode .custom-select {
+  background-color: var(--input-background);
+  color: var(--input-text);
+}
+
+body.dark-mode .stat-label,
+body.dark-mode .text-muted {
+  color: #c9d6ce !important;
+}
+
+/* navbar on phones: 5-6 links didn't fit */
+@media (max-width: 575.98px) {
+  .nav-pill-student {
+    gap: 0;
+    padding: 8px 6px !important;
+  }
+
+  .nav-pill-student .nav-item-btn {
+    flex-shrink: 1;
+    min-width: 0;
+    padding: 0 2px !important;
+  }
+
+  .nav-pill-student .nav-label {
+    font-size: 0.5rem;
+    letter-spacing: 0;
+  }
+
+  .nav-pill-student .nav-divider {
+    margin: 0 1px !important;
+  }
+}

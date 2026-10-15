@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classroom - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="teacher-dashboard.html" class="nav-item-btn">
+                    <img src="assets/icons/bar-chart.svg" alt="" class="nav-icon">
+                    <span class="nav-label">DASHBOARD</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-classes.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSROOMS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <a href="teacher-classes.html" class="back-link mb-3">&larr; Back to classrooms</a>
+
+            <p id="page-message" class="alert alert-success" role="status" hidden></p>
+
+
+            <!-- class info + invite link -->
+            <section class="card classroom-header-card mb-4">
+                <div class="row align-items-center">
+
+                    <div class="col-12 col-md-6 mb-3 mb-md-0">
+                        <h1 class="classroom-header-title">Calculus 1</h1>
+                        <span class="badge-section mr-2 mb-0">Section N24</span>
+                        <span id="class-count" class="classroom-header-sub"></span>
+                    </div>
+
+                    <div class="col-12 col-md-6">
+                        <label for="invite-link" class="input-group-label">INVITE LINK</label>
+
+                        <div class="input-group">
+                            <input type="text" id="invite-link" class="form-control form-control-standard" value="student-enroll.html?code=CAL1-N24-7QX2" readonly>
+
+                            <div class="input-group-append">
+                                <button type="button" id="copy-button" class="btn btn-pill-action mx-0 mb-0 ml-2">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- the exercise -->
+            <section class="card classroom-side-card mb-4">
+                <h2 class="card-section-heading">EXERCISE</h2>
+
+                <div class="row align-items-center">
+
+                    <div class="col-12 col-md-5 mb-3 mb-md-0">
+                        <h3 class="group-name-highlight">Tangent lines</h3>
+                        <p class="group-meta-sub mb-0">Topic 3: The Derivative &bull; 2 questions &bull; 10 points</p>
+                    </div>
+
+                    <div class="col-12 col-md-7 d-flex flex-wrap align-items-center">
+
+                        <div class="custom-control custom-switch mr-3 mb-2">
+                            <input type="checkbox" id="assign-switch" class="custom-control-input" checked>
+                            <label for="assign-switch" class="custom-control-label">Assigned to this class</label>
+                        </div>
+
+                        <label for="due-date" class="input-group-label mr-2 mb-2">DUE</label>
+                        <input type="date" id="due-date" class="form-control form-control-standard w-auto mr-3 mb-2" value="2026-10-20">
+
+                        <a href="teacher-classes.html#assignments" class="btn btn-pill-action mx-0 mb-2">View results</a>
+
+                    </div>
+
+                </div>
+            </section>
+
+
+            <div class="row">
+
+                <!-- students -->
+                <div class="col-12 col-md-7 mb-4">
+                    <section class="card classmates-card">
+
+                        <div class="classmates-card-header d-flex flex-wrap justify-content-between align-items-center">
+                            <h2 id="students-title" class="card-section-heading mb-2">STUDENTS</h2>
+                            <input type="search" id="student-search" class="form-control form-control-standard w-auto mb-2" placeholder="Search a student" aria-label="Search a student">
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table classmates-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">NAME</th>
+                                        <th scope="col">GROUP</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="student-list"></tbody>
+                            </table>
+                        </div>
+
+                    </section>
+                </div>
+
+
+                <!-- groups -->
+                <div class="col-12 col-md-5 mb-4">
+                    <section class="card classroom-side-card">
+                        <h2 id="groups-title" class="card-section-heading">GROUPS</h2>
+
+                        <div class="custom-control custom-switch mb-3">
+                            <input type="checkbox" id="student-groups-switch" class="custom-control-input" checked>
+                            <label for="student-groups-switch" class="custom-control-label">Let students make their own groups</label>
+                        </div>
+
+                        <ul id="group-list" class="list-unstyled mb-4"></ul>
+
+                        <form id="group-form" novalidate>
+                            <label for="group-name" class="input-group-label">NEW GROUP</label>
+                            <input type="text" id="group-name" class="form-control form-control-standard mb-2" placeholder="e.g. Integrals" maxlength="30">
+                            <button type="submit" class="btn btn-pill-action mx-0 mb-0">Add group</button>
+                        </form>
+                    </section>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/teacher-class-detail.js"></script>
+</body>
+
+</html>

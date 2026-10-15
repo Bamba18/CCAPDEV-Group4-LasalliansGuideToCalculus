@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topics - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="student-enroll.html" class="nav-item-btn">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ENROLL</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="MyClasses.html" class="nav-item-btn">
+                    <img src="assets/icons/home.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-assignments.html" class="nav-item-btn">
+                    <img src="assets/icons/clipboard.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">TOPICS</h1>
+                <p class="sub-text">Pick a topic and explore the graph.</p>
+            </div>
+
+
+            <div class="row">
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">1</span>
+                        <h2 class="classroom-title">Definition of a Function</h2>
+                        <p class="classroom-meta">How functions are defined in terms of sets.</p>
+                        <a href="html_updated/definition_updated.html" class="btn btn-pill-action mx-0 align-self-start">Open topic</a>
+                    </article>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">2</span>
+                        <h2 class="classroom-title">Types of Discontinuities</h2>
+                        <p class="classroom-meta">Removable, jump, and essential discontinuities; formulating the concept of a limit.</p>
+                        <a href="html_updated/discontinuities_updated.html" class="btn btn-pill-action mx-0 align-self-start">Open topic</a>
+                    </article>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">3</span>
+                        <h2 class="classroom-title">Limits and Continuity</h2>
+                        <p class="classroom-meta">The epsilon-delta definition of continuity and limits of a function.</p>
+                        <a href="html_updated/epsilondelta_updated.html" class="btn btn-pill-action mx-0 align-self-start">Open topic</a>
+                    </article>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">4</span>
+                        <h2 class="classroom-title">Intermediate Value Theorem</h2>
+                        <p class="classroom-meta">Approximating roots using the bisection method.</p>
+                        <a href="html_updated/ivt_updated.html" class="btn btn-pill-action mx-0 align-self-start">Open topic</a>
+                    </article>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">5</span>
+                        <h2 class="classroom-title">The Derivative</h2>
+                        <p class="classroom-meta">Slope of tangent lines, differentiability, local behavior of functions, and the Extreme Value Theorem.</p>
+                        <a href="html_updated/derivatives_updated.html" class="btn btn-pill-action mx-0 align-self-start">Open topic</a>
+                    </article>
+                </div>
+
+
+                <!-- 6 and 7 don't have pages yet -->
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">6</span>
+                        <h2 class="classroom-title">Approximation Methods</h2>
+                        <p class="classroom-meta">Mean value theorem, Newton's method, secant method.</p>
+                        <button type="button" class="btn btn-pill-action mx-0 align-self-start" disabled>Coming soon</button>
+                    </article>
+                </div>
+
+
+                <div class="col-12 col-md-6 col-lg-4 mb-4">
+                    <article class="classroom-card">
+                        <span class="topic-number">7</span>
+                        <h2 class="classroom-title">The Integral</h2>
+                        <p class="classroom-meta">The Riemann integral and the trapezoid rule.</p>
+                        <button type="button" class="btn btn-pill-action mx-0 align-self-start" disabled>Coming soon</button>
+                    </article>
+                </div>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+</body>
+
+</html>

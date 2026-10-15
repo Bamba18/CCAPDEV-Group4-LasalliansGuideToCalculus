@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enroll to a Class - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="student-enroll.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ENROLL</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="MyClasses.html" class="nav-item-btn">
+                    <img src="assets/icons/home.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-assignments.html" class="nav-item-btn">
+                    <img src="assets/icons/clipboard.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">ENROLL TO A CLASS</h1>
+                <p class="sub-text">Enter the invite code given by your teacher.</p>
+            </div>
+
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+
+                    <!-- invite code form -->
+                    <div class="card classroom-side-card mb-4">
+                        <h2 class="card-section-heading">FIND YOUR CLASSROOM</h2>
+
+                        <form id="enroll-form" novalidate>
+                            <label for="invite-code" class="input-group-label">INVITE CODE</label>
+
+                            <div class="input-group">
+                                <input type="text" id="invite-code" class="form-control form-control-standard" placeholder="e.g. ENGC-S11-2KD5" maxlength="20">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-pill-action mx-0 mb-0 ml-2">Find class</button>
+                                </div>
+                            </div>
+                        </form>
+
+                        <p id="enroll-message" class="alert mt-3 mb-0" role="status" hidden></p>
+                    </div>
+
+
+                    <!-- shows up after a code is found -->
+                    <div id="class-preview" class="card classroom-side-card mb-4" hidden>
+                        <h2 id="preview-name" class="classroom-title"></h2>
+                        <span id="preview-section" class="badge-section align-self-start"></span>
+
+                        <p class="classroom-meta">
+                            <strong>Teacher:</strong> <span id="preview-teacher"></span><br>
+                            <strong>Students:</strong> <span id="preview-students"></span><br>
+                            <span id="preview-description"></span>
+                        </p>
+
+                        <button type="button" id="enroll-button" class="btn btn-pill-action mx-0 align-self-start">Enroll in this class</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!-- classes the student already joined -->
+            <h2 class="card-section-heading text-center mt-4 mb-3">MY CLASSROOMS</h2>
+
+            <div id="joined-list" class="row justify-content-center"></div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/student-enroll.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="student-enroll.html" class="nav-item-btn">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ENROLL</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="MyClasses.html" class="nav-item-btn">
+                    <img src="assets/icons/home.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-assignments.html" class="nav-item-btn">
+                    <img src="assets/icons/clipboard.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-profile.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">MY PROFILE</h1>
+            </div>
+
+
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-8 col-lg-6">
+
+                    <p id="profile-message" class="alert alert-success" role="status" hidden></p>
+
+
+                    <!-- user info -->
+                    <section class="card classroom-header-card mb-4">
+                        <h2 id="full-name" class="classroom-header-title">Juan Dela Cruz</h2>
+                        <span class="badge-section align-self-start">Student</span>
+                        <p class="classroom-header-sub">juan_delacruz@dlsu.edu.ph</p>
+                    </section>
+
+
+                    <!-- edit name -->
+                    <section class="card classroom-side-card mb-4">
+                        <h2 class="card-section-heading">EDIT PROFILE</h2>
+
+                        <form id="profile-form" novalidate>
+
+                            <div class="form-group">
+                                <label for="first-name" class="input-group-label">FIRST NAME</label>
+                                <input type="text" id="first-name" class="form-control form-control-standard" value="Juan" maxlength="30">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="last-name" class="input-group-label">LAST NAME</label>
+                                <input type="text" id="last-name" class="form-control form-control-standard" value="Dela Cruz" maxlength="30">
+                            </div>
+
+                            <button type="submit" class="btn btn-pill-action mx-0">Save changes</button>
+
+                        </form>
+                    </section>
+
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/profile.js"></script>
+</body>
+
+</html>

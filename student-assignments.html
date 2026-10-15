@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Assignments - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="student-enroll.html" class="nav-item-btn">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ENROLL</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="MyClasses.html" class="nav-item-btn">
+                    <img src="assets/icons/home.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSES</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-assignments.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/clipboard.svg" alt="" class="nav-icon">
+                    <span class="nav-label">ASSIGNMENTS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="student-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">MY ASSIGNMENTS</h1>
+                <p class="sub-text">Exercises your teachers gave to your classes.</p>
+            </div>
+
+
+            <!-- tabs -->
+            <ul class="nav nav-tabs assignment-tabs mb-4" role="tablist">
+                <li class="nav-item">
+                    <a id="pending-tab" class="nav-link active" href="#pending" data-toggle="tab" role="tab">Pending (1)</a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="completed-tab" class="nav-link" href="#completed" data-toggle="tab" role="tab">Completed (0)</a>
+                </li>
+            </ul>
+
+            <p id="assignment-message" class="alert alert-success" role="status" hidden></p>
+
+
+            <div class="tab-content">
+
+                <!-- pending tab -->
+                <section id="pending" class="tab-pane fade show active" role="tabpanel">
+
+                    <p id="no-pending" class="text-muted" hidden>No pending assignments.</p>
+
+                    <div id="pending-card" class="row">
+                        <div class="col-12 col-md-8 col-lg-6 mb-4">
+                            <div class="classroom-card">
+
+                                <span class="badge-group-soft align-self-start mb-2">Calculus 1 &bull; N24</span>
+                                <h2 class="classroom-title">Tangent lines</h2>
+
+                                <p class="classroom-meta">
+                                    Answer two questions about the slope of a tangent line.<br>
+                                    <strong>Teacher:</strong> Maria Santos<br>
+                                    <strong>Due:</strong> October 20, 2026<br>
+                                    <strong>Points:</strong> 10 points &bull; 2 questions
+                                </p>
+
+                                <button type="button" class="btn btn-pill-action mx-0 align-self-start" data-toggle="modal" data-target="#exercise-popup">Start exercise</button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+
+                <!-- completed tab -->
+                <section id="completed" class="tab-pane fade" role="tabpanel">
+
+                    <p id="no-completed" class="text-muted">No completed assignments yet.</p>
+
+                    <div id="completed-card" class="row" hidden>
+                        <div class="col-12 col-md-8 col-lg-6 mb-4">
+                            <div class="classroom-card">
+
+                                <span class="badge-group-soft align-self-start mb-2">Calculus 1 &bull; N24</span>
+                                <h2 class="classroom-title">Tangent lines</h2>
+
+                                <p class="classroom-meta mb-0">
+                                    <strong>Score:</strong> <span id="score"></span><br>
+                                    <strong>Submitted:</strong> <span id="submitted-time"></span>
+                                </p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+
+    <!-- ===== EXERCISE POPUP ===== -->
+    <div id="exercise-popup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exercise-title" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h2 id="exercise-title" class="h5 modal-title">Tangent lines</h2>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+                    <p>Pick one answer for each question. Each one is worth 5 points.</p>
+
+                    <p id="exercise-error" class="alert alert-danger" hidden></p>
+
+                    <form id="exercise-form">
+
+                        <fieldset class="mb-4">
+                            <legend class="h6">1. For y = x², what is the slope of the tangent at x = 2?</legend>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q1-a" name="question-1" value="2" class="custom-control-input">
+                                <label for="q1-a" class="custom-control-label">2</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q1-b" name="question-1" value="4" class="custom-control-input">
+                                <label for="q1-b" class="custom-control-label">4</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q1-c" name="question-1" value="8" class="custom-control-input">
+                                <label for="q1-c" class="custom-control-label">8</label>
+                            </div>
+                        </fieldset>
+
+
+                        <fieldset class="mb-4">
+                            <legend class="h6">2. For y = x², what does the tangent look like at x = 0?</legend>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q2-a" name="question-2" value="horizontal" class="custom-control-input">
+                                <label for="q2-a" class="custom-control-label">Horizontal</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q2-b" name="question-2" value="vertical" class="custom-control-input">
+                                <label for="q2-b" class="custom-control-label">Vertical</label>
+                            </div>
+
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="q2-c" name="question-2" value="slanted" class="custom-control-input">
+                                <label for="q2-c" class="custom-control-label">Slanted (slope of 1)</label>
+                            </div>
+                        </fieldset>
+
+                        <button type="submit" class="btn btn-pill-action mx-0">Submit answers</button>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="js/student-assignments.js"></script>
+</body>
+
+</html>

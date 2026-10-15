@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Dashboard - The Lasallian's Guide to Calculus</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/darkmode.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- dark mode button -->
+    <button type="button" class="theme-fab" id="themeToggle" aria-label="Toggle dark mode">
+        <svg class="theme-icon theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13z"></path>
+        </svg>
+        <svg class="theme-icon theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"></path>
+        </svg>
+    </button>
+
+
+    <!-- ===== NAVBAR ===== -->
+    <header class="page-header py-3">
+        <div class="container d-flex justify-content-center px-2">
+            <nav class="top-nav-pill nav-pill-student d-flex align-items-center justify-content-around" aria-label="Main navigation">
+
+                <a href="teacher-dashboard.html" class="nav-item-btn" aria-current="page">
+                    <img src="assets/icons/bar-chart.svg" alt="" class="nav-icon">
+                    <span class="nav-label">DASHBOARD</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-classes.html" class="nav-item-btn">
+                    <img src="assets/icons/users.svg" alt="" class="nav-icon">
+                    <span class="nav-label">CLASSROOMS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="topics.html" class="nav-item-btn">
+                    <img src="assets/icons/book-open.svg" alt="" class="nav-icon">
+                    <span class="nav-label">TOPICS</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="teacher-profile.html" class="nav-item-btn">
+                    <img src="assets/icons/user.svg" alt="" class="nav-icon">
+                    <span class="nav-label">PROFILE</span>
+                </a>
+
+                <div class="nav-divider"></div>
+
+                <a href="Login.html" class="nav-item-btn">
+                    <img src="assets/icons/log-out.svg" alt="" class="nav-icon">
+                    <span class="nav-label">LOGOUT</span>
+                </a>
+
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="flex-grow-1 py-3">
+        <div class="container">
+
+            <div class="text-center mb-4">
+                <h1 class="welcome-heading">TEACHER DASHBOARD</h1>
+                <p class="sub-text">An overview of your classrooms and students.</p>
+            </div>
+
+
+            <!-- numbers -->
+            <section class="row">
+
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="card classroom-side-card text-center">
+                        <p class="stat-number">3</p>
+                        <h2 class="stat-label">Classrooms</h2>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="card classroom-side-card text-center">
+                        <p class="stat-number">87</p>
+                        <h2 class="stat-label">Students</h2>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="card classroom-side-card text-center">
+                        <p class="stat-number">14</p>
+                        <h2 class="stat-label">Groups</h2>
+                    </div>
+                </div>
+
+                <div class="col-6 col-lg-3 mb-4">
+                    <div class="card classroom-side-card text-center">
+                        <p class="stat-number">240</p>
+                        <h2 class="stat-label">Topic views</h2>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- charts -->
+            <section class="row">
+
+                <div class="col-12 col-lg-4 mb-4">
+                    <div class="card classroom-side-card h-100">
+                        <h2 class="card-section-heading">STUDENTS PER CLASSROOM</h2>
+                        <div class="chart-box">
+                            <canvas id="students-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 mb-4">
+                    <div class="card classroom-side-card h-100">
+                        <h2 class="card-section-heading">TOPIC VIEWS THIS WEEK</h2>
+                        <div class="chart-box">
+                            <canvas id="views-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-lg-4 mb-4">
+                    <div class="card classroom-side-card h-100">
+                        <h2 class="card-section-heading">WHO MADE THE GROUPS</h2>
+                        <div class="chart-box">
+                            <canvas id="groups-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <!-- classrooms table -->
+            <section class="card classmates-card mb-4">
+                <div class="classmates-card-header">
+                    <h2 class="card-section-heading mb-0">YOUR CLASSROOMS</h2>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table classmates-table">
+                        <thead>
+                            <tr>
+                                <th scope="col">CLASSROOM</th>
+                                <th scope="col">STUDENTS</th>
+                                <th scope="col">ACTION</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>Calculus 1 <span class="badge-group-soft">N24</span></td>
+                                <td>42</td>
+                                <td><a href="teacher-class-detail.html" class="btn-table-edit">Open</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Calculus 2 <span class="badge-group-soft">N25</span></td>
+                                <td>31</td>
+                                <td><a href="teacher-class-detail.html" class="btn-table-edit">Open</a></td>
+                            </tr>
+
+                            <tr>
+                                <td>Engineering Calculus <span class="badge-group-soft">S11</span></td>
+                                <td>14</td>
+                                <td><a href="teacher-class-detail.html" class="btn-table-edit">Open</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer-dlsu text-center py-3 mt-auto">
+        <div class="container">
+            <small class="footer-text">
+                The Lasallian's Guide to Calculus &bull; CCAPDEV Group 4 &bull; De La Salle University
+            </small>
+        </div>
+    </footer>
+
+
+    <script src="js/jquery-3.7.1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/darkmode.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.js"></script>
+    <script src="js/teacher-dashboard.js"></script>
+</body>
+
+</html>
