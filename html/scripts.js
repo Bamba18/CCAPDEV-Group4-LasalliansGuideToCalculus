@@ -123,3 +123,22 @@ calc6.setExpression({
 });
 calc6.setMathBounds({ left: 0.5, right: 2.5, bottom: -1, top: 1 });
 calc6.resize();
+
+// ==========================================
+// SEPARATE CONFIGURATION FOR GRAPH 7
+// ==========================================
+const elt7 = document.getElementById('calculator7');
+const calc7 = Desmos.GraphingCalculator(elt7, {
+    expressions: false,
+    settingsMenu: false,
+    trace: true,
+    solutions: true
+});
+
+calc7.setExpression({
+    id: "f7",
+    latex: "f(x) = -x^2 + 2",
+    color: Desmos.Colors.BLUE
+});
+calc7.setMathBounds({ left: -3, right: 3, bottom: -3, top: 3 });
+calc7.resize();
